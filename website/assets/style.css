@@ -22,29 +22,47 @@ body {
     background: transparent;
 }
 
-.checkbox-list input[type=checkbox] {
+.checkbox-list-right input[type=checkbox] {
     position: absolute;
     right: 15px;
 }
-
-.people-list{
-
-}
-.people-list .avatar{
+.checkbox-list-left input[type=checkbox] {
     
 }
-.people-list .avatar img{
+.scroll-list{
+    overflow: auto;
+}
+
+.text-mini{
+    font-size: 0.8em;
+}
+
+.people-list {}
+
+.people-list .avatar {}
+
+.people-list .avatar img {
     width: 45px;
     height: 45px;
     object-fit: cover;
 }
 
-.my-layout {
-    height: 100vh;
+
+
+.info-border {
+    border-radius: .25rem !important;
+    border: 1px solid #dee2e6 !important;
+    padding: 1px 3px;
+    margin: -1px -4px;
+}
+
+.card-close-btn{
+    color:#333
 }
 
 .d-flex .flex-1 {
     flex: 1
+    
 }
 
 .d-flex .flex-0 {
@@ -76,7 +94,8 @@ body {
     color: #666;
     font-size: 1.2em;
 }
-.layout_nav .page-title{
+
+.layout_nav .page-title {
     /* font-size: 1.5em; */
 }
 
@@ -122,4 +141,7 @@ body {
     .page_login .login-form {
         margin-top: 130px !important;
     }
+}
+.my-layout {
+    height:100vh;
 }
