@@ -66,9 +66,16 @@ def questions_to_keywords(questions, per_question):
 				question = re.sub(r'[^A-Za-z^-]', ' ', question)
 				question = re.sub(r'\s+', ' ', question)
 				words = [word for word in question.split() if word not in stopwords.words('dutch')]
-				keywords_per_question.append(tf_idf_keywords(question,bow,dictionary))
+				keywords_per_question.append(tf_idf_keywords(words,bow,dictionary))
 			return keywords_per_question
 		else:
+			for i in range(len(questions)):
+				question = questions[i]
+				question = re.sub("'",' ',question).replace('_', ' ')
+				question = re.sub(r'[^A-Za-z^-]', ' ', question)
+				question = re.sub(r'\s+', ' ', question)
+				words = [word for word in question.split() if word not in stopwords.words('dutch')]
+				questions[i] = words
 			questions = [word for question in questions for word in question]
 			return tf_idf_keywords(questions,bow,dictionary)
 
@@ -88,8 +95,10 @@ def main(argv):
 	doc = read_doc(target)
 	metadata = doc_to_metadata(doc)
 	questions = doc_to_questions(doc)
+	questions_copy = questions.copy()
 	keywords = questions_to_keywords(questions, False)
-	returnstring = construct_returnvalue(metadata,questions,keywords)
+	returnstring = construct_returnvalue(metadata,questions_copy,keywords)
+	print(returnstring)
 	return returnstring
 	
 if __name__ == "__main__":
