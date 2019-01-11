@@ -19,7 +19,7 @@ def read_doc(target):
 	return full_text
 	
 def doc_to_metadata(doc):
-	doc = doc.replace('\n', ' ')
+	doc = doc.replace('Vragen door','Vragen van').replace('\naan', ' aan ').replace('aan\n',' aan ').replace('inzake','over').replace('\n','')
 	indiener = doc.split('Vragen van')[1].split('aan')[0].strip()
 	topic = doc.split('over')[1].split('(')[0].strip()
 	id = doc.split('der Kamer')[1].split('Vragen')[0].strip()
@@ -35,14 +35,11 @@ def doc_to_questions(doc):
 		question = question.lower()
 		question = question[:question.rfind('?')]
 		question = re.sub(r'-\n','',question) # handle dashes breaking up words at end of line
-		question = re.sub("'",' ',question).replace('_', ' ')
-		question = re.sub(r'[^A-Za-z^-]', ' ', question)
-		question = re.sub(r'\s+', ' ', question)
-		words = [word for word in question.split() if word not in stopwords.words('dutch')]
+		question = re.sub(r'\n',' ',question)
 		#To do: Handle footnotes ending up in questions crossing the page boundary. e.g. 2018D50780_ 2018-10-24.
 		#Proposed solution: first and last of the words to remove seem always to contain both letters and number, use that to remove them.
 		#To do: special characters (e met puntjes)
-		questions[i] = words
+		questions[i] = question
 	return questions
 
 #Get keywords out of text by tf_idf method
@@ -65,20 +62,35 @@ def questions_to_keywords(questions, per_question):
 		if per_question:
 			keywords_per_question = []
 			for question in questions:
+				question = re.sub("'",' ',question).replace('_', ' ')
+				question = re.sub(r'[^A-Za-z^-]', ' ', question)
+				question = re.sub(r'\s+', ' ', question)
+				words = [word for word in question.split() if word not in stopwords.words('dutch')]
 				keywords_per_question.append(tf_idf_keywords(question,bow,dictionary))
 			return keywords_per_question
 		else:
 			questions = [word for question in questions for word in question]
 			return tf_idf_keywords(questions,bow,dictionary)
+
+def construct_returnvalue(metadata,questions,keywords):
+	print(metadata)
+	print(questions)
+	print(keywords)
+	returnvalue = ''
+	for section in [metadata, questions, keywords]:
+		for el in section:
+			returnvalue += el + 'breakbreak'
+		returnvalue += 'sectionsplit'
+	return returnvalue
 			
 def main(argv):
 	target = argv[1]
 	doc = read_doc(target)
 	metadata = doc_to_metadata(doc)
-	print(metadata)
-	#questions = doc_to_questions(doc)
-	#keywords = questions_to_keywords(questions, False)
-	#return keywords
+	questions = doc_to_questions(doc)
+	keywords = questions_to_keywords(questions, False)
+	returnstring = construct_returnvalue(metadata,questions,keywords)
+	return returnstring
 	
 if __name__ == "__main__":
 	main(sys.argv)
