@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible"
           content="IE=edge">
-    <title>Project Overzicht</title>
+    <title>Overzicht Kamervragen</title>
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
     <link rel="stylesheet"
@@ -35,7 +35,7 @@
 <body class="page_search_engine">
     <!-- 此处显示demo图作为参考-->
     <div class="demopage hidden">
-        <img src="assets/demo/project_overview.png">
+        <img src="assets/demo/question_overview.png">
     </div>
 
     <div class="container-fluid my-layout d-flex flex-column">
@@ -49,7 +49,7 @@
                                 <img src="assets/img/logo.png"></div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Project Overzicht</h3>
+                            <h3 class="page-title">Overzicht Kamervragen</h3>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
                             <div class="options">
@@ -60,7 +60,7 @@
                                     F. Ten Noord
                                 </a>
                                 <!-- sign-out -->
-                                <a href="login.html"
+                                <a href="login"
                                    class="ml-3 mr-3">
                                     <i class="fa fa-sign-out"
                                        aria-hidden="true"></i>
@@ -126,14 +126,14 @@
                                         <label class="form-check-label"
                                                for="exampleCheck1">Body 1</label>
                                     </div>
-                                    <div class="form-check p-2">
+                                     <div class="form-check p-2">
                                         <input type="checkbox"
                                                class="form-check-input"
                                                id="exampleCheck1">
                                         <label class="form-check-label"
                                                for="exampleCheck1">Body 1</label>
                                     </div>
-                                    <div class="form-check p-2">
+                                     <div class="form-check p-2">
                                         <input type="checkbox"
                                                class="form-check-input"
                                                id="exampleCheck1">
@@ -157,16 +157,16 @@
                                         <strong>Het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden"</strong>
                                     </p>
                                     <p>
-                                        <span class="text-secondary">Project code </span>#2017D30329
+                                        <span class="text-secondary">Project code #2017D30329</span>
+                                       
+                                    </p>
+                                    <p>
+                                        <span class="text-secondary">Datum 5-12-2018</span>
                                         
                                     </p>
                                     <p>
-                                        <span class="text-secondary">Datum </span>5-12-2018
+                                        <span class="text-secondary">Indiener Corrie van Brenk (50PLUS)</span>
                                         
-                                    </p>
-                                    <p>
-                                        <span class="text-secondary">Indiener</span>
-                                        Indiener Corrie van Brenk (50PLUS)
                                     </p>
                                 </div>
                                 <div class="card mb-3">
@@ -179,65 +179,19 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm info d-flex align-items-center">
-                                                <p class="mr-3">
-                                                    <span class="text-secondary">Aangewezen Expert(s):</span>
-                                                </p>
-                                                <div class="people-list d-flex">
-                                                    
-                                                    <div class="people mx-2">
-                                                        <div class="avatar">
-                                                            <img class="rounded-circle"
-                                                                 src="assets/img/woman.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="name">
-                                                            F. Ten Noord
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card mb-3">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-md title">
-                                                <p>
-                                                    <strong>Waarom is het mogelijk dat een geloofwaardige melding van slecht rijgedrag zonder bewijsvoering in behandeling wordt genomen en de …</strong>
+                                            <div class="col-sm">
+                                                <p class="mb-0">
+                                                    <span class="text-secondary">Keywords</span>
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm info d-flex align-items-center">
-                                                <p class="mr-3">
-                                                    <span class="text-secondary">Aangewezen Expert(s):</span>
-                                                </p>
-                                                <div class="people-list d-flex">
-                                                    <div class="people mx-2">
-                                                        <div class="avatar">
-                                                            <img class="rounded-circle"
-                                                                 src="assets/img/man.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="name">
-                                                            B. Veenendaal
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="people mx-2">
-                                                        <div class="avatar">
-                                                            <img class="rounded-circle"
-                                                                 src="assets/img/woman.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="name">
-                                                            F. Ten Noord
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div class="col-sm">
+                                                <span class="badge badge-pill border badge-clear">Rijgedrag</span>
+                                                <span class="badge badge-pill border badge-clear">Meldin</span>
+                                                <span class="badge badge-pill border badge-clear">Slecht</span>
+                                                <span class="badge badge-pill border badge-clear">Geloofwaardig</span>
+                                                <span class="badge badge-pill border badge-clear">Opschorten</span>
                                             </div>
                                         </div>
                                     </div>
@@ -247,38 +201,24 @@
                                         <div class="row">
                                             <div class="col-md title">
                                                 <p>
-                                                    <strong>Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?</strong>
+                                                    <strong>Bent u bekend met het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden"?</strong>
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm info d-flex align-items-center">
-                                                <p class="mr-3">
-                                                    <span class="text-secondary">Aangewezen Expert(s):</span>
+                                            <div class="col-sm">
+                                                <p class="mb-0">
+                                                    <span class="text-secondary">Keywords</span>
                                                 </p>
-                                                <div class="people-list d-flex">
-                                                    <div class="people mx-2">
-                                                        <div class="avatar">
-                                                            <img class="rounded-circle"
-                                                                 src="assets/img/man.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="name">
-                                                            B. Veenendaal
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="people mx-2">
-                                                        <div class="avatar">
-                                                            <img class="rounded-circle"
-                                                                 src="assets/img/woman.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="name">
-                                                            F. Ten Noord
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <span class="badge badge-pill border badge-clear">Rijgedrag</span>
+                                                <span class="badge badge-pill border badge-clear">Meldin</span>
+                                                <span class="badge badge-pill border badge-clear">Slecht</span>
+                                                <span class="badge badge-pill border badge-clear">Geloofwaardig</span>
+                                                <span class="badge badge-pill border badge-clear">Opschorten</span>
                                             </div>
                                         </div>
                                     </div>
@@ -288,42 +228,83 @@
                                         <div class="row">
                                             <div class="col-md title">
                                                 <p>
-                                                    <strong>Kunt u aangeven welke overige criteria gelden bij het beoordelen van de geloofwaardigheid van de melding van slecht rijgedrag? Wie heeft …</strong>
+                                                    <strong>Bent u bekend met het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden"?</strong>
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm info d-flex align-items-center">
-                                                <p class="mr-3">
-                                                    <span class="text-secondary">Aangewezen Expert(s):</span>
+                                            <div class="col-sm">
+                                                <p class="mb-0">
+                                                    <span class="text-secondary">Keywords</span>
                                                 </p>
-                                                <div class="people-list d-flex">
-                                                    <div class="people mx-2">
-                                                        <div class="avatar">
-                                                            <img class="rounded-circle"
-                                                                 src="assets/img/man.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="name">
-                                                             B. Veenendaal
-                                                        </div>
-                                                    </div>
-                                                    <div class="people mx-2">
-                                                        <div class="avatar">
-                                                            <img class="rounded-circle"
-                                                                 src="assets/img/woman.jpg"
-                                                                 alt="">
-                                                        </div>
-                                                        <div class="name">
-                                                            F. Ten Noord
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <span class="badge badge-pill border badge-clear">Rijgedrag</span>
+                                                <span class="badge badge-pill border badge-clear">Meldin</span>
+                                                <span class="badge badge-pill border badge-clear">Slecht</span>
+                                                <span class="badge badge-pill border badge-clear">Geloofwaardig</span>
+                                                <span class="badge badge-pill border badge-clear">Opschorten</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <nav aria-label="Page navigation example ">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md title">
+                                                <p>
+                                                    <strong>Bent u bekend met het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden"?</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <p class="mb-0">
+                                                    <span class="text-secondary">Keywords</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <span class="badge badge-pill border badge-clear">Rijgedrag</span>
+                                                <span class="badge badge-pill border badge-clear">Meldin</span>
+                                                <span class="badge badge-pill border badge-clear">Slecht</span>
+                                                <span class="badge badge-pill border badge-clear">Geloofwaardig</span>
+                                                <span class="badge badge-pill border badge-clear">Opschorten</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md title">
+                                                <p>
+                                                    <strong>Bent u bekend met het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden"?</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <p class="mb-0">
+                                                    <span class="text-secondary">Keywords</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm">
+                                                <span class="badge badge-pill border badge-clear">Rijgedrag</span>
+                                                <span class="badge badge-pill border badge-clear">Meldin</span>
+                                                <span class="badge badge-pill border badge-clear">Slecht</span>
+                                                <span class="badge badge-pill border badge-clear">Geloofwaardig</span>
+                                                <span class="badge badge-pill border badge-clear">Opschorten</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              <nav aria-label="Page navigation example ">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item"><a class="page-link"
                                                href="#">Previous</a></li>

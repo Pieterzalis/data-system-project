@@ -83,7 +83,7 @@
                             </label>
                         </div>
                         <div class="form-group row justify-content-center">
-                            <a href="search_engine.html"
+                            <a href="search_engine"
                                class="btn btn-lg btn-outline-dark">Log in</a>
                         </div>
 

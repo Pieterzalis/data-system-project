@@ -60,7 +60,7 @@
                                     F.Ten Noord
                                 </a>
                                 <!-- sign-out -->
-                                <a href="login.html"
+                                <a href="login"
                                    class="ml-3 mr-3">
                                     <i class="fa fa-sign-out"
                                        aria-hidden="true"></i>
@@ -184,7 +184,7 @@
                                 </div>
                                 <div class="form-group row justify-content-center">
                                     <div class="input-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
-                                        <a href="project_overview.html"
+                                        <a href="project_overview"
                                            class="btn btn-lg btn-block btn-outline-dark">Zoek</a>
                                     </div>
                                 </div>
