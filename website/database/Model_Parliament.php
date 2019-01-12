@@ -1,13 +1,8 @@
 <?php
 
-require_once 'meekrodb.2.3.class.php';
-
-// Database configuration
-DB::$user = 'root';
-DB::$password = '';
-DB::$dbName = 'datasystems';
-DB::$encoding = 'utf8'; // defaults to latin1 if omitted
-
+// Load core model
+// This will also load DB config
+require_once 'Model_Core.php';
 
 // Function to return a option list of all political parties in the DB
 function getParties() {
@@ -61,6 +56,21 @@ function populateParliamentarianList() {
     }
 
     echo $html;
+}
+
+// Translate given last name to an parliament member ID and return it.
+function getPMemberIDByLastname($last_name) {
+
+    // Do code
+    $query = "SELECT parliamentmember_id 
+              FROM parliamentmember
+              WHERE CONCAT(parliamentmember_lastname_prefix, ' ', parliamentmember_lastname) LIKE '%". $last_name ."%'";
+
+    $id = DB::queryFirstRow($query);
+
+    return $id['parliamentmember_id'];
+
+
 }
 
 

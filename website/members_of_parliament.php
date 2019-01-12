@@ -33,7 +33,7 @@
 </head>
 
 <?php
-require_once 'database/querytest.php';
+require_once 'database/Model_Parliament.php';
 ?>
 
 <body class="page_search_engine">
