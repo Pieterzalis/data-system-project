@@ -12,6 +12,9 @@ require_once 'Model_Core.php';
 // Function returns the created project ID
 function saveProject($project_code, $project_submitter_string, $date_letter, $project_title) {
 
+    // TODO also check if the project_code exists, if it does, we cannot insert.
+    // Right now it will give error when trying to inset duplicate unique key
+
     // Fake the project_submitter until we have full authentication system
     // TODO create real authentication
     $project_upload_user_id = 1;                           // id 1 has role 'bestuursondersteuning'
