@@ -1,14 +1,36 @@
+<?php
+require_once 'database/Model_Parliament.php';
+
+ //Decode Ajax call (post values)
+if (isset($_POST['text-filter']) && !empty($_POST['text-filter'])) {
+
+    // Also check if the party filter has been used
+    if (isset($_POST['party-filter']) && !empty($_POST['party-filter'])) {
+        // Populate list with text-filter and party-filter
+        populateParliamentarianListWithFilter($_POST['text-filter'], $_POST['party-filter']);
+    }
+    else {
+        // Populate list only with text-filter
+        populateParliamentarianListWithFilter($_POST['text-filter']);
+    }
+
+    // Exit the page, otherwise will load entire page again.
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Parlementariërs</title>
-    <?php include_once("templates/template_head.php") ?>
+    <?php
+        include_once("templates/template_head.php");
+    ?>
 </head>
 
-<?php
-require_once 'database/Model_Parliament.php';
-?>
+
 
 <body class="page_search_engine">
 
@@ -57,11 +79,10 @@ require_once 'database/Model_Parliament.php';
                             </div>
                             <div class="form-group">
                                 <label for="text_filter">Filter op parlementariër</label>
-                                <input type="email"
+                                <input type="text"
                                        name="text-filter"
                                        class="form-control"
-                                       id="text_filter"
-                                       aria-describedby="emailHelp">
+                                       id="text_filter">
                             </div>
                             <div class="form-group">
                                 <label for="filterParty">Filter op partij</label>
@@ -86,9 +107,11 @@ require_once 'database/Model_Parliament.php';
                                 <h4>Overzicht Parlementariërs</h4>
                             </div>
 
+                            <div class="jq-pmember"">
                             <!-- Start card population -->
-                            <?php populateParliamentarianList() ?>
+                                <?php populateParliamentarianList() ?>
                             <!-- End card -->
+                            </div>
 
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination">

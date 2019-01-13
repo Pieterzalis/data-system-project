@@ -1,5 +1,6 @@
 <?php
 
+
 // Load core model
 // This will also load DB config
 require_once 'Model_Core.php';
