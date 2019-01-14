@@ -9,8 +9,10 @@ require_once 'Model_Core.php';
 // Save Methods
 //
 
-// Function to insert a project in to the database, should check the project code first.
-// Function returns the created project ID
+/*
+ * Function to insert a project in to the database, should check the project code first.
+ * Function returns the created project ID
+*/
 function saveProject($project_code, $project_submitter_string, $date_letter, $project_title) {
 
     // TODO also check if the project_code exists, if it does, we cannot insert.
