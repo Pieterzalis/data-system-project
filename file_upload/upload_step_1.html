@@ -29,6 +29,124 @@
 
     <script src="assets/js/index.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+
+            var fileUploader1 = document.getElementById('FileUploader1');
+            var fileUploader2 = document.getElementById('FileUploader2');
+            var fileUploader3 = document.getElementById('FileUploader3');
+            var pathDisplayer = document.getElementById('file-name-text');
+            var step1 = $("#step-1-form");
+            var file_init = $("#file-init");
+            var file_name = $("#file-name");
+            var file_error = $("#file-error");
+            file_name.hide();
+            file_error.hide();
+
+            if (fileUploader1.addEventListener) {
+                fileUploader1.addEventListener('change', fileUploaderChangeHandler, false);
+            } else if (fileUploader1.attachEvent) {
+                fileUploader1.attachEvent('onclick', fileUploaderClickHandler);
+            } else {
+                fileUploader1.onchange = fileUploaderChangeHandler;
+            }
+
+            if (fileUploader2.addEventListener) {
+                fileUploader2.addEventListener('change', fileUploaderChangeHandler, false);
+            } else if (fileUploader2.attachEvent) {
+                fileUploader2.attachEvent('onclick', fileUploaderClickHandler);
+            } else {
+                fileUploader2.onchange = fileUploaderChangeHandler;
+            }
+
+            if (fileUploader3.addEventListener) {
+                fileUploader3.addEventListener('change', fileUploaderChangeHandler, false);
+            } else if (fileUploader3.attachEvent) {
+                fileUploader3.attachEvent('onclick', fileUploaderClickHandler);
+            } else {
+                fileUploader3.onchange = fileUploaderChangeHandler;
+            }
+
+            function fileUploaderClickHandler(e, a, p, d) {
+                setTimeout(function () {
+                    fileUploaderChangeHandler(e, a, p, d);
+                }, 0);
+            }
+
+            function fileUploaderChangeHandler(e, a, b, c) {
+                step1.removeClass('alert alert-danger');
+                var strFileName = '';
+                if (e.currentTarget && e.currentTarget.files && e.currentTarget.files.length) {
+                    strFileName = e.currentTarget.files["0"].name;
+                    if (strFileName && strFileName.length) {
+                        if (strFileName.endsWith('.doc') || strFileName.endsWith('.docx') || strFileName.endsWith('.txt') || strFileName.endsWith('.pdf')) {
+                            //
+                            file_init.hide();
+                            file_name.show();
+                            file_error.hide();
+                            // alert('文件符合要求');
+                            saveFile(e.currentTarget.files["0"]);
+                        } else {
+                            step1.addClass('alert alert-danger');
+                            // alert('文件不符合要求');
+                            file_init.hide();
+                            file_name.hide();
+                            file_error.show();
+                            strFileName = '';
+                        }
+                    } else {
+                        strFileName = '';
+                    }
+                }
+                pathDisplayer.innerText = strFileName;
+            }
+            var currentFile;
+            function saveFile(file) {
+                currentFile = file;
+            }
+            function upload(file) {
+
+                var form = new FormData();
+
+                form.append('uploads[]', file, file.name);
+                var xhr = new XMLHttpRequest();
+
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            // 上传成功提示
+                            alert('上传成功');
+                        } else {
+                            // TODO：失败提示
+                            alert('上传失败');
+                        }
+                    }
+                };
+
+                var APIurl = 'http://www.baidu.com';
+                xhr.open('POST', APIurl, true);
+                xhr.setRequestHeader('Content-Type', 'multipart/form-data');
+
+                xhr.send(form);
+            }
+        });
+    </script>
+    <style>
+        .a_choose_click{
+            position: relative;
+        }
+         .file-uploader{
+            position:absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100;
+            opacity: 0;
+            z-index: 9;
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 
@@ -44,7 +162,7 @@
             <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-4 pl-0 justify-content-start">
+                        <div class="col-sm-4 pl-0">
                             <div class="logo">
                                 <img src="assets/img/logo.png"></div>
                         </div>
@@ -60,7 +178,7 @@
                                              src="assets/img/man.jpg"
                                              alt="">
                                     </div>
-                                    Laura Zuidensteijn
+                                    UserName
                                 </a>
                                 <!-- sign-out -->
                                 <a href="login.html"
@@ -79,12 +197,12 @@
             <div class="col-sm layout_content container-fluid">
                 <div class="row justify-content-md-center mt-md-3 mt-2">
 
-                        <div class="col-sm-12 col-md-10 col-lg-8">
+                    <div class="col-sm-12 col-md-10 col-lg-8">
 
                         <div class="card">
                             <div class="card-body p-0">
                                 <!-- step-line -->
-                                 <div class="container step-container">
+                                <div class="container step-container">
                                     <div class="row step-line m-3 justify-content-md-center">
                                         <div class="col step actived">
                                             <div class="step-icon">
@@ -139,35 +257,106 @@
                                 <div class="step-content step-1 text-center p-3">
                                     <div class="card m-3">
                                         <div class="title mt-2 mx-2">
-                                            <h4>Upload hier de kamervragen</h4>
+                                            <h4>Upload</h4>
                                         </div>
                                         <div class="options mt-2 mx-2">
-                                            <div class="step-1-block">
-                                                <p>sleep het bestand hier naar toe of<a href="upload_step_1_form.html"> klik </a>om te zoeken op uw computer</p>
+                                            <div class="step-1-block"
+                                                 id="step-1-form">
+                                                <form id="UploadForm"
+                                                      method="post"
+                                                      enctype="multipart/form-data"
+                                                      action="upload_step_2.html">
+
+                                                    <!-- file-init -->
+                                                    <div id="file-init">
+                                                        <p>XXX XXXXX XX XXXXXX XXXXXX
+                                                            <a id="Choose_click_1"
+                                                               class="a_choose_click"
+                                                               href=""
+                                                               title="Choose file">click<input type="file"
+                                                                       class="file-uploader"
+                                                                       name="uploadDataField"
+                                                                       id="FileUploader1" />
+                                                            </a>
+                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                    </div>
+
+                                                    <!-- file-name -->
+                                                    <div id="file-name"
+                                                         class="file-name container p-md-5">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-sm-12 col-md-auto text-center text-md-right p-md-3 mb-3 mb-md-0">
+                                                                <i class="mx-1 fa fa-3x fa-file-o"></i>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md-auto text-center text-md-left p-md-3 mb-3 mb-md-0">
+                                                                <p id="file-name-text"></p>
+                                                            </div>
+                                                            <div class="col-sm-12 col-md  text-center text-md-right p-md-3">
+                                                                <a type="submit"
+                                                                        class="btn btn-success" href="upload_step_2.html">
+                                                                    next
+                                                                    <i class="mx-1 fa fa-angle-right"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- 点击这里在你的电脑上找另一个文件 -->
+                                                        <p class="mt-3">XXX XXXXX XX XXXXXX XXXXXX
+                                                            <a id="Choose_click_2"
+                                                               class="a_choose_click"
+                                                               href=""
+                                                               title="Choose file">click<input type="file"
+                                                                       class="file-uploader"
+                                                                       name="uploadDataField"
+                                                                       id="FileUploader2" />
+                                                            </a>
+                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                    </div>
+
+                                                    <!-- file-error -->
+                                                    <div id="file-error"
+                                                         class="file-error">
+                                                        error
+
+                                                        <!-- 数据文件格式不支持 -->
+                                                        <!-- 点击这里选择另一个文件 -->
+                                                        <p>XXX XXXXX XX XXXXXX XXXXXX
+                                                            <a id="Choose_click_3"
+                                                               class="a_choose_click"
+                                                               href=""
+                                                               title="Choose file">click<input type="file"
+                                                                       class="file-uploader"
+                                                                       name="uploadDataField"
+                                                                       id="FileUploader3" />
+                                                            </a>
+                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                    </div>
+
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="notice m-2">
-                                            <h4> Geaccepteerde bestandsformaten</h4>
+                                            <h4> file type</h4>
                                             <div style="font-size:10px">
-                                                <i class="fa m-md-2 my-icon-file">
-                                                    <span class="bg-danger text-white">PDF</span>
+                                                <i class="fa m-sm-2 my-icon-file">
+                                                    <span class="bg-danger text-white">pdf</span>
                                                     <hr>
                                                     <hr>
                                                     <hr>
                                                 </i>
-                                                <i class="fa m-md-2 my-icon-file">
-                                                    <span class="bg-primary text-white">Doc</span>
+                                                <i class="fa m-sm-2 my-icon-file">
+                                                    <span class="bg-primary text-white">doc</span>
                                                     <hr>
                                                     <hr>
                                                     <hr>
                                                 </i>
-                                                <i class="fa m-md-2 my-icon-file">
-                                                    <span class="bg-purple text-white">Docx</span>
+                                                <i class="fa m-sm-2 my-icon-file">
+                                                    <span class="bg-purple text-white">docx</span>
                                                     <hr>
                                                     <hr>
                                                     <hr>
                                                 </i>
-                                                <i class="fa m-md-2 my-icon-file">
+                                                <i class="fa m-sm-2 my-icon-file">
                                                     <span class="bg-warning text-white">...</span>
                                                     <hr>
                                                     <hr>
