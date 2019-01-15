@@ -28,7 +28,7 @@ def doc_to_metadata(doc):
 	metadict['indiener'] = doc.split('Vragen van')[1].split('aan')[0].strip()
 	metadict['topic'] = doc.split('over')[1].split('(')[0].strip()
 	metadict['id'] = doc.split('der Kamer')[1].split('Vragen')[0].strip()
-	metadict['date'] = doc.split('Ingezonden')[1].split(')')[0].strip()
+	metadict['date'] = doc.replace('Ingezonden','ingezonden').split('ingezonden')[1].split(')')[0].strip()
 	return metadict
 
 
