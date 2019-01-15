@@ -29,7 +29,21 @@
 
     <script src="assets/js/index.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            let myAlert = $("#alert-modal");
 
+            window.showAlert = function () {
+                myAlert.addClass('d-flex');
+                myAlert.show();
+            }
+            window.hideAlert = function () {
+                myAlert.hide();
+                myAlert.removeClass('d-flex');
+            }
+            hideAlert();
+        });
+    </script>
 </head>
 
 <body class="page_search_engine">
@@ -60,7 +74,7 @@
                                              src="assets/img/man.jpg"
                                              alt="">
                                     </div>
-                                    Laura Zuidensteijn
+                                    UserName
                                 </a>
                                 <!-- sign-out -->
                                 <a href="login.html"
@@ -77,7 +91,7 @@
         <div class="row flex-1">
             <!-- layout_content -->
             <div class="col-sm layout_content container-fluid">
-                <div class="row justify-content-md-center mt-md-3 mt-2">
+                <div class="row justify-content-md-center mt-md-3 my-2">
 
                     <div class="col-sm-12 col-md-10 col-lg-8">
 
@@ -214,14 +228,30 @@
                                             </table>
                                         </div>
                                     </div>
-                                 
-                                                                   
-                                    <a class="btn btn-danger mx-3" href="upload_step_1.html">ANULEER</a>
-                                    <a class="btn btn-success mx-3" href="">VOEG TOE</a>
+                                    <button class="btn btn-danger mx-3">ANULEER</button>
+                                    <button class="btn btn-success mx-3"
+                                            onclick="showAlert()">ANULEER</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="alert-modal"
+         class="position-fixed sticky-top w-100 h-100 bg-shadow align-items-center justify-content-center d-none"
+         onclick="hideAlert()">
+        <div class="card"
+             style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Success</h5>
+
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+                <div class="text-right">
+                    <a href="overzicht.html"
+                       class="card-link text-secondary"><strong>Link</strong></a>
                 </div>
             </div>
         </div>
