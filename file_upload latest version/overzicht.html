@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Overzicht</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="assets/style.css" />
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="assets/style-nav.css" />
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="assets/icon-font/css/font-awesome.min.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <script src="assets/js/index.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        function changePage({ pageId }) {
+            console.log(pageId);
+            // indexPage
+            var indexNavPage = $('#indexPage');
+            // childPage
+            var childNavPage = $('#childPage');
+            indexNavPage.hide();
+            childNavPage.show();
+
+            // 测试百度
+            // childNavPage.attr('src', 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=' + pageId); 
+
+            // 真实请求
+           
+        }
+
+    </script>
+
+</head>
+
+<body class="page_project_overview2">
+    <!-- 此处显示demo图作为参考-->
+    <div class="demopage hidden">
+        <img src="assets/demo/overzicht.jpg">
+    </div>
+
+    <div class="container-fluid my-layout d-flex flex-column">
+        <div class="row flex-none">
+            <!-- layout_nav -->
+            <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-4 pl-0">
+                            <div class="logo">
+                                <img src="assets/img/logo.png"></div>
+                        </div>
+                        <div class="col-sm-4 d-flex align-items-center justify-content-center">
+                            <h3 class="page-title">Overzicht</h3>
+                        </div>
+                        <div class="col-sm-4 d-flex align-items-center justify-content-end">
+                            <div class="options">
+                                <!-- UserName -->
+                                <a href="">
+                                    <div class="avatar">
+                                        <img class="rounded-circle"
+                                             src="assets/img/man.jpg"
+                                             alt="">
+                                    </div>
+                                    UserName
+                                </a>
+                                <!-- sign-out -->
+                                <a href="login.html"
+                                   class="ml-3 mr-3">
+                                    <i class="fa fa-sign-out"
+                                       aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row flex-1">
+            <!-- layout_left -->
+            <div class="col-md-4 p-0 col-lg-3 col-xl-3 layout_left d-flex">
+                <div class="container-fluid layout_left_form bg-app-dark">
+                    <div class="row"
+                         style="height: 100%;">
+                        <div class="col-sm p-0 d-flex flex-column">
+                            <!-- nav-tabs -->
+                            <ul class="nav nav-tabs flex-none d-none bg-white"
+                                id="myTab"
+                                role="tablist">
+                                <li class="nav-item flex-1">
+                                    <a class="nav-link active"
+                                       id="tab1-tab"
+                                       data-toggle="tab"
+                                       href="#tab1"
+                                       role="tab"
+                                       aria-controls="tab1"
+                                       aria-selected="true">
+                                        <i class="fa fa-file"
+                                           aria-hidden="true"></i>
+                                        tab1
+                                    </a>
+                                </li>
+                                <li class="nav-item flex-1">
+                                    <a class="nav-link"
+                                       id="tab2-tab"
+                                       data-toggle="tab"
+                                       href="#tab2"
+                                       role="tab"
+                                       aria-controls="tab2"
+                                       aria-selected="false">
+                                        <i class="fa fa-search"
+                                           aria-hidden="true"></i>
+                                        tab2
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- tab-content -->
+                            <div class="tab-content flex-1 p-2"
+                                 style="overflow-y:auto"
+                                 id="myTabContent">
+
+                                <div class="tab-pane fade show active"
+                                     id="tab1"
+                                     role="tabpanel"
+                                     aria-labelledby="tab1-tab">
+                                    <form class="p-2">
+
+                                        <div class="form-group mb-0">
+                                            <label for="exampleInputEmail1">Zoek</label>
+                                            <div class="input-group bg-trans-dark">
+                                                <div class="input-group-prepend clear">
+                                                    <div class="input-group-text">
+                                                        <i class="fa fa-search"
+                                                           aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="Search"
+                                                       placeholder="Search">
+                                            </div>
+                                        </div>
+                                        <div class="text-center py-3 px-2">
+                                            <button type="button"
+                                                    class="btn btn-outline-light">XXX XXXX XXXXXXXX</button>
+                                        </div>
+                                    </form>
+                                    <div id="accordion">
+                                        <!-- card -->
+                                        <div class="card m-2">
+                                            <div class="card-header"
+                                                 id="headingOne"
+                                                 data-toggle="collapse"
+                                                 data-target="#collapseOne"
+                                                 aria-expanded="true"
+                                                 aria-controls="collapseOne">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-none mr-2">
+                                                        <i class="fa fa-file fa-fw"
+                                                           aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="flex-1">
+                                                        Collapsible Group Item #1</div>
+                                                    <div class="flex-none  ml-2">
+                                                        <i class="fa fa-angle-down"
+                                                           aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div id="collapseOne"
+                                                 class="collapse show"
+                                                 aria-labelledby="headingOne"
+                                                 data-parent="#accordion">
+                                                <!-- card-body -->
+                                                <div class="card-body">
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:1})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true">1</i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:2})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true">2</i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:3})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true">3</i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true">4</i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- card -->
+                                        <div class="card m-2">
+                                            <div class="card-header collapsed"
+                                                 id="headingTwo"
+                                                 data-toggle="collapse"
+                                                 data-target="#collapseTwo"
+                                                 aria-expanded="false"
+                                                 aria-controls="collapseTwo">
+
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-none mr-2">
+                                                        <i class="fa fa-file fa-fw"
+                                                           aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="flex-1">
+                                                        Collapsible Group Item #2</div>
+                                                    <div class="flex-none  ml-2">
+                                                        <i class="fa fa-angle-down"
+                                                           aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div id="collapseTwo"
+                                                 class="collapse"
+                                                 aria-labelledby="headingTwo"
+                                                 data-parent="#accordion">
+                                                <!-- card-body -->
+                                                <div class="card-body">
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- card -->
+                                        <div class="card m-2">
+                                            <div class="card-header collapsed"
+                                                 data-toggle="collapse"
+                                                 data-target="#collapseThree"
+                                                 aria-expanded="false"
+                                                 aria-controls="collapseThree"
+                                                 id="headingThree">
+
+                                                <div class="d-flex align-items-center">
+                                                    <div class="flex-none mr-2">
+                                                        <i class="fa fa-file fa-fw"
+                                                           aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="flex-1">
+                                                        Collapsible Group Item #3</div>
+                                                    <div class="flex-none  ml-2">
+                                                        <i class="fa fa-angle-down"
+                                                           aria-hidden="true"></i>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div id="collapseThree"
+                                                 class="collapse"
+                                                 aria-labelledby="headingThree"
+                                                 data-parent="#accordion">
+                                                <!-- card-body -->
+                                                <div class="card-body">
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage({pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade"
+                                     id="tab2"
+                                     role="tabpanel"
+                                     aria-labelledby="tab2-tab">
+                                    <!-- 222222 -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- layout_content -->
+            <div class="col-sm p-0 layout_content py-md-3 justify-content-center positon-relative">
+                <!-- content -->
+
+                <!-- index Page -->
+                <div id="indexPage"
+                     class="container-fluid py-3 py-md-0">
+                    <div class="row">
+                        <div class="col-sm mx-md-3 mx-ld-5">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <table class="table table-sm mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="no-border"
+                                                    scope="row">XXXXX:</td>
+                                                <th class="no-border"
+                                                    scope="row">XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX </th>
+                                            </tr>
+                                            <tr>
+                                                <td class="no-border"
+                                                    scope="row">XXXX:</td>
+                                                <th class="no-border"
+                                                    scope="row">XXXX XXXXXX </th>
+                                            </tr>
+                                            <tr>
+                                                <td class="no-border"
+                                                    scope="row">XXXXXX:</td>
+                                                <th class="no-border"
+                                                    scope="row">XXXX XXXX XXXX XXXXX </th>
+                                            </tr>
+                                            <tr>
+                                                <td class="no-border pt-4"
+                                                    scope="row">XXXXXX:</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <ul class="my-list-group container-fluid">
+                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-floppy-o fa-stack-2x"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                </span>
+                                                <span>XXXX XXXX XXXXX XXX</span>
+                                            </div>
+                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
+                                                <i class="fa fa-angle-right"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-floppy-o fa-stack-2x"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                </span>
+                                                <span>XXXX XXXX XXXXX XXX</span>
+                                            </div>
+                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
+                                                <i class="fa fa-angle-right"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-floppy-o fa-stack-2x"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                </span>
+                                                <span>XXXX XXXX XXXXX XXX</span>
+                                            </div>
+                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
+                                                <i class="fa fa-angle-right"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-floppy-o fa-stack-2x"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                </span>
+                                                <span>XXXX XXXX XXXXX XXX</span>
+                                            </div>
+                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
+                                                <i class="fa fa-angle-right"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                                <!-- index Page -->
+                <div id="indexPage"
+                     class="container-fluid py-3 py-md-0">
+                    <div class="row">
+                        <div class="col-sm mx-md-3 mx-ld-5">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <table class="table table-sm mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="no-border"
+                                                    scope="row">XXXXX:</td>
+                                                <th class="no-border"
+                                                    scope="row">XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX </th>
+                                            </tr>
+                                            <tr>
+                                                <td class="no-border"
+                                                    scope="row">XXXX:</td>
+                                                <th class="no-border"
+                                                    scope="row">XXXX XXXXXX </th>
+                                            </tr>
+                                            <tr>
+                                                <td class="no-border"
+                                                    scope="row">XXXXXX:</td>
+                                                <th class="no-border"
+                                                    scope="row">XXXX XXXX XXXX XXXXX </th>
+                                            </tr>
+                                            <tr>
+                                                <td class="no-border pt-4"
+                                                    scope="row">XXXXXX:</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <ul class="my-list-group container-fluid">
+                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-floppy-o fa-stack-2x"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                </span>
+                                                <span>XXXX XXXX XXXXX XXX</span>
+                                            </div>
+                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
+                                                <i class="fa fa-angle-right"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-floppy-o fa-stack-2x"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                </span>
+                                                <span>XXXX XXXX XXXXX XXX</span>
+                                            </div>
+                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
+                                                <i class="fa fa-angle-right"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-floppy-o fa-stack-2x"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                </span>
+                                                <span>XXXX XXXX XXXXX XXX</span>
+                                            </div>
+                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
+                                                <i class="fa fa-angle-right"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-floppy-o fa-stack-2x"
+                                                       aria-hidden="true"></i>
+                                                </span>
+                                                <span class="fa-stack">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                </span>
+                                                <span>XXXX XXXX XXXXX XXX</span>
+                                            </div>
+                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
+                                                <i class="fa fa-angle-right"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <!-- iframe child Page 通过左侧点击访问子页面（overzicht-detail.html），同时传递相应的页面ID进入，后端根据ID渲染overzicht-detail.html页面 -->
+                <iframe id="childPage"
+                        src=""
+                        name="listReload"
+                        class="iframe-child-page"
+                        style="display: none">
+                </iframe>
+
+                <!-- 此处显示demo图作为参考-->
+                <div class="hidden">
+                    <img class="hidden"
+                         style="position: absolute;width: 100%;"
+                         src="assets/demo/overzicht-index.png">
+                    <img class="hidden"
+                         style="position: absolute;width: 100%;"
+                         src="assets/demo/overzicht-detail.png">
+                    <img class=""
+                         style="position: absolute;width: 100%;"
+                         src="assets/demo/overzicht-detail-keyword.png">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
