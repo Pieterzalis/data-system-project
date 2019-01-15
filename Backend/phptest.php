@@ -53,7 +53,7 @@ function prepareDataforDB($data)
     $indiener = getIndiener($data->metadata->indiener);
     $party = getParty($data->metadata->indiener);
     $title = ucfirst($data->metadata->topic);
-    $date = dutch_strtotime($data->metadata->date);
+    $date = date("Y-m-d", dutch_strtotime($data->metadata->date));
 
     $questions = getQuestions($data->questions);
 
@@ -64,7 +64,7 @@ function prepareDataforDB($data)
     // Echo results
     echo '<p>Project Code: ' . $id . '</p>';
     echo '<p>Indiener: ' . $indiener . '</p>';
-    echo '<p>Topic of projet: ' . $title . '</p>';
+    echo '<p>Topic of project: ' . $title . '</p>';
     echo '<p>Date of letter: ' . $date . '</p>';
 
     echo '<h3>Questions in letter:</h3>';
