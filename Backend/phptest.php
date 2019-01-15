@@ -53,7 +53,11 @@ function prepareDataforDB($data)
     $indiener = getIndiener($data->metadata->indiener);
     $party = getParty($data->metadata->indiener);
     $title = ucfirst($data->metadata->topic);
-    $date = date("Y-m-d", dutch_strtotime($data->metadata->date));
+
+    // TODO redo this... this is ugly
+    $date_english = dutch_strtotime($data->metadata->date);
+    $date_int = (int)$date_english;
+    $date = date("Y-m-d", $date_int);
 
     $questions = getQuestions($data->questions);
 
@@ -64,6 +68,7 @@ function prepareDataforDB($data)
     // Echo results
     echo '<p>Project Code: ' . $id . '</p>';
     echo '<p>Indiener: ' . $indiener . '</p>';
+    echo '<p>Party: ' . $party . '</p>';
     echo '<p>Topic of project: ' . $title . '</p>';
     echo '<p>Date of letter: ' . $date . '</p>';
 
@@ -95,7 +100,7 @@ function getParty($string)
     $strpos_start = strpos($string, '(') +1;
     $strpos_end = strpos($string, ')' ) ;
 
-    $str = substr($string, $strpos_start);
+    $str = substr($string, $strpos_start, $strpos_end-$strpos_start);
 
     return $str;
 }
