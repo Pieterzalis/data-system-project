@@ -26,7 +26,7 @@ function parseLetter()
         echo '<h2>Raw parse results of letter: ' . $file_name . '</h2>';
         echo '<p>Project Code: ' . $json->metadata->id . '</p>';
         echo '<p>Indiener: ' . $json->metadata->indiener . '</p>';
-        echo '<p>Topic of projet: ' . $json->metadata->topic . '</p>';
+        echo '<p>Topic of project: ' . $json->metadata->topic . '</p>';
         echo '<p>Date of letter: ' . $json->metadata->date . '</p>';
 
         echo '<h3>Questions in letter:</h3>';
@@ -88,7 +88,7 @@ function getIndiener($string)
 {
     // TODO add support for strings with 'leden'
     // Need to set substring so it only contains indiener name
-    $str = substr($string, 4, (strpos($string, '(')-1)-4);
+    $str = trim(substr($string, 0, (strpos($string, '('))));
 
     return $str;
 }
