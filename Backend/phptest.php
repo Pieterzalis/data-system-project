@@ -2,13 +2,14 @@
 #$command = escapeshellcmd("python C:\\Users\\flori\\OneDrive\\Documenten\\hello.py");
 #$output = shell_exec($command);
 require_once '../website/database/Model_Core.php';
+require_once '../website/database/Model_Project.php';
 
 parseLetter();
 
 function parseLetter()
 {
     // TODO make this dynamic with the upload script!
-    $file_path = htmlentities('C:\\xampp\htdocs\\datasystems.test\\Backend\\letter2.pdf');
+    $file_path = htmlentities('C:\\xampp\htdocs\\datasystems.test\\Backend\\letter3.pdf');
     $python_path = htmlentities('read_qf.py');
     $file_name = basename($file_path);
 
@@ -82,6 +83,22 @@ function prepareDataforDB($data)
         echo '<p>' . $keyword . '</p>';
     }
 
+    // Insert project in the DB!
+
+
+}
+
+function saveProjectandQuestions($project_code, $project_indiener, $project_party, $project_title, $project_date_letter,
+                                 $questions, $keywords){
+
+	// First save the project and return the project ID
+	$project_id = saveProject($project_code, $project_indiener, $project_party, $project_date_letter, $project_title);
+
+	// Now we have the project_id we can save all questions with reference to the project
+	$questions = saveQuestionArray($questions, $project_id);
+
+	// Also insert the keywords we have extracted into the DB
+	$keywords = saveKeywordArray($keywords, $project_id);
 }
 
 function getIndiener($string)

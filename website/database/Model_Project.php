@@ -13,7 +13,7 @@ require_once 'Model_Core.php';
  * Function to insert a project in to the database, should check the project code first.
  * Function returns the created project ID
 */
-function saveProject($project_code, $project_submitter_string, $date_letter, $project_title) {
+function saveProject($project_code, $project_submitter_name, $project_submitter_party, $date_letter, $project_title) {
 
     // TODO also check if the project_code exists, if it does, we cannot insert.
     // Right now it will give error when trying to inset duplicate unique key
@@ -25,7 +25,7 @@ function saveProject($project_code, $project_submitter_string, $date_letter, $pr
 
     // TODO Translate project submitter (lastname) to a parliamentarian ID
     // We don't need to insert the party since it is linked to the parliamentarian record
-    $project_submitter = getPMemberIDByLastname($project_submitter_string);
+    $project_submitter = getPMemberIDByLastname($project_submitter_name);
     if (is_null($project_submitter)) {
         exit("No such submitter found, please check if the last name is correct.");
     }
@@ -55,15 +55,23 @@ function saveProject($project_code, $project_submitter_string, $date_letter, $pr
 //
 // Get Methods
 //
+//
 
-// Function to return a option list of all political parties in the DB
-function getProject() {
+// Function to return a html list of projects
+// TODO this will simply get all projects, no html is build yet.
+// TODO NOTE !!!!! All untested!!
+function getProjectList() {
     $html = "";
-    $results = DB::query("SELECT * FROM Party");
+    $results = DB::query("SELECT * FROM Project");
 
+
+    // TODO build HTML according to screens
     foreach ($results as $row) {
-        $party_name = $row["party_name"];
-        $html .= "<option>" . $party_name . "</option>";
+        $project_title = $row["project_title"];
+        $html .= "<p>" . $project_title . "</p>";
     }
     echo $html;
 }
+
+
+
