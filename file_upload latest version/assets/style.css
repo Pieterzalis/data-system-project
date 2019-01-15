@@ -48,6 +48,14 @@ hr.color-white {
     background: #4978adaa;
 }
 
+.bg-shadow {
+    background: #00000088;
+}
+
+.shadow {
+    box-shadow: 0 0 10px #00000088;
+}
+
 .hidden {
     display: none;
 }
@@ -58,6 +66,10 @@ hr.color-white {
 
 .no-after::after {
     display: none !important;
+}
+
+.no-border {
+    border: none !important;
 }
 
 .input-group-prepend.clear .input-group-text {
@@ -238,6 +250,14 @@ hr.color-white {
     background: #ffffff40;
 }
 
+.my-list-group {
+    list-style: none;
+    padding: .3rem;
+    margin: 0;
+}
+
+.my-list-group-item {}
+
 .input-group.bg-trans-dark {
     border-width: 0;
 }
@@ -269,7 +289,7 @@ hr.color-white {
 }
 
 .d-flex .flex-1 {
-    flex: 1;
+    flex: 1
 }
 
 .d-flex .flex-0 {
@@ -312,6 +332,18 @@ hr.color-white {
     object-fit: cover;
 }
 
+.avatar.avatar-sm img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+
+.avatar.avatar-md img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+}
+
 .layout_nav .page-title {
     /* font-size: 1.5em; */
 }
@@ -337,6 +369,17 @@ hr.color-white {
         height: 100%;
         overflow: auto;
     }
+    .border-md-right {
+        border-right: 1px solid #dee2e6 !important;
+    }
+}
+
+.scroll-disable {
+    overflow: hidden;
+}
+
+.scroll-view {
+    overflow: auto;
 }
 
 .page_login .login-form {
