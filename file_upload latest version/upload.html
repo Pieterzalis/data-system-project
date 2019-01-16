@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible"
           content="IE=edge">
@@ -27,8 +28,10 @@
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
 
-    <script src="assets/js/index.js"></script>
+    <script src="../website/assets/js/index.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+
+
     <script>
         $(document).ready(function () {
             var fileUploader1 = document.getElementById('FileUploader1');
@@ -106,11 +109,28 @@
                     form.append('files[]', file);
                 }
 
+                // Change parsing status to step-2
+                $("#step-1").hide();
+                $("#step-2").show();
+
                 fetch('process.php', {
                     method: 'POST',
                     body: form
                 }).then(response => {
                     console.log(response);
+
+                    response.text().then(function (text) {
+
+                        // text will contain the html response!!!
+                        // Set the step-3 div with response content
+                        $('#projectTitleID').html(text);
+
+                        // First hide the div step 1
+                        $("#step-2").hide();
+                        $("#step-3").show();
+
+                    });
+
                 });
             }
 
@@ -487,7 +507,9 @@
                                                 <div class="mb-0">
                                                     <label>Indiener</label>
                                                 </div>
-                                                <p><Strong>XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXX</Strong></p>
+                                                <div id="projectTitleID">
+                                                    <p><Strong>XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXX</Strong></p>
+                                                </div>
                                                 <p>xxxxxxx:<Strong>4352-32423</Strong></p>
                                             </div>
                                             <div class="row justify-content-md-center">
