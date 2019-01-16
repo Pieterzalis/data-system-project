@@ -1,0 +1,148 @@
+.demopage {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    /* height: 100%; */
+}
+
+.demopage img {
+    width: 100%;
+    /* height: 100%; */
+}
+
+body {
+    margin: 0
+}
+
+.hidden {
+    display: none;
+}
+
+.input-group-prepend.clear .input-group-text {
+    background: transparent;
+}
+
+.checkbox-list-right input[type=checkbox] {
+    position: absolute;
+    right: 15px;
+}
+.checkbox-list-left input[type=checkbox] {
+    
+}
+.scroll-list{
+    overflow: auto;
+}
+
+.text-mini{
+    font-size: 0.8em;
+}
+
+.people-list {}
+
+.people-list .avatar {}
+
+.people-list .avatar img {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+}
+
+
+
+.info-border {
+    border-radius: .25rem !important;
+    border: 1px solid #dee2e6 !important;
+    padding: 1px 3px;
+    margin: -1px -4px;
+}
+
+.card-close-btn{
+    color:#333
+}
+
+.d-flex .flex-1 {
+    flex: 1
+    
+}
+
+.d-flex .flex-0 {
+    flex: 0
+}
+
+.d-flex .flex-auto {
+    flex: auto
+}
+
+.d-flex .flex-none {
+    flex: none
+}
+
+.layout_nav {
+    background: #fff;
+    /* height: 80px; */
+    box-sizing: content-box;
+    border-bottom: 1px solid #888;
+    color: #666;
+    /* background-color: rgba(255, 0, 0, 0.3); */
+}
+
+.layout_nav .logo img {
+    height: 80px;
+}
+
+.layout_nav .options a {
+    color: #666;
+    font-size: 1.2em;
+}
+
+.layout_nav .page-title {
+    /* font-size: 1.5em; */
+}
+
+@media (max-width: 768px) {
+    .layout_content {}
+}
+
+@media (min-width: 768px) {
+    .layout_nav .logo {
+        padding-left: 80px;
+    }
+    .layout_left {
+        height: 100%;
+        overflow-y: auto;
+        position: absolute;
+        border-right: 1px solid #888;
+    }
+    .layout_content {
+        height: 100%;
+        width: 100%;
+        overflow: auto;
+    }
+}
+
+.page_login .login-form {
+    margin: 20px auto;
+}
+
+.page_login .login-form .logo img {
+    width: 100%;
+}
+
+.page_login .login-form .title {
+    margin-bottom: 30px;
+}
+
+.page_login .login-form form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #000;
+}
+
+@media (min-width: 768px) {
+    .page_login .login-form {
+        margin-top: 130px !important;
+    }
+}
+.my-layout {
+    height:100vh;
+}

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Project Overzicht</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="assets/style.css" />
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="assets/icon-font/css/font-awesome.min.css">
+
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <script src="assets/js/index.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+
+<body class="page_project_overview2">
+    <!-- 此处显示demo图作为参考-->
+    <div class="demopage hidden">
+        <img src="assets/demo/project_overview2.png">
+    </div>
+
+    <div class="container-fluid my-layout d-flex flex-column">
+        <div class="row flex-none">
+            <!-- layout_nav -->
+            <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-4 pl-0">
+                            <div class="logo">
+                                <img src="assets/img/logo.png"></div>
+                        </div>
+                        <div class="col-sm-4 d-flex align-items-center justify-content-center">
+                            <h3 class="page-title">Project Overzicht2</h3>
+                        </div>
+                        <div class="col-sm-4 d-flex align-items-center justify-content-end">
+                            <div class="options">
+                                <!-- UserName -->
+                                <a href="">
+                                    <i class="fa fa-user-circle"
+                                       aria-hidden="true"></i>
+                                    UserName
+                                </a>
+                                <!-- sign-out -->
+                                <a href="login.php"
+                                   class="ml-3 mr-3">
+                                    <i class="fa fa-sign-out"
+                                       aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row flex-1">
+            <!-- layout_left -->
+            <div class="col-md-3 p-0 col-lg-2 col-xl-2 layout_left d-flex">
+                <div class="container-fluid layout_left_form">
+                    <div class="row">
+                        <div class="col-sm">
+                            <form>
+                                <div class="form-group text-center pt-4">
+                                    <span> Filters</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Title</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend clear">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-search"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="Search"
+                                               placeholder="Search">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Date between</label>
+                                    <div class="input-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="date begin"
+                                               placeholder="12 Mei 2018">
+                                        <div class="input-group-prepend clear">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-calendar-o"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">and</label>
+                                    <div class="input-group">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="date end"
+                                               placeholder="19 November 2018">
+                                        <div class="input-group-prepend clear">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-calendar-o"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <fieldset class="form-group">
+                                    <div class="row">
+                                        <legend class="col-form-label col-sm-12 pt-0">Factual/Non-factual</legend>
+                                        <div class="col-sm-12">
+                                            <div class="form-check">
+                                                <input class="form-check-input"
+                                                       type="radio"
+                                                       name="gridRadios"
+                                                       id="gridRadios1"
+                                                       value="option1"
+                                                       checked>
+                                                <label class="form-check-label"
+                                                       for="gridRadios1">
+                                                    Factual
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input"
+                                                       type="radio"
+                                                       name="gridRadios"
+                                                       id="gridRadios2"
+                                                       value="option2">
+                                                <label class="form-check-label"
+                                                       for="gridRadios2">
+                                                    Non-factual
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Keywords</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend clear">
+                                            <div class="input-group-text">
+                                                <i class="fa fa-search"
+                                                   aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="Search"
+                                               placeholder="Search">
+                                    </div>
+                                </div>
+
+                                <!-- list check -->
+                                <div class="checkbox-list-left scroll-list border rounded form-group"
+                                     style="max-height:150px">
+                                    <div class="form-check py-2 pl-5">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               id="exampleCheckb_1">
+                                        <label class="form-check-label"
+                                               for="exampleCheckb_1">Keyword 1</label>
+                                    </div>
+                                    <div class="form-check py-2 pl-5">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               id="exampleCheckb_2">
+                                        <label class="form-check-label"
+                                               for="exampleCheckb_2">Keyword 2</label>
+                                    </div>
+                                    <div class="form-check py-2 pl-5">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               id="exampleCheckb_3">
+                                        <label class="form-check-label"
+                                               for="exampleCheckb_3">Keyword 3</label>
+                                    </div>
+                                    <div class="form-check py-2 pl-5">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               id="exampleCheckb_4">
+                                        <label class="form-check-label"
+                                               for="exampleCheckb_4">Keyword 4</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Factual/Non-factual</label>
+                                </div>
+
+                                <!-- list check -->
+                                <div class="checkbox-list-left scroll-list border rounded form-group"
+                                     style="max-height:150px">
+                                    <div class="form-check py-2 pl-5">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               id="exampleCheck1">
+                                        <label class="form-check-label"
+                                               for="exampleCheck1">Classification 1</label>
+                                    </div>
+                                    <div class="form-check py-2 pl-5">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               id="exampleCheck2">
+                                        <label class="form-check-label"
+                                               for="exampleCheck2">Classification 2</label>
+                                    </div>
+                                    <div class="form-check py-2 pl-5">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               id="exampleCheck3">
+                                        <label class="form-check-label"
+                                               for="exampleCheck3">Classification 3</label>
+                                    </div>
+                                    <div class="form-check py-2 pl-5">
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               id="exampleCheck4">
+                                        <label class="form-check-label"
+                                               for="exampleCheck4">Classification 4</label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- layout_content -->
+            <div class="col-sm p-0 layout_content d-flex justify-content-center ">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm pt-md-2">
+                            <div class="row">
+                                <div class="col-sm">
+                                    <ul class="nav nav-pills">
+                                        <li class="nav-item">
+                                            <a class="nav-link active"
+                                               href="#1"
+                                               data-toggle="tab">Overview</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link"
+                                               href="#2"
+                                               data-toggle="tab">Upload Question</a>
+                                        </li>
+                                    </ul>
+                                    <!--
+                                    <button type="button"
+                                    class="btn btn-secondary">Overview</button>
+                                    <button type="button"
+                                    class="btn btn-clear">Upload question</button> 
+                                    -->
+                                </div>
+                            </div>
+                            <div class="row justify-content-around">
+                                <div class="col-sm-1">
+                                    <i class="fa fa-arrow-up"></i>
+                                </div>
+                                <div class="col-sm-1">
+                                    <i class="fa fa-arrow-up"></i>
+                                </div>
+                                <div class="col-sm-1">
+                                    <i class="fa fa-arrow-up"></i>
+                                </div>
+                            </div>
+                            <div class="card mb-3">
+                                <div class="card-body row text-mini">
+                                    <div class="col-sm-6 col-lg-3">
+                                        <p class="text-secondary">
+                                            <u>Het bericht 'Miljoenen nodig om tunnels brandbestendig te maken'</u>
+                                        </p>
+                                        <p>
+                                            <strong>#2018Z18292 - 12 Oktober 2018</strong>
+                                        </p>
+                                        <div class="d-flex align-items-center">
+                                            <i class="fa fa-user-circle fa-3x mr-2"></i>
+                                            <p class="mr-3 m-0">
+                                                <strong>Roy van Aalst</strong>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-lg-3">
+                                        <p class="mr-3 m-0">
+                                            <strong>Classification</strong>
+                                        </p>
+                                        <p class="mr-3 m-0">
+                                            Classification text
+                                        </p>
+                                        <p class="mr-3 m-0">
+                                            <strong>Factual/Non factual</strong>
+                                        </p>
+                                        <p class="mr-3 m-0">
+                                            Non-factual
+                                        </p>
+                                    </div>
+                                    <div class="col-sm-12 col-lg-6">
+                                        <p class="mr-3 m-0">
+                                            <strong>Keywords</strong>
+                                        </p>
+                                        <p class="mr-3 m-0">
+                                            Keyword 1 Keyword 1 Keyword 1<br><br>
+                                            Keyword 2 test Keyword 2 test Keyword 2 test Keyword 2 test Keyword 2 test 
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="height:150px;">
+
+                            </div>
+                            <div class="card mb-3"
+                                 style="height:150px;">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
