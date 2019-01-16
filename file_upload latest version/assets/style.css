@@ -1,3 +1,32 @@
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+.partylogo{
+    border: solid;
+    border-color: #3f648d;
+    border-width: 1px;
+}
+
+.search{
+    background-color: #09335e;
+}
+
+.search:hover{
+    background-color: #2A5B8D;
+    
+}
+
+.kennisbankitems{
+    border: solid;
+    border-color: #154274;
+    border-width: 2px; 
+}
+
+.questions{
+    background-color: #3f648d;
+}
+
 .demopage {
     position: fixed;
     z-index: 1;
@@ -13,6 +42,7 @@
 body {
     margin: 0
 }
+
 
 .color-app {
     color: #4978ad;
@@ -331,9 +361,10 @@ hr.color-white {
 }
 
 .layout_nav .options .avatar img {
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     object-fit: cover;
+    margin: 10px;
 }
 
 .avatar.avatar-sm img {
