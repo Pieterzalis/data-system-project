@@ -83,6 +83,7 @@
                             file_error.hide();
                             // alert('文件符合要求');
                             saveFile(e.currentTarget.files["0"]);
+                            // TODO Should be moved to onclick of button
                             upload(e.currentTarget.files);
                         } else {
                             step1.addClass('alert alert-danger');
@@ -98,6 +99,7 @@
                 }
                 pathDisplayer.innerText = strFileName;
             }
+
             var currentFile;
             function saveFile(file) {
                 currentFile = file;
@@ -124,7 +126,7 @@
 
                         // text will contain the html response!!!
                         // Set the step-3 div with response content
-                        $('#projectTitleID').html(text);
+                        $('#jq-step3-div').html(text);
 
                         // Set progress in top of screen
                         $("#progress-step3").addClass("actived");
@@ -346,7 +348,7 @@
                                      class="step-content step-1 text-center p-3">
                                     <div class="card m-3">
                                         <div class="title mt-2 mx-2">
-                                            <h4>Upload</h4>
+                                            <h4>Upload hier de kamervragen</h4>
                                         </div>
                                         <div class="options mt-2 mx-2">
                                             <div class="step-1-block"
@@ -357,16 +359,10 @@
 
                                                     <!-- file-init -->
                                                     <div id="file-init">
-                                                        <p>XXX XXXXX XX XXXXXX XXXXXX
-                                                            <a id="Choose_click_1"
-                                                               class="a_choose_click"
-                                                               href=""
-                                                               title="Choose file">click<input type="file"
-                                                                       class="file-uploader"
-                                                                       name="uploadDataField"
-                                                                       id="FileUploader1" />
-                                                            </a>
-                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                        <p>Klik
+                                                            <a id="Choose_click_1" class="a_choose_click" style="cursor: pointer;" href=""
+                                                               title="Choose file">hier<input style="cursor: pointer;" type="file" class="file-uploader" name="uploadDataField" id="FileUploader1" /></a>
+                                                             om te zoeken op uw computer</p>
                                                     </div>
 
                                                     <!-- file-name -->
@@ -381,25 +377,16 @@
                                                                 <p id="file-name-text"></p>
                                                             </div>
                                                             <div class="col-sm-12 col-md  text-center text-md-right p-md-3">
-                                                                <button type="button" class="btn btn-success"
-                                                                        onclick="gotoStep2()">
-                                                                    next
+                                                                <button type="button" class="btn btn-success upload-file-btn">
+                                                                    Volgende
                                                                     <i class="mx-1 fa fa-angle-right"></i>
                                                                 </button>
                                                             </div>
                                                         </div>
 
                                                         <!-- 点击这里在你的电脑上找另一个文件 -->
-                                                        <p class="mt-3">XXX XXXXX XX XXXXXX XXXXXX
-                                                            <a id="Choose_click_2"
-                                                               class="a_choose_click"
-                                                               href=""
-                                                               title="Choose file">click<input type="file"
-                                                                       class="file-uploader"
-                                                                       name="uploadDataField"
-                                                                       id="FileUploader2" />
-                                                            </a>
-                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                        <p class="mt-3">Klik <a id="Choose_click_2" class="a_choose_click" href="" title="Choose file">hier<input type="file" class="file-uploader"
+                                                        name="uploadDataField" id="FileUploader2"/></a> om een ander bestand te zoeken op uw computer</p>
                                                     </div>
 
                                                     <!-- file-error -->
@@ -426,7 +413,7 @@
                                             </div>
                                         </div>
                                         <div class="notice m-2">
-                                            <h4> file type</h4>
+                                            <h4>Geaccepteerde bestandsformaten</h4>
                                             <div style="font-size:10px">
                                                 <i class="fa m-sm-2 my-icon-file">
                                                     <span class="bg-danger text-white">pdf</span>
@@ -434,24 +421,24 @@
                                                     <hr>
                                                     <hr>
                                                 </i>
-                                                <i class="fa m-sm-2 my-icon-file">
-                                                    <span class="bg-primary text-white">doc</span>
-                                                    <hr>
-                                                    <hr>
-                                                    <hr>
-                                                </i>
-                                                <i class="fa m-sm-2 my-icon-file">
-                                                    <span class="bg-purple text-white">docx</span>
-                                                    <hr>
-                                                    <hr>
-                                                    <hr>
-                                                </i>
-                                                <i class="fa m-sm-2 my-icon-file">
-                                                    <span class="bg-warning text-white">...</span>
-                                                    <hr>
-                                                    <hr>
-                                                    <hr>
-                                                </i>
+                                                <!--<i class="fa m-sm-2 my-icon-file">-->
+                                                    <!--<span class="bg-primary text-white">doc</span>-->
+                                                    <!--<hr>-->
+                                                    <!--<hr>-->
+                                                    <!--<hr>-->
+                                                <!--</i>-->
+                                                <!--<i class="fa m-sm-2 my-icon-file">-->
+                                                    <!--<span class="bg-purple text-white">docx</span>-->
+                                                    <!--<hr>-->
+                                                    <!--<hr>-->
+                                                    <!--<hr>-->
+                                                <!--</i>-->
+                                                <!--<i class="fa m-sm-2 my-icon-file">-->
+                                                    <!--<span class="bg-warning text-white">...</span>-->
+                                                    <!--<hr>-->
+                                                    <!--<hr>-->
+                                                    <!--<hr>-->
+                                                <!--</i>-->
                                                 <!-- <i class="mx-1 fa fa-3x fa-file-pdf-o"></i>
                                                 <i class="mx-1 fa fa-3x fa-file-excel-o"></i>
                                                 <i class="mx-1 fa fa-3x fa-file-word-o"></i>
@@ -459,10 +446,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <a class="btn btn-danger"
-                                       href="upload_step_1.html">ANULEER</a> -->
-                                    <button class="btn btn-danger"
-                                            onclick="gotoStep1()">ANULEER</a>
+
+                                    <a><button class="btn btn-danger">ANNULEER</button></a>
                                 </div>
 
 
@@ -489,15 +474,15 @@
                                         </div>
                                         <p class="mt-3">Een moment geduld alstublieft...</p>
                                     </div>
-                                    <button class="btn btn-danger"
-                                            onclick="gotoStep1()">ANULEER</a>
+
+                                    <a><button class="btn btn-danger" onclick="gotoStep1()">ANNULEER</button></a>
                                 </div>
 
                                 <!-- step-content -->
                                 <div id="step-3"
                                      class="step-content step-3 text-center p-3"
                                      style="display:none">
-                                    <div class="card m-3 p-md-3 p-lg-4">
+                                    <div class="card m-3 p-md-3 p-lg-4" id="jq-step3-div">
                                         <!-- title -->
                                         <div class="title mt-2 mx-2">
                                             <h4>Upload</h4>
@@ -576,10 +561,8 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <button class="btn btn-danger"
-                                            onclick="gotoStep1()">ANULEER</a>
-                                        <button class="btn btn-success mx-3"
-                                                onclick="showAlert()">ANULEER</button>
+                                    <a><button class="btn btn-danger" onclick="gotoStep1()">ANNULEER </button></a>
+                                    <a><button class="btn btn-success mx-3" onclick="showAlert()">VOEG TOE</button></a>
                                 </div>
                             </div>
                         </div>
@@ -594,13 +577,13 @@
         <div class="card"
              style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title text-center">Success</h5>
+                <h5 class="card-title text-center">Project opgeslagen</h5>
 
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <p class="card-text">Het project is opgeslagen in de database.</p>
 
                 <div class="text-right">
                     <a href="overzicht.html"
-                       class="card-link text-secondary"><strong>Link</strong></a>
+                       class="card-link text-secondary"><strong>OK</strong></a>
                 </div>
             </div>
         </div>

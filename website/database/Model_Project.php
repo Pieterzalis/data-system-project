@@ -4,6 +4,7 @@
 // Load core model
 // This will also load DB config
 require_once 'Model_Core.php';
+require_once 'Model_Parliament.php';
 
 //
 // Save Methods
@@ -13,7 +14,7 @@ require_once 'Model_Core.php';
  * Function to insert a project in to the database, should check the project code first.
  * Function returns the created project ID
 */
-function saveProject($project_code, $project_submitter_name, $project_submitter_party, $date_letter, $project_title) {
+function saveProject($project_code, $project_submitter_name, $date_letter_mysql, $project_title) {
 
     // TODO also check if the project_code exists, if it does, we cannot insert.
     // Right now it will give error when trying to inset duplicate unique key
@@ -29,10 +30,6 @@ function saveProject($project_code, $project_submitter_name, $project_submitter_
     if (is_null($project_submitter)) {
         exit("No such submitter found, please check if the last name is correct.");
     }
-
-    // TODO convert date letter to mysql letter for query
-    $date_letter_mysql = date("Y-m-d", dutch_strtotime($date_letter));
-
 
     DB::insert('project', array(
         'project_code' => $project_code,
