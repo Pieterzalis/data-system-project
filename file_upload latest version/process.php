@@ -136,87 +136,73 @@ function returnHTMLResponse($project_id, $questions, $keywords, $project_indiene
         $html_keywords .= '<span class="badge badge-pill badge-secondary">' . ucfirst($keyword) . '</span>';
     }
 
+    $html_questions = '';
+    $i = 1;
+    foreach($questions as $question) {
+        $html_questions .= '<tr class="bg-app-light">
+                                <td class="text-right"> Vraag ' . $i . ':</td>
+                                <td class="text-left">' . $question . '</td>
+                            </tr>';
+
+        $i++;
+    }
+
+
 	// Add it all together
 	$html .= '
-                                        <!-- title -->
-                                        <div class="title mt-2 mx-2">
-                                            <h4>Controleer het nieuwe project</h4>
-                                            <hr class="color-app">
-                                        </div>
+            <!-- title -->
+            <div class="title mt-2 mx-2">
+                <h4>Controleer het nieuwe project</h4>
+                <hr class="color-app">
+            </div>
 
-                                        <!-- row-info -->
-                                        <div class="project-info">
-                                            <div>
+            <!-- row-info -->
+            <div class="project-info">
+                <div>
 
-                                                <div class="mb-0">
-                                                    <label>Project Titel</label>
-                                                </div>
-                                                <div id="projectTitleID">
-                                                    <p><Strong>'. $results[0]["project_title"] .'</Strong></p>
-                                                </div>
-                                                <p>Ingediend op: <Strong>'. $project_date_letter .'</Strong></p>
-                                            </div>
-                                            <div class="row justify-content-md-center">
-                                                <div class="col-sm col-md-6 col-lg-4">
+                    <div class="mb-0">
+                        <label>Project Titel</label>
+                    </div>
+                    <div id="projectTitleID">
+                        <p><Strong>'. $results[0]["project_title"] .'</Strong></p>
+                    </div>
+                    <p>Ingediend op: <Strong>'. $project_date_letter .'</Strong></p>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-sm col-md-6 col-lg-4">
 
-                                                    <div class="mb-0">
-                                                        <label>Keywords</label>
-                                                    </div>
-                                                    <div>
-                                                        ' . $html_keywords . '
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm col-md-6 col-lg-4">
-                                                    <div class="mb-0">
-                                                        <label>Indieners</label>
-                                                    </div>
-                                                    <p><Strong>XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXX</Strong></p>
-                                                </div>
-                                            </div>
-                                        </div>
+                        <div class="mb-0">
+                            <label>Keywords</label>
+                        </div>
+                        <div>
+                            ' . $html_keywords . '
+                        </div>
+                    </div>
+                    <div class="col-sm col-md-6 col-lg-4">
+                        <div class="mb-0">
+                            <label>Indiener</label>
+                        </div>
+                        <p><Strong>'. $project_indiener .'</Strong></br>'. $results[0]["party_name"] .'</p>
+                    </div>
+                </div>
+            </div>
 
-                                        <!-- row-table -->
-                                        <div class="project-table">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th colspan="2"> Title</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr class="bg-app-light">
-                                                        <td class="text-right"> content：</td>
-                                                        <td class="text-left"> XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXX</td>
-                                                    </tr>
-                                                    <tr class="bg-app-light">
-                                                        <td class="text-right"> content：</td>
-                                                        <td class="text-left"> XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXX</td>
-                                                    </tr>
-                                                    <tr class="bg-app-light">
-                                                        <td class="text-right"> content：</td>
-                                                        <td class="text-left"> XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXX</td>
-                                                    </tr>
-                                                    <tr class="bg-app-light">
-                                                        <td class="text-right"> content：</td>
-                                                        <td class="text-left"> XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXX</td>
-                                                    </tr>
-                                                    <tr class="bg-app-light">
-                                                        <td class="text-right"> content：</td>
-                                                        <td class="text-left"> XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXX</td>
-                                                    </tr>
-                                                    <tr class="bg-app-light">
-                                                        <td class="text-right"> content：</td>
-                                                        <td class="text-left"> XX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXXXXXXX XX XXXXXXXX XXXXX XXXXXXX XXXXX XXXXXXX XXXXX XXX</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    ';
+            <!-- row-table -->
+            <div class="project-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Vragen</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ' . $html_questions . '
+                    </tbody>
+                </table>
+            </div>
+        ';
 
-
-
-
-	echo $html;
+echo $html;
 
 
 }

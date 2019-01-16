@@ -219,6 +219,10 @@ hr.color-white {
     position: relative;
 }
 
+.badge-secondary {
+    margin: 0 1px 0 1px;
+}
+
 .step-2 .file-analysing .file-analysing-icon .fa-spin {
     position: absolute;
     top: -15px;
