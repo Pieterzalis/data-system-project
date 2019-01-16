@@ -34,12 +34,27 @@
     <script src="assets/js/index.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script>
-        function changePage({ pageId }) {
-            console.log(pageId);
+
+        var lastClick = $('select-all-nav-item');
+
+        function changePage(node, { pageId }) {
+            lastClick.removeClass("actived");
+            lastClick = $(node);
+            lastClick.addClass("actived");
+            console.log(pageId);//选中的ID
+            jump(pageId);//跳转
+        }
+
+        function search() {
+            back();
+        }
+
+        function jump(pageId) {
             // indexPage
             var indexNavPage = $('#indexPage');
             // childPage
             var childNavPage = $('#childPage');
+
             indexNavPage.hide();
             childNavPage.show();
 
@@ -47,7 +62,19 @@
             // childNavPage.attr('src', 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=' + pageId); 
 
             // 真实请求
-           
+            childNavPage.attr('src', 'overzicht-detail.html?id=' + pageId);
+        }
+        function back() {
+            lastClick.removeClass("actived");
+            // indexPage
+            var indexNavPage = $('#indexPage');
+            // childPage
+            var childNavPage = $('#childPage');
+
+            childNavPage.hide();
+            indexNavPage.show();
+            // 请求清空
+            childNavPage.attr('src', '');
         }
 
     </script>
@@ -79,10 +106,10 @@
                                 <a href="">
                                     <div class="avatar">
                                         <img class="rounded-circle"
-                                             src="assets/img/man.jpg"
+                                             src="assets/img/woman.jpg"
                                              alt="">
                                     </div>
-                                    UserName
+                                    Francine ten Noord
                                 </a>
                                 <!-- sign-out -->
                                 <a href="login.html"
@@ -117,7 +144,7 @@
                                        aria-selected="true">
                                         <i class="fa fa-file"
                                            aria-hidden="true"></i>
-                                        tab1
+                                        Zoek een project
                                     </a>
                                 </li>
                                 <li class="nav-item flex-1">
@@ -146,7 +173,7 @@
                                     <form class="p-2">
 
                                         <div class="form-group mb-0">
-                                            <label for="exampleInputEmail1">Zoek</label>
+                                            <label for="exampleInputEmail1"> Zoek een project</label>
                                             <div class="input-group bg-trans-dark">
                                                 <div class="input-group-prepend clear">
                                                     <div class="input-group-text">
@@ -157,12 +184,13 @@
                                                 <input type="text"
                                                        class="form-control"
                                                        id="Search"
-                                                       placeholder="Search">
+                                                       placeholder="">
                                             </div>
                                         </div>
                                         <div class="text-center py-3 px-2">
                                             <button type="button"
-                                                    class="btn btn-outline-light">XXX XXXX XXXXXXXX</button>
+                                                    class="btn btn-outline-light"
+                                                    onclick="search()">Alle toegewezen kamervragen</button>
                                         </div>
                                     </form>
                                     <div id="accordion">
@@ -180,7 +208,7 @@
                                                            aria-hidden="true"></i>
                                                     </div>
                                                     <div class="flex-1">
-                                                        Collapsible Group Item #1</div>
+                                                        het artikel «Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden</div>
                                                     <div class="flex-none  ml-2">
                                                         <i class="fa fa-angle-down"
                                                            aria-hidden="true"></i>
@@ -197,13 +225,13 @@
                                                 <div class="card-body">
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:1})">
+                                                       onclick="changePage(this,{pageId:1})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
-                                                                   aria-hidden="true">1</i>
+                                                                   aria-hidden="true">#1</i>
                                                             </div>
-                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            <div class="flex-1">Bent u bekend met het artikel «Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden
                                                             </div>
                                                             <div class="flex-none ml-2">
                                                                 <i class="fa fa-angle-right"
@@ -213,13 +241,13 @@
                                                     </a>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:2})">
+                                                       onclick="changePage(this,{pageId:2})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
-                                                                   aria-hidden="true">2</i>
+                                                                   aria-hidden="true">#2</i>
                                                             </div>
-                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            <div class="flex-1">Waarom is het mogelijk dat een geloofwaardige melding van slecht rijgedrag zonder bewijsvoering in behandeling wordt genomen en de rijbevoegdheid wordt opgeschort? Hoe wenselijk acht u deze situatie? Kunt u uw antwoord toelichten?
                                                             </div>
                                                             <div class="flex-none ml-2">
                                                                 <i class="fa fa-angle-right"
@@ -229,13 +257,13 @@
                                                     </a>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:3})">
+                                                       onclick="changePage(this,{pageId:3})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
-                                                                   aria-hidden="true">3</i>
+                                                                   aria-hidden="true">#3</i>
                                                             </div>
-                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            <div class="flex-1">Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?
                                                             </div>
                                                             <div class="flex-none ml-2">
                                                                 <i class="fa fa-angle-right"
@@ -245,13 +273,13 @@
                                                     </a>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:'unknow'})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
-                                                                   aria-hidden="true">4</i>
+                                                                   aria-hidden="true">#4</i>
                                                             </div>
-                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            <div class="flex-1">Kunt u aangeven welke overige criteria gelden bij het beoordelen van de geloofwaardigheid van de melding van slecht rijgedrag? Wie heeft deze criteria vastgesteld?
                                                             </div>
                                                             <div class="flex-none ml-2">
                                                                 <i class="fa fa-angle-right"
@@ -277,7 +305,7 @@
                                                            aria-hidden="true"></i>
                                                     </div>
                                                     <div class="flex-1">
-                                                        Collapsible Group Item #2</div>
+                                                        het bericht «De overheid is de regie kwijt in het bestrijden van overlast van ratten»</div>
                                                     <div class="flex-none  ml-2">
                                                         <i class="fa fa-angle-down"
                                                            aria-hidden="true"></i>
@@ -293,7 +321,23 @@
                                                 <div class="card-body">
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:'unknow'})">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-none mr-2">
+                                                                <i class="fa fa-fw"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                            <div class="flex-1">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                                                            </div>
+                                                            <div class="flex-none ml-2">
+                                                                <i class="fa fa-angle-right"
+                                                                   aria-hidden="true"></i>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <!-- child-item -->
+                                                    <a class="child-item"
+                                                       onclick="changePage(this,{pageId:'unknow'})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
@@ -309,13 +353,13 @@
                                                     </a>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:'unknow'})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
                                                                    aria-hidden="true"></i>
                                                             </div>
-                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
+                                                            <div class="flex-1">xxxxxxxxxxxxxxxxxxxxxxxx
                                                             </div>
                                                             <div class="flex-none ml-2">
                                                                 <i class="fa fa-angle-right"
@@ -325,23 +369,7 @@
                                                     </a>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                            <div class="flex-1">On the the should have a value of On the have a value of On the the should have a value of
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:'unknow'})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
@@ -373,7 +401,7 @@
                                                            aria-hidden="true"></i>
                                                     </div>
                                                     <div class="flex-1">
-                                                        Collapsible Group Item #3</div>
+                                                    het uitstempelen van zeevarenden in de haven van Rotterdam</div>
                                                     <div class="flex-none  ml-2">
                                                         <i class="fa fa-angle-down"
                                                            aria-hidden="true"></i>
@@ -389,7 +417,7 @@
                                                 <div class="card-body">
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:'unknow'})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
@@ -405,7 +433,7 @@
                                                     </a>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:'unknow'})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
@@ -421,7 +449,7 @@
                                                     </a>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:'unknow'})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
@@ -437,7 +465,7 @@
                                                     </a>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage({pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:'unknow'})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
@@ -483,33 +511,33 @@
                                         <tbody>
                                             <tr>
                                                 <td class="no-border"
-                                                    scope="row">XXXXX:</td>
+                                                    scope="row">Project:</td>
                                                 <th class="no-border"
-                                                    scope="row">XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX </th>
+                                                    scope="row">Het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden" </th>
                                             </tr>
                                             <tr>
                                                 <td class="no-border"
-                                                    scope="row">XXXX:</td>
+                                                    scope="row">Deadline:</td>
                                                 <th class="no-border"
-                                                    scope="row">XXXX XXXXXX </th>
+                                                    scope="row">31-01-2019 </th>
                                             </tr>
                                             <tr>
                                                 <td class="no-border"
-                                                    scope="row">XXXXXX:</td>
+                                                    scope="row">Indiener:</td>
                                                 <th class="no-border"
-                                                    scope="row">XXXX XXXX XXXX XXXXX </th>
+                                                    scope="row">Corrie van der Brink - 50 Plus </th>
                                             </tr>
                                             <tr>
                                                 <td class="no-border pt-4"
-                                                    scope="row">XXXXXX:</td>
+                                                    scope="row">Vragen:</td>
                                             </tr>
                                         </tbody>
                                     </table>
 
                                     <ul class="my-list-group container-fluid">
                                         <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?</div>
                                             <div class="col-9 col-md-auto px-sm-2 px-md-3">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-floppy-o fa-stack-2x"
@@ -517,9 +545,9 @@
                                                 </span>
                                                 <span class="fa-stack">
                                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">0</i>
                                                 </span>
-                                                <span>XXXX XXXX XXXXX XXX</span>
+                                                <span>opgeslagen bronnen</span>
                                             </div>
                                             <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
                                                 <i class="fa fa-angle-right"
@@ -527,8 +555,8 @@
                                             </div>
                                         </li>
                                         <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Waarom is het mogelijk dat een geloofwaardige melding van slecht rijgedrag zonder bewijsvoering in behandeling wordt genomen en de rijbevoegdheid wordt opgeschort? Hoe wenselijk acht u deze situatie? Kunt u uw antwoord toelichten?</div>
                                             <div class="col-9 col-md-auto px-sm-2 px-md-3">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-floppy-o fa-stack-2x"
@@ -536,9 +564,9 @@
                                                 </span>
                                                 <span class="fa-stack">
                                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">8</i>
                                                 </span>
-                                                <span>XXXX XXXX XXXXX XXX</span>
+                                                <span>opgeslagen bronnen</span>
                                             </div>
                                             <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
                                                 <i class="fa fa-angle-right"
@@ -546,8 +574,8 @@
                                             </div>
                                         </li>
                                         <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?</div>
                                             <div class="col-9 col-md-auto px-sm-2 px-md-3">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-floppy-o fa-stack-2x"
@@ -555,9 +583,9 @@
                                                 </span>
                                                 <span class="fa-stack">
                                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">10</i>
                                                 </span>
-                                                <span>XXXX XXXX XXXXX XXX</span>
+                                                <span>opgeslagen bronnen</span>
                                             </div>
                                             <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
                                                 <i class="fa fa-angle-right"
@@ -565,8 +593,8 @@
                                             </div>
                                         </li>
                                         <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
+                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"> </div>
+                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Kunt u aangeven welke overige criteria gelden bij het beoordelen van de geloofwaardigheid van de melding van slecht rijgedrag? Wie heeft deze criteria vastgesteld?</div>
                                             <div class="col-9 col-md-auto px-sm-2 px-md-3">
                                                 <span class="fa-stack">
                                                     <i class="fa fa-floppy-o fa-stack-2x"
@@ -574,128 +602,9 @@
                                                 </span>
                                                 <span class="fa-stack">
                                                     <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
+                                                    <i class="fa fa-stack-1x fa-inverse text-dark">2</i>
                                                 </span>
-                                                <span>XXXX XXXX XXXXX XXX</span>
-                                            </div>
-                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
-                                                <i class="fa fa-angle-right"
-                                                   aria-hidden="true"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                                <!-- index Page -->
-                <div id="indexPage"
-                     class="container-fluid py-3 py-md-0">
-                    <div class="row">
-                        <div class="col-sm mx-md-3 mx-ld-5">
-                            <div class="card">
-                                <div class="card-body">
-
-                                    <table class="table table-sm mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td class="no-border"
-                                                    scope="row">XXXXX:</td>
-                                                <th class="no-border"
-                                                    scope="row">XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX XXXX </th>
-                                            </tr>
-                                            <tr>
-                                                <td class="no-border"
-                                                    scope="row">XXXX:</td>
-                                                <th class="no-border"
-                                                    scope="row">XXXX XXXXXX </th>
-                                            </tr>
-                                            <tr>
-                                                <td class="no-border"
-                                                    scope="row">XXXXXX:</td>
-                                                <th class="no-border"
-                                                    scope="row">XXXX XXXX XXXX XXXXX </th>
-                                            </tr>
-                                            <tr>
-                                                <td class="no-border pt-4"
-                                                    scope="row">XXXXXX:</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <ul class="my-list-group container-fluid">
-                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
-                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-floppy-o fa-stack-2x"
-                                                       aria-hidden="true"></i>
-                                                </span>
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
-                                                </span>
-                                                <span>XXXX XXXX XXXXX XXX</span>
-                                            </div>
-                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
-                                                <i class="fa fa-angle-right"
-                                                   aria-hidden="true"></i>
-                                            </div>
-                                        </li>
-                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
-                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-floppy-o fa-stack-2x"
-                                                       aria-hidden="true"></i>
-                                                </span>
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
-                                                </span>
-                                                <span>XXXX XXXX XXXXX XXX</span>
-                                            </div>
-                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
-                                                <i class="fa fa-angle-right"
-                                                   aria-hidden="true"></i>
-                                            </div>
-                                        </li>
-                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
-                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-floppy-o fa-stack-2x"
-                                                       aria-hidden="true"></i>
-                                                </span>
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
-                                                </span>
-                                                <span>XXXX XXXX XXXXX XXX</span>
-                                            </div>
-                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
-                                                <i class="fa fa-angle-right"
-                                                   aria-hidden="true"></i>
-                                            </div>
-                                        </li>
-                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">1#</div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
-                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-floppy-o fa-stack-2x"
-                                                       aria-hidden="true"></i>
-                                                </span>
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">1</i>
-                                                </span>
-                                                <span>XXXX XXXX XXXXX XXX</span>
+                                                <span>opgeslagen bronnen</span>
                                             </div>
                                             <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
                                                 <i class="fa fa-angle-right"
@@ -710,7 +619,6 @@
                     </div>
                 </div>
 
-                
                 <!-- iframe child Page 通过左侧点击访问子页面（overzicht-detail.html），同时传递相应的页面ID进入，后端根据ID渲染overzicht-detail.html页面 -->
                 <iframe id="childPage"
                         src=""

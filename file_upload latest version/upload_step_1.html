@@ -31,8 +31,6 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
-
-
             var fileUploader1 = document.getElementById('FileUploader1');
             var fileUploader2 = document.getElementById('FileUploader2');
             var fileUploader3 = document.getElementById('FileUploader3');
@@ -43,7 +41,6 @@
             var file_error = $("#file-error");
             file_name.hide();
             file_error.hide();
-
             if (fileUploader1.addEventListener) {
                 fileUploader1.addEventListener('change', fileUploaderChangeHandler, false);
             } else if (fileUploader1.attachEvent) {
@@ -51,7 +48,6 @@
             } else {
                 fileUploader1.onchange = fileUploaderChangeHandler;
             }
-
             if (fileUploader2.addEventListener) {
                 fileUploader2.addEventListener('change', fileUploaderChangeHandler, false);
             } else if (fileUploader2.attachEvent) {
@@ -59,7 +55,6 @@
             } else {
                 fileUploader2.onchange = fileUploaderChangeHandler;
             }
-
             if (fileUploader3.addEventListener) {
                 fileUploader3.addEventListener('change', fileUploaderChangeHandler, false);
             } else if (fileUploader3.attachEvent) {
@@ -67,13 +62,11 @@
             } else {
                 fileUploader3.onchange = fileUploaderChangeHandler;
             }
-
             function fileUploaderClickHandler(e, a, p, d) {
                 setTimeout(function () {
                     fileUploaderChangeHandler(e, a, p, d);
                 }, 0);
             }
-
             function fileUploaderChangeHandler(e, a, b, c) {
                 step1.removeClass('alert alert-danger');
                 var strFileName = '';
@@ -110,7 +103,6 @@
                 var form = new FormData();
 				for (let i = 0; i < files.length; i++) {
 					let file = files[i];
-
 					form.append('files[]', file);
 				}
 				
@@ -124,7 +116,6 @@
 			/*
                 form.append('uploads[]', file, file.name);
                 var xhr = new XMLHttpRequest();
-
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState === 4) {
                         if (xhr.status === 200) {
@@ -136,11 +127,9 @@
                         }
                     }
                 };
-
                 var APIurl = 'http://www.baidu.com';
                 xhr.open('POST', 'C:\\xampp\\htdocs\\', true);
                 xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-
                 xhr.send(form);
             }*/
         });
@@ -191,7 +180,7 @@
                                              src="assets/img/man.jpg"
                                              alt="">
                                     </div>
-                                    UserName
+                                    Laura Zuidensteijn
                                 </a>
                                 <!-- sign-out -->
                                 <a href="login.html"
@@ -223,7 +212,7 @@
                                                 <i class="fa fa-file fa-3x d-none d-md-block"></i>
                                             </div>
                                             <div class="step-text">
-                                                <p>1</p>
+                                                <p>Upload</p>
                                             </div>
                                             <div class="step-num">
                                                 <label>1</label>
@@ -240,7 +229,7 @@
                                                 <i class="fa fa-cog fa-3x d-none d-md-block"></i>
                                             </div>
                                             <div class="step-text">
-                                                <p>1</p>
+                                                <p>Verwerk</p>
                                             </div>
                                             <div class="step-num">
                                                 <label>2</label>
@@ -257,7 +246,7 @@
                                                 <i class="fa fa-check-square fa-3x d-none d-md-block"></i>
                                             </div>
                                             <div class="step-text">
-                                                <p>1</p>
+                                                <p>Controleer</p>
                                             </div>
                                             <div class="step-num">
                                                 <label>3</label>
@@ -270,7 +259,7 @@
                                 <div class="step-content step-1 text-center p-3">
                                     <div class="card m-3">
                                         <div class="title mt-2 mx-2">
-                                            <h4>Upload</h4>
+                                            <h4>Upload hier de kamervragen</h4>
                                         </div>
                                         <div class="options mt-2 mx-2">
                                             <div class="step-1-block"
@@ -282,16 +271,16 @@
 
                                                     <!-- file-init -->
                                                     <div id="file-init">
-                                                        <p>XXX XXXXX XX XXXXXX XXXXXX
+                                                        <p>Sleep het bestand hier toe of
                                                             <a id="Choose_click_1"
                                                                class="a_choose_click"
                                                                href=""
-                                                               title="Choose file">click<input type="file"
+                                                               title="Choose file">klik<input type="file"
                                                                        class="file-uploader"
                                                                        name="uploadDataField"
                                                                        id="FileUploader1" />
                                                             </a>
-                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                            om te zoeken op uw computer</p>
                                                     </div>
 
                                                     <!-- file-name -->
@@ -314,35 +303,35 @@
                                                         </div>
 
                                                         <!-- 点击这里在你的电脑上找另一个文件 -->
-                                                        <p class="mt-3">XXX XXXXX XX XXXXXX XXXXXX
+                                                        <p class="mt-3">Bestandsformaat niet ondersteund 
                                                             <a id="Choose_click_2"
                                                                class="a_choose_click"
                                                                href=""
-                                                               title="Choose file">click<input type="file"
+                                                               title="Choose file">Klik<input type="file"
                                                                        class="file-uploader"
                                                                        name="uploadDataField"
                                                                        id="FileUploader2" />
                                                             </a>
-                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                            hier om een ander bestand te kiezen</p>
                                                     </div>
 
                                                     <!-- file-error -->
                                                     <div id="file-error"
                                                          class="file-error">
-                                                        error
+                                                        Error
 
                                                         <!-- 数据文件格式不支持 -->
                                                         <!-- 点击这里选择另一个文件 -->
-                                                        <p>XXX XXXXX XX XXXXXX XXXXXX
+                                                        <p>Bestandsformaat niet ondersteund
                                                             <a id="Choose_click_3"
                                                                class="a_choose_click"
                                                                href=""
-                                                               title="Choose file">click<input type="file"
+                                                               title="Choose file">Klik<input type="file"
                                                                        class="file-uploader"
                                                                        name="uploadDataField"
                                                                        id="FileUploader3" />
                                                             </a>
-                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                             hier om een ander bestand te kiezen</p>
                                                     </div>
 
                                                 </form>
@@ -382,7 +371,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn btn-danger">ANULEER</button>
+                                    <a class="btn btn-danger" href="upload_step_1.html">ANULEER</a>
                                 </div>
                             </div>
                         </div>
