@@ -239,15 +239,19 @@ hr.color-white {
 
 .my-layout .layout_left .card .child-item {
     color: #fff;
+    background: #ffffff40;
     display: block;
     padding: 5px 20px;
     font-size: 10px;
     border-bottom: 1px solid #104176;
 }
 
+.my-layout .layout_left .card .child-item.actived {
+    background: #ffffff20;
+}
+
 .my-layout .layout_left .card .card-body {
     padding: 0;
-    background: #ffffff40;
 }
 
 .my-list-group {
