@@ -26,7 +26,7 @@ def doc_to_metadata(doc):
 	metadict = {} # dictionary with metadata
 	doc = doc.replace('Vragen door', 'Vragen van').replace('\naan', ' aan ').replace('aan\n', ' aan ').replace('inzake', 'over').replace('\n', '')
 	metadict['indiener'] = doc.split('Vragen van')[1].split('aan')[0].replace('de leden','').replace('het lid','').replace('lid','').replace('leden','').strip()
-	if 'en' in metadict['indiener']:
+	if ' en ' in metadict['indiener']:
 		metadict['indiener'] = metadict['indiener'].split('en')[0].strip()
 	metadict['topic'] = doc.split('over')[1].split('(')[0].strip()
 	metadict['id'] = doc.split('der Kamer')[1].split('Vragen')[0].strip()
