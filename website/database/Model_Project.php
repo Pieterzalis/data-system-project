@@ -7,6 +7,16 @@ require_once 'Model_Core.php';
 require_once 'Model_Parliament.php';
 
 //
+// Handle any ajax post requests to this file here
+//
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    if ($_REQUEST['func'] === 'getAssignedQuestionsHtml'){
+        getAssignedQuestionsHtml(2);
+    }
+
+}
+//
 // Save Methods
 //
 
