@@ -34,10 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (empty($errors)) {
                 $move_file = move_uploaded_file($file_tmp, $file);
-
-	            parseLetter();
-
-
                 if (!$move_file){
                 	// Moving file went wrong
 	                echo 'Error uploading, moving file';
