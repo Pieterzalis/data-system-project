@@ -132,14 +132,18 @@ function getPMemberIDByLastname($last_name) {
     // Do code
     $query = "SELECT parliamentmember_firstname, parliamentmember_lastname_prefix, parliamentmember_lastname, parliamentmember_id 
               FROM parliamentmember
-              WHERE parliamentmember_lastname LIKE '%". $last_name_split ."%'";
+              WHERE parliamentmember_lastname LIKE '%". $last_name_split ."'";
 
-    $id = DB::query($query);
+    $ids = DB::query($query);
 
-    if (count($id) > 1){
+    // Declare final id variable
+    $final_id = 0;
 
-        // Loop through the $id array
-        foreach ($id as $item) {
+    // Check the returned ids result, check how many records are in there.
+    if (count($ids) > 1){
+
+        // Loop through the $id array, also match first name.
+        foreach ($ids as $item) {
             if ($item['parliamentmember_firstname'] === $first_name_split){
                 $final_id = $item['parliamentmember_id'];
                 break;
@@ -147,7 +151,7 @@ function getPMemberIDByLastname($last_name) {
         }
 
     } else {
-        $final_id = $id[0]['parliamentmember_id'];
+        $final_id = $ids[0]['parliamentmember_id'];
     }
 
     return $final_id;

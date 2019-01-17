@@ -117,6 +117,13 @@ hr.color-white {
     overflow: auto;
 }
 
+.project-card {
+    -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.12);
+    -moz-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.12);
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.12);
+    margin-bottom: .5em;
+}
+
 .text-mini {
     font-size: 0.8em;
 }

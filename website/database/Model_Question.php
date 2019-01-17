@@ -26,8 +26,17 @@ function saveQuestionArray($questions, $project_id) {
 			'question_title' => $question
 		));
 
-		// Get the inserted question_id and add to return array
-		array_push($questions_ids, DB::insertId());
+        // Get the inserted question ID, needed to insert questions
+        $question_id = DB::insertId();
+
+        // Get the inserted question_id and add to return array
+        array_push($questions_ids, DB::insertId());
+
+        // NOTE also insert questions_has_experts to simulate the assigning experts process
+        DB::insert('question_has_experts', array(
+            'user_id' => 2,
+            'question_id' => $question_id
+        ));
 
 	}
 
