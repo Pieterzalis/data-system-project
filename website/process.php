@@ -203,9 +203,10 @@ function getIndiener($string)
 {
     // TODO add support for strings with 'leden'
     // Need to set substring so it only contains indiener name
-    $str = trim(substr($string, 0, (strpos($string, '('))));
-
-    return $str;
+    if (strpos($string, '(') != false) {
+        $string = trim(substr($string, 0, (strpos($string, '('))));
+    }
+    return $string;
 }
 
 function getParty($string)

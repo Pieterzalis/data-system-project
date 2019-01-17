@@ -124,14 +124,33 @@ function populateParliamentarianListWithFilter($last_name, $party_names = null) 
 // Translate given last name to an parliament member ID and return it.
 function getPMemberIDByLastname($last_name) {
 
+    $split_name = explode(" ", $last_name);
+
+    $last_name_split = end($split_name);
+    $first_name_split = reset($split_name);
+
     // Do code
-    $query = "SELECT parliamentmember_id 
+    $query = "SELECT parliamentmember_firstname, parliamentmember_lastname_prefix, parliamentmember_lastname, parliamentmember_id 
               FROM parliamentmember
-              WHERE CONCAT(parliamentmember_lastname_prefix, ' ', parliamentmember_lastname) LIKE '%". $last_name ."%'";
+              WHERE parliamentmember_lastname LIKE '%". $last_name_split ."%'";
 
-    $id = DB::queryFirstRow($query);
+    $id = DB::query($query);
 
-    return $id['parliamentmember_id'];
+    if (count($id) > 1){
+
+        // Loop through the $id array
+        foreach ($id as $item) {
+            if ($item['parliamentmember_firstname'] === $first_name_split){
+                $final_id = $item['parliamentmember_id'];
+                break;
+            }
+        }
+
+    } else {
+        $final_id = $id[0]['parliamentmember_id'];
+    }
+
+    return $final_id;
 
 
 }
