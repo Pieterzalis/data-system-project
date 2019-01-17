@@ -54,19 +54,112 @@ function saveProject($project_code, $project_submitter_name, $date_letter_mysql,
 //
 //
 
-// Function to return a html list of projects
-// TODO this will simply get all projects, no html is build yet.
-// TODO NOTE !!!!! All untested!!
-function getProjectList() {
-    $html = "";
-    $results = DB::query("SELECT * FROM Project");
+// Function to return a html display of a project card on the kamervragen overzicht page
+// Based on the user_id of the expert.
 
+function getAssignedQuestionsHtml($user_id) {
+    $html = "";
+    $res_proj_questions = DB::query("SELECT project_id, 
+                        project_title, 
+                        REPLACE(CONCAT(parliamentmember_firstname, ' ', parliamentmember_lastname_prefix, ' ', parliamentmember_lastname), '  ', ' ') AS indiener_fullname, 
+                        party_name,
+                        question_title,
+                        question_id
+                        FROM question 
+                        INNER JOIN project ON question_project_id = project_id
+                        INNER JOIN parliamentmember on project_submitter = parliamentmember_id
+                        INNER JOIN party ON parliamentmember_party_id = party_id
+                        WHERE question_id IN (
+                                SELECT question_id FROM question_has_experts
+                                WHERE user_id = 2
+                        )
+    "); // End Query
+
+    // Now build a project card for every unique project
+
+    $projectID = 0;
 
     // TODO build HTML according to screens
-    foreach ($results as $row) {
-        $project_title = $row["project_title"];
-        $html .= "<p>" . $project_title . "</p>";
+    foreach ($res_proj_questions as $row) {
+        if ($projectID != $row['project_id']){
+
+            $projectID = $row['project_id'];
+
+            // Build the project card here
+            $html .= "
+                        <div class=\"card project-card\" id=\"project-card-1\">
+                            <div class=\"card-body\">
+                                <table class=\"table table-sm mb-0\">
+                                    <tbody>
+                                        <tr>
+                                            <td class=\"no-border\"
+                                                scope=\"row\">Project:</td>
+                                            <th class=\"no-border\"
+                                                scope=\"row\">".$row['project_title']."</th>
+                                        </tr>
+                                        <tr>
+                                            <td class=\"no-border\"
+                                                scope=\"row\">Deadline:</td>
+                                            <th class=\"no-border\"
+                                                scope=\"row\">Not yet implemented in DB</th>
+                                        </tr>
+                                        <tr>
+                                            <td class=\"no-border\"
+                                                scope=\"row\">Indiener:</td>
+                                            <th class=\"no-border\"
+                                                scope=\"row\">".$row['indiener_fullname']." - ".$row['party_name']." </th>
+                                        </tr>
+                                        <tr>
+                                            <td class=\"no-border pt-4\"
+                                                scope=\"row\">Vragen:</td>
+                                        </tr>
+                                    </tbody>
+                                </table>";
+
+            // TODO add database field for question_number and show them here
+            // Right now ill just count them
+            $i = 0;
+            foreach ($res_proj_questions as $q_item){
+                if ($q_item['project_id'] === $projectID) {
+                    $i++;
+                    $html .="           <!-- begin questions!!! -->
+                                <ul class=\"my-list-group container-fluid\">
+                                    <a class=\"child-item\" \">
+                                    <li class=\"my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center questions\">
+                                        <div class=\"col-3 col-md-auto pr-sm-2 pr-md-3\">#".$i."</div>
+                                        <div class=\"col-9 col-md px-sm-2 px-md-3 border-md-right\">".$q_item['question_title']."</div>
+                                        <div class=\"col-9 col-md-auto px-sm-2 px-md-3\">
+                                            <span class=\"fa-stack\">
+                                                <i class=\"fa fa-floppy-o fa-stack-2x\"
+                                                   aria-hidden=\"true\"></i>
+                                            </span>
+                                            <span class=\"fa-stack\">
+                                                <i class=\"fa fa-circle fa-stack-2x\"></i>
+                                                <i class=\"fa fa-stack-1x fa-inverse text-dark\">0</i>
+                                            </span>
+                                            <span>opgeslagen bronnen</span>
+                                        </div>
+                                        <div class=\"col-3 col-md-auto pl-sm-4 pl-md-3\">
+                                            <i class=\"fa fa-angle-right\"
+                                               aria-hidden=\"true\"></i>
+                                        </div>
+                                    </li></a>
+                                </ul>";
+
+                }
+            }
+
+            // Close the card divs
+            $html .= "    </div>
+                      </div>";
+            // End creating html
+        }
+
     }
+
+    // Then do a nested foreach, to also load the questions into the card.
+
+
     echo $html;
 }
 

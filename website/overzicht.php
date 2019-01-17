@@ -1,3 +1,6 @@
+<?php
+    require_once 'database/Model_Project.php';
+?>
 <!DOCTYPE html>
 <html>
 
@@ -477,125 +480,130 @@
                      class="container-fluid py-3 py-md-0">
                     <div class="row">
                         <div class="col-sm mx-md-3 mx-ld-5">
-
-                            <!-- Start of project card including questions -->
-                            <!-- TODO Insert this dynamically on page load. -->
-                            <div class="card project-card" id="project-card-1">
-                                <div class="card-body">
-
-                                    <table class="table table-sm mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td class="no-border"
-                                                    scope="row">Project:</td>
-                                                <th class="no-border"
-                                                    scope="row">Het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden" </th>
-                                            </tr>
-                                            <tr>
-                                                <td class="no-border"
-                                                    scope="row">Deadline:</td>
-                                                <th class="no-border"
-                                                    scope="row">31-01-2019 </th>
-                                            </tr>
-                                            <tr>
-                                                <td class="no-border"
-                                                    scope="row">Indiener:</td>
-                                                <th class="no-border"
-                                                    scope="row">Corrie van der Brink - 50 Plus </th>
-                                            </tr>
-                                            <tr>
-                                                <td class="no-border pt-4"
-                                                    scope="row">Vragen:</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <ul class="my-list-group container-fluid">
-                                        <a class="child-item" onclick="changePage(this,{pageId:1})">
-                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center questions">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?</div>
-                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-floppy-o fa-stack-2x"
-                                                       aria-hidden="true"></i>
-                                                </span>
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">0</i>
-                                                </span>
-                                                <span>opgeslagen bronnen</span>
-                                            </div>
-                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
-                                                <i class="fa fa-angle-right"
-                                                   aria-hidden="true"></i>
-                                            </div>
-                                            </li></a>
-                                        <a class="child-item" onclick="changePage(this,{pageId:1})">
-                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Waarom is het mogelijk dat een geloofwaardige melding van slecht rijgedrag zonder bewijsvoering in behandeling wordt genomen en de rijbevoegdheid wordt opgeschort? Hoe wenselijk acht u deze situatie? Kunt u uw antwoord toelichten?</div>
-                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-floppy-o fa-stack-2x"
-                                                       aria-hidden="true"></i>
-                                                </span>
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">8</i>
-                                                </span>
-                                                <span>opgeslagen bronnen</span>
-                                            </div>
-                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
-                                                <i class="fa fa-angle-right"
-                                                   aria-hidden="true"></i>
-                                            </div>
-                                            </li></a>
-                                        <a class="child-item" onclick="changePage(this,{pageId:1})">
-                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?</div>
-                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-floppy-o fa-stack-2x"
-                                                       aria-hidden="true"></i>
-                                                </span>
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">10</i>
-                                                </span>
-                                                <span>opgeslagen bronnen</span>
-                                            </div>
-                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
-                                                <i class="fa fa-angle-right"
-                                                   aria-hidden="true"></i>
-                                            </div>
-                                            </li></a>
-                                        <a class="child-item" onclick="changePage(this,{pageId:1})">
-                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"> </div>
-                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Kunt u aangeven welke overige criteria gelden bij het beoordelen van de geloofwaardigheid van de melding van slecht rijgedrag? Wie heeft deze criteria vastgesteld?</div>
-                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-floppy-o fa-stack-2x"
-                                                       aria-hidden="true"></i>
-                                                </span>
-                                                <span class="fa-stack">
-                                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                                    <i class="fa fa-stack-1x fa-inverse text-dark">2</i>
-                                                </span>
-                                                <span>opgeslagen bronnen</span>
-                                            </div>
-                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">
-                                                <i class="fa fa-angle-right"
-                                                   aria-hidden="true"></i>
-                                            </div>
-                                            </li></a>
-                                    </ul>
-
-                                </div>
+                            <div class="jq-question-assigned-content">
+                            <?php
+                                getAssignedQuestionsHtml(2)
+                            ?>
                             </div>
-                            <!-- End project card -->
+
+<!--                            <!-- Start of project card including questions -->
+<!--                            <!-- TODO Insert this dynamically on page load. -->
+<!--                            <div class="card project-card" id="project-card-1">-->
+<!--                                <div class="card-body">-->
+<!---->
+<!--                                    <table class="table table-sm mb-0">-->
+<!--                                        <tbody>-->
+<!--                                            <tr>-->
+<!--                                                <td class="no-border"-->
+<!--                                                    scope="row">Project:</td>-->
+<!--                                                <th class="no-border"-->
+<!--                                                    scope="row">Het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden" </th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td class="no-border"-->
+<!--                                                    scope="row">Deadline:</td>-->
+<!--                                                <th class="no-border"-->
+<!--                                                    scope="row">31-01-2019 </th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td class="no-border"-->
+<!--                                                    scope="row">Indiener:</td>-->
+<!--                                                <th class="no-border"-->
+<!--                                                    scope="row">Corrie van der Brink - 50 Plus </th>-->
+<!--                                            </tr>-->
+<!--                                            <tr>-->
+<!--                                                <td class="no-border pt-4"-->
+<!--                                                    scope="row">Vragen:</td>-->
+<!--                                            </tr>-->
+<!--                                        </tbody>-->
+<!--                                    </table>-->
+<!---->
+<!--                                    <ul class="my-list-group container-fluid">-->
+<!--                                        <a class="child-item" onclick="changePage(this,{pageId:1})">-->
+<!--                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center questions">-->
+<!--                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>-->
+<!--                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?</div>-->
+<!--                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">-->
+<!--                                                <span class="fa-stack">-->
+<!--                                                    <i class="fa fa-floppy-o fa-stack-2x"-->
+<!--                                                       aria-hidden="true"></i>-->
+<!--                                                </span>-->
+<!--                                                <span class="fa-stack">-->
+<!--                                                    <i class="fa fa-circle fa-stack-2x"></i>-->
+<!--                                                    <i class="fa fa-stack-1x fa-inverse text-dark">0</i>-->
+<!--                                                </span>-->
+<!--                                                <span>opgeslagen bronnen</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">-->
+<!--                                                <i class="fa fa-angle-right"-->
+<!--                                                   aria-hidden="true"></i>-->
+<!--                                            </div>-->
+<!--                                            </li></a>-->
+<!--                                        <a class="child-item" onclick="changePage(this,{pageId:1})">-->
+<!--                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">-->
+<!--                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>-->
+<!--                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Waarom is het mogelijk dat een geloofwaardige melding van slecht rijgedrag zonder bewijsvoering in behandeling wordt genomen en de rijbevoegdheid wordt opgeschort? Hoe wenselijk acht u deze situatie? Kunt u uw antwoord toelichten?</div>-->
+<!--                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">-->
+<!--                                                <span class="fa-stack">-->
+<!--                                                    <i class="fa fa-floppy-o fa-stack-2x"-->
+<!--                                                       aria-hidden="true"></i>-->
+<!--                                                </span>-->
+<!--                                                <span class="fa-stack">-->
+<!--                                                    <i class="fa fa-circle fa-stack-2x"></i>-->
+<!--                                                    <i class="fa fa-stack-1x fa-inverse text-dark">8</i>-->
+<!--                                                </span>-->
+<!--                                                <span>opgeslagen bronnen</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">-->
+<!--                                                <i class="fa fa-angle-right"-->
+<!--                                                   aria-hidden="true"></i>-->
+<!--                                            </div>-->
+<!--                                            </li></a>-->
+<!--                                        <a class="child-item" onclick="changePage(this,{pageId:1})">-->
+<!--                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">-->
+<!--                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"></div>-->
+<!--                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?</div>-->
+<!--                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">-->
+<!--                                                <span class="fa-stack">-->
+<!--                                                    <i class="fa fa-floppy-o fa-stack-2x"-->
+<!--                                                       aria-hidden="true"></i>-->
+<!--                                                </span>-->
+<!--                                                <span class="fa-stack">-->
+<!--                                                    <i class="fa fa-circle fa-stack-2x"></i>-->
+<!--                                                    <i class="fa fa-stack-1x fa-inverse text-dark">10</i>-->
+<!--                                                </span>-->
+<!--                                                <span>opgeslagen bronnen</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">-->
+<!--                                                <i class="fa fa-angle-right"-->
+<!--                                                   aria-hidden="true"></i>-->
+<!--                                            </div>-->
+<!--                                            </li></a>-->
+<!--                                        <a class="child-item" onclick="changePage(this,{pageId:1})">-->
+<!--                                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">-->
+<!--                                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3"> </div>-->
+<!--                                            <div class="col-9 col-md px-sm-2 px-md-3 border-md-right">Kunt u aangeven welke overige criteria gelden bij het beoordelen van de geloofwaardigheid van de melding van slecht rijgedrag? Wie heeft deze criteria vastgesteld?</div>-->
+<!--                                            <div class="col-9 col-md-auto px-sm-2 px-md-3">-->
+<!--                                                <span class="fa-stack">-->
+<!--                                                    <i class="fa fa-floppy-o fa-stack-2x"-->
+<!--                                                       aria-hidden="true"></i>-->
+<!--                                                </span>-->
+<!--                                                <span class="fa-stack">-->
+<!--                                                    <i class="fa fa-circle fa-stack-2x"></i>-->
+<!--                                                    <i class="fa fa-stack-1x fa-inverse text-dark">2</i>-->
+<!--                                                </span>-->
+<!--                                                <span>opgeslagen bronnen</span>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-3 col-md-auto pl-sm-4 pl-md-3">-->
+<!--                                                <i class="fa fa-angle-right"-->
+<!--                                                   aria-hidden="true"></i>-->
+<!--                                            </div>-->
+<!--                                            </li></a>-->
+<!--                                    </ul>-->
+<!---->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <!-- End project card -->
 
                         </div>
                     </div>
