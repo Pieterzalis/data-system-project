@@ -163,19 +163,28 @@ hr.color-white {
 }
 
 .step-line .step .step-num {
-    height: 44px;
-    width: 44px;
-    line-height: 44px;
+    height: 36px;
+    width: 36px;
+    line-height: 36px;
     color: #4978ad;
     border: 1px solid #4978ad;
     border-radius: 50%;
     text-align: center;
-    margin: 0 auto;
+    margin: 12px auto 0 auto;
 }
 
 .step-line .step.activated .step-num {
     color: #fff;
     background: #4978ad;
+    height: 44px;
+    width: 44px;
+    line-height: 44px;
+    margin: 0px auto;
+}
+
+.step-line .step .current {
+    background-color: #6A86A6 !important;
+    border-color: #6A86A6;
 }
 
 .step-line .step .step-hr {
