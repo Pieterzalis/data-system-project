@@ -6,11 +6,11 @@ from nltk.corpus import stopwords
 import json
 from gensim.corpora.dictionary import Dictionary
 from gensim.models.tfidfmodel import TfidfModel
+import docx2txt
 
 # Take file location and return text of file
 
-
-def read_doc(target):
+def read_pdf(target):
 	pdfFileObject = open(target, 'rb')
 	pdfReader = PyPDF2.PdfFileReader(pdfFileObject)
 	count = pdfReader.numPages
@@ -20,24 +20,52 @@ def read_doc(target):
 		text = page.extractText()
 		full_text += text + ' '
 	return full_text
+	
+def read_docx(target):
+	text = docx2txt.process(target)
+	return text
+
+def read_file(target):
+	extension = target.rpartition('.')[2]
+	if extension == 'pdf':
+		return read_pdf(target)
+	elif extension == 'docx':
+		return read_docx(target)
+	return ''
 
 
 def doc_to_metadata(doc):
+	print(doc.split('\n')[0].strip())
 	metadict = {} # dictionary with metadata
-	doc = doc.replace('Vragen door', 'Vragen van').replace('\naan', ' aan ').replace('aan\n', ' aan ').replace('inzake', 'over').replace('\n', '')
+	doc = doc.replace('Vragen door', 'Vragen van').replace('\naan', ' aan ').replace('aan\n', ' aan ').replace('inzake', 'over').replace('\n', ' ')
 	metadict['indiener'] = doc.split('Vragen van')[1].split('aan')[0].replace('de leden','').replace('het lid','').replace('lid','').replace('leden','').strip()
-	if ' en ' in metadict['indiener']:
+	if ',' in metadict['indiener']:
+		metadict['indiener'] = metadict['indiener'].split(',')[0].strip()	
+	elif ' en ' in metadict['indiener']:
 		metadict['indiener'] = metadict['indiener'].split('en')[0].strip()
 	metadict['topic'] = doc.split('over')[1].split('(')[0].strip()
-	metadict['id'] = doc.split('der Kamer')[1].split('Vragen')[0].strip()
+	if 'der Kamer' in doc:
+		metadict['id'] = doc.split('der Kamer')[1].split('Vragen')[0].strip()
+	else:
+		metadict['id'] = doc.split(' ')[0].strip()
 	metadict['date'] = doc.replace('Ingezonden','ingezonden').split('ingezonden')[1].split(')')[0].strip()
 	return metadict
 
 
 # Parse questions from file text
-def doc_to_questions(doc):
-	questions = doc.split('Vraag ')
-	questions = questions[1:]
+def doc_to_questions(text):
+	# To do: Handle footnotes ending up in questions crossing the page boundary. e.g. 2018D50780_ 2018-10-24.
+	# Proposed solution: first and last of the words to remove seem always to contain both letters and number,
+	# use that to remove them.
+	# To do: special characters (e met puntjes)
+	# To do: numbers footnotes: Remove every number that is directly attached to the end of a non-number
+	questions = []
+	if 'Vraag ' in text: #for pdf files
+		questions = text.split('Vraag ')
+		questions = questions[1:]
+	else: #for doc files
+		paragraphs = text.split('\n')
+		questions = [paragraph for paragraph in paragraphs if '? ' in paragraph]
 	for i in range(len(questions)):
 		question = questions[i]
 		question = question[:question.rfind('?')]
@@ -45,11 +73,6 @@ def doc_to_questions(doc):
 		question = re.sub(r'\n',' ',question)
 		question = 'Vraag ' + question + '?'
 		question = re.sub(r'\s+', ' ', question)
-
-		# To do: Handle footnotes ending up in questions crossing the page boundary. e.g. 2018D50780_ 2018-10-24.
-		# Proposed solution: first and last of the words to remove seem always to contain both letters and number,
-		# use that to remove them.
-		# To do: special characters (e met puntjes)
 		questions[i] = question
 	return questions
 
@@ -66,7 +89,14 @@ def tf_idf_keywords(text, bow, dictionary):
 		keywords.append(str(dictionary.get(term_id)))
 	return keywords
 
-
+def preprocess_question(question):
+	question = question.lower()
+	question = re.sub("'",' ',question).replace('_', ' ').replace(' -',' ')
+	question = re.sub(r'[^A-Za-z^-]', ' ', question)
+	question = re.sub(r'\s+', ' ', question)
+	words = [word for word in question.split() if word not in stopwords.words('dutch')]
+	return words
+	
 # Given questions, get keywords. Can be done both per question or for the set of questions
 def questions_to_keywords(questions, per_question):
 	with open('corpus.json') as bowfile:
@@ -75,21 +105,13 @@ def questions_to_keywords(questions, per_question):
 		if per_question:
 			keywords_per_question = []
 			for question in questions:
-				question = question.lower()
-				question = re.sub("'",' ',question).replace('_', ' ').replace(' -',' ')
-				question = re.sub(r'[^A-Za-z^-]', ' ', question)
-				question = re.sub(r'\s+', ' ', question)
-				words = [word for word in question.split() if word not in stopwords.words('dutch')]
+				words = preprocess_question(question)
 				keywords_per_question.append(tf_idf_keywords(words,bow,dictionary))
 			return keywords_per_question
 		else:
 			for i in range(len(questions)):
 				question = questions[i]
-				question = question.lower()
-				question = re.sub("'",' ',question).replace('_', ' ').replace(' -',' ')
-				question = re.sub(r'[^A-Za-z^-]', ' ', question)
-				question = re.sub(r'\s+', ' ', question)
-				words = [word for word in question.split() if word not in stopwords.words('dutch')]
+				words = preprocess_question(question)
 				questions[i] = words
 			questions = [word for question in questions for word in question]
 			return tf_idf_keywords(questions,bow,dictionary)
@@ -98,9 +120,10 @@ def questions_to_keywords(questions, per_question):
 def main(argv):
 	target = argv[1].replace('%26', '&').replace('%20', ' ')
 	print(target)
-	doc = read_doc(target)
-	metadata = doc_to_metadata(doc)
-	questions = doc_to_questions(doc)
+	text = read_file(target)
+
+	metadata = doc_to_metadata(text)
+	questions = doc_to_questions(text)
 	questions_orig = questions.copy()
 	keywords = questions_to_keywords(questions, False)
 
