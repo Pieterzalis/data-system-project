@@ -48,7 +48,7 @@ def doc_to_metadata(doc):
 		metadict['indiener'] = metadict['indiener'].split(',')[0].strip()	
 	elif ' en ' in metadict['indiener']:
 		metadict['indiener'] = metadict['indiener'].split(' en ')[0].strip()
-	metadict['topic'] = doc.split('over')[1].split('(')[0].strip()
+	metadict['topic'] = doc.split('over', 1)[1].split('(')[0].strip()
 	if 'der Kamer' in doc:
 		metadict['id'] = doc.split('der Kamer')[1].split('Vragen')[0].strip()
 	else:
