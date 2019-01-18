@@ -24,12 +24,13 @@ def create_queries(keywords):
 #Convert raw response to list of relevant features
 def clean_articles(articles):
 	for i in range(len(articles)):
+		cleaned_article = {}
 		article = articles[i]
-		title = article['title']
-		date = article['publishedAt'].split('T')[0]
-		url = article['url']
-		snippet = article['description']
-		articles[i] = [title, date, url, snippet]
+		cleaned_article['title'] = article['title']
+		cleaned_article['date'] = article['publishedAt'].split('T')[0]
+		cleaned_article['url'] = article['url']
+		cleaned_article['snippet'] = article['description']
+		articles[i] = cleaned_article
 	return articles
 
 #Use queries based on the keywords to retrieve articles from the NewsAPI
@@ -41,25 +42,20 @@ def get_news_articles(queries, fromdate, todate):
 	articles_to_find = 5
 	articles = []
 	for query in queries:
-		print(query)
 		all_articles = newsapi.get_everything(q=query,
 											  from_param=fromdate,
 											  to=todate,
 											  sort_by='relevancy',
 											  page=1)
 		articles_found = all_articles['articles']
-		print(len(articles_found))
-		if len(articles_found) > articles_to_find:
-			articles.append(articles_found[:articles_to_find])
-			articles = [article for article_list in articles for article in article_list] #flatten list
+		for found_article in articles_found:
+			if found_article not in articles and len(articles) < articles_to_find:
+				articles.append(found_article)
+		if len(articles) == articles_to_find:
 			articles = clean_articles(articles)
 			return articles
-		else:
-			articles.append(articles_found)
-			articles_to_find -= len(articles_found)
-	articles = [article for article_list in articles for article in article_list] #flatten list
 	articles = clean_articles(articles)
-	return articles
+	return articles #if all queries together do not return 5 different articles, return what is found
 
 """
 def get_scientific_articles(keywords):
@@ -68,13 +64,14 @@ def get_scientific_articles(keywords):
 #Concert raw html to list of relevant features
 def clean_answers(answers):
 	for i in range (len(answers)):
+		cleaned_answer = {}
 		answer = answers[i]
-		id = answer.find("a", {"class": "code-nummer"}).getText()
-		title = answer.findAll("a", href=True)[2].getText()
-		date = answer.find("div", {"class": "card__pretitle"}).getText().strip()
-		url = "https://tweedekamer.nl/"+answer.find("a", {"class": "document__button"})['href']
-		snippet = answer.find("p").getText()
-		answers[i] = [id, title, date, url, snippet]
+		cleaned_answer['id'] = answer.find("a", {"class": "code-nummer"}).getText()
+		cleaned_answer['title'] = answer.findAll("a", href=True)[2].getText()
+		cleaned_answer['date'] = answer.find("div", {"class": "card__pretitle"}).getText().strip()
+		cleaned_answer['url'] = "https://tweedekamer.nl/"+answer.find("a", {"class": "document__button"})['href']
+		cleaned_answer['snippet'] = answer.find("p").getText()
+		answers[i] = cleaned_answer
 	return answers
 
 #Use queries to retrieve urls and metadata of related previous answers
@@ -84,36 +81,32 @@ def get_previous_answers(queries, fromdate, todate):
 	answers = []
 	prev_answers_to_find = 5
 	for query in queries:
-		print(query)
 		url = 'https://www.tweedekamer.nl/kamerstukken/kamervragen?clusterName=Kamerstukken&dpp=25&fld_prl_kamerstuk=Kamervragen&fld_prl_soort=Antwoord%20schriftelijke%20vragen&fld_tk_categorie=kamerstukken&qry=%2A&srt=date%3Adesc%3Adate&sta=1&fromdate='+fromdate+'&todate='+todate+'&qry='+query
 		response = requests.get(url)
 		soup = BeautifulSoup(response.text,'html.parser')
 		articlecards = soup.findAll("article", {"class": "card"})
 		time.sleep(1)
-		print(len(articlecards))
-		if len(articlecards) > prev_answers_to_find:
-			answers.append(articlecards[:prev_answers_to_find])
-			answers = [answer for answer_list in answers for answer in answer_list] #flatten list
+		for articlecard in articlecards:
+			if articlecard not in answers and len(answers) < prev_answers_to_find:
+				answers.append(articlecard)
+		if len(answers) == prev_answers_to_find:
 			answers = clean_answers(answers)
 			return answers
-		else:
-			answers.append(articlecards)
-			prev_answers_to_find -= len(articlecards)
-	answers = [answer for answer_list in answers for answer in answer_list] #flatten list
 	answers = clean_answers(answers)
-	return answers
+	return answers #if all queries together do not return 5 different previous answers, return what is found
 		
 def main(argv):
 	keywords = argv[1]
+	#keywords =  ["grond", "hergebruik", "betrokken", "handen", "inzichtelijk"]
 	#fromdate = argv[2]
 	#todate = argv[3]
 	queries = create_queries(keywords)
-	articles = get_news_articles(keywords, fromdate=None, todate=None)
-	prev_answers = get_previous_answers(queries, fromdate=None, todate=None)
-	for answer in prev_answers:
-		print(answer, '\n')
-	for article in articles:
-		print(article, '\n')
+	data = {}
+	data['news_articles'] = get_news_articles(keywords, fromdate=None, todate=None)
+	data['prev_answers'] = get_previous_answers(queries, fromdate=None, todate=None)
+	json_data = json.dumps(data)
+	print(json_data)
+	return
 	
 if __name__ == "__main__":
 	main(sys.argv)
