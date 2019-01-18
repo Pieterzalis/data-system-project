@@ -24,14 +24,19 @@ def read_pdf(target):
 def read_docx(target):
 	text = docx2txt.process(target)
 	return text
+	
+def remove_footnotes(text):
+	return text
 
 def read_file(target):
 	extension = target.rpartition('.')[2]
 	if extension == 'pdf':
-		return read_pdf(target)
+		text = read_pdf(target)
 	elif extension == 'docx':
-		return read_docx(target)
-	return ''
+		text = read_docx(target)
+	else:
+		text = ''
+	return remove_footnotes(text)
 
 
 def doc_to_metadata(doc):
@@ -42,8 +47,8 @@ def doc_to_metadata(doc):
 	if ',' in metadict['indiener']:
 		metadict['indiener'] = metadict['indiener'].split(',')[0].strip()	
 	elif ' en ' in metadict['indiener']:
-		metadict['indiener'] = metadict['indiener'].split('en')[0].strip()
-	metadict['topic'] = doc.split('over')[1].split('(')[0].strip()
+		metadict['indiener'] = metadict['indiener'].split(' en ')[0].strip()
+	metadict['topic'] = doc.split('over', 1)[1].split('(')[0].strip()
 	if 'der Kamer' in doc:
 		metadict['id'] = doc.split('der Kamer')[1].split('Vragen')[0].strip()
 	else:
@@ -92,6 +97,7 @@ def tf_idf_keywords(text, bow, dictionary):
 def preprocess_question(question):
 	question = question.lower()
 	question = re.sub("'",' ',question).replace('_', ' ').replace(' -',' ')
+	question = re.sub(r'[0-9]','',question)
 	question = re.sub(r'[^A-Za-z^-]', ' ', question)
 	question = re.sub(r'\s+', ' ', question)
 	words = [word for word in question.split() if word not in stopwords.words('dutch')]
