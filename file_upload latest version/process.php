@@ -140,7 +140,7 @@ function returnHTMLResponse($project_id, $questions, $keywords, $project_indiene
     $i = 1;
     foreach($questions as $question) {
         $html_questions .= '<tr class="bg-app-light">
-                                <td class="text-right"> Vraag ' . $i . ':</td>
+                                <td class="text-nowrap text-right"> Vraag ' . $i . ':</td>
                                 <td class="text-left">' . $question . '</td>
                             </tr>';
 
