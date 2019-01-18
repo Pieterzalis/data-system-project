@@ -11,9 +11,12 @@ require_once 'Model_Parliament.php';
 //
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if ($_REQUEST['func'] === 'getAssignedQuestionsHtml'){
-        getAssignedQuestionsHtml(2);
-    }
+	if (isset($_REQUEST['func'])) {
+
+		if ($_REQUEST['func'] === 'getAssignedQuestionsHtml') {
+			getAssignedQuestionsHtml(2);
+		}
+	}
 
 }
 //
