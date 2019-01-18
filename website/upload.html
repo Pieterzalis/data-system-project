@@ -113,7 +113,7 @@
 
                 // Change parsing status to step-2
                 $("#progress-step2").addClass("activated");
-                $("#progress-step1").html('<i class="fa fa-check"></i>');
+                $("#step-num-1").html('<i class="fa fa-check"></i>');
                 $("#step-1").hide();
                 $("#step-2").show();
 
@@ -131,6 +131,7 @@
 
                         // Set progress in top of screen
                         $("#progress-step3").addClass("activated");
+                        $("#step-num-2").html('<i class="fa fa-check"></i>');
 
                         // First hide the div step 1
                         $("#step-2").hide();
@@ -301,7 +302,7 @@
                                             <div class="step-text">
                                                 <p>Upload</p>
                                             </div>
-                                            <div class="step-num">
+                                            <div class="step-num" id="step-num-1">
                                                 <label>1</label>
                                             </div>
                                         </div>
@@ -318,7 +319,7 @@
                                             <div class="step-text">
                                                 <p>Verwerk</p>
                                             </div>
-                                            <div class="step-num">
+                                            <div class="step-num" id="step-num-2">
                                                 <label>2</label>
                                             </div>
                                         </div>
