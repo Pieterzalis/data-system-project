@@ -126,6 +126,10 @@ hr.color-white {
     margin-bottom: .5em;
 }
 
+.max-width-table {
+    width: 150px;
+}
+
 
 .text-mini {
     font-size: 0.8em;
