@@ -12,13 +12,13 @@
     <link rel="stylesheet"
           type="text/css"
           media="screen"
-          href="assets/style.css" />
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
           href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet"
-          href="assets/icon-font/css/font-awesome.min.css">
+          href="assets/icon-font/css/font-awesome.min.css"/>
+    <link rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="assets/style.css" />
 
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -168,9 +168,9 @@
             var step_1 = $('#step-1');
             var step_2 = $('#step-2');
             var step_3 = $('#step-3');
-            step_1.hide();
+            step_1.show();
             step_2.hide();
-            step_3.show();
+            step_3.hide();
         }
 
         
@@ -179,8 +179,8 @@
             var step_2 = $('#step-2');
             var step_3 = $('#step-3');
             step_1.hide();
-            step_2.hide();
-            step_3.show();
+            step_2.show();
+            step_3.hide();
 
             setTimeout(() => {
                 // 第二部等待5秒跳到第三步

@@ -2,6 +2,12 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.project-table {
+    box-shadow: 0 2px 20px -5px rgba(0, 0, 0, 0.5);
+    margin-top: 2rem;
+}
+
+
 .partylogo{
     border: solid;
     border-color: #3f648d;
@@ -63,7 +69,7 @@ hr.color-white {
 }
 
 .bg-app-light {
-    background: #4978adaa;
+    background: #ACC2DA;
 }
 
 .bg-app-dark {
@@ -72,10 +78,6 @@ hr.color-white {
 
 .bg-purple {
     background: #563d7c;
-}
-
-.bg-app-light {
-    background: #4978adaa;
 }
 
 .bg-shadow {
@@ -124,6 +126,7 @@ hr.color-white {
     margin-bottom: .5em;
 }
 
+
 .text-mini {
     font-size: 0.8em;
 }
@@ -140,11 +143,8 @@ hr.color-white {
 
 .step-line {}
 
-@media (min-width: 768px) {
-    .step-container {
-        max-width: 350px !important;
-        margin: 0 auto !important;
-    }
+.step-container {
+    max-width: 500px !important; 
 }
 
 .step-line .step {}
@@ -173,7 +173,7 @@ hr.color-white {
     margin: 0 auto;
 }
 
-.step-line .step.actived .step-num {
+.step-line .step.activated .step-num {
     color: #fff;
     background: #4978ad;
 }
@@ -186,7 +186,9 @@ hr.color-white {
 
 .step-line .step .step-hr hr {
     margin: 22px 0;
+    border-top: 1px solid #4978ad;
 }
+
 
 .step-content {
     background: #4978ad;
@@ -287,7 +289,7 @@ hr.color-white {
     border-bottom: 1px solid #104176;
 }
 
-.my-layout .layout_left .card .child-item.actived {
+.my-layout .layout_left .card .child-item.activated {
     background: #ffffff20;
 }
 
