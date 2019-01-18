@@ -112,6 +112,8 @@ function saveProjectandQuestions($project_code, $project_indiener, $project_titl
 
 function returnHTMLResponse($project_id, $questions, $keywords, $project_indiener, $project_date_letter){
 
+    // Convert dates to dutch format and deadline fixed 3 weeks later
+    $project_date_letter = date('d-m-Y', strtotime($project_date_letter));
     $deadline_date = date('d-m-Y', strtotime($project_date_letter . "+3 week"));
 
     $html = '';
