@@ -4,6 +4,7 @@ require_once 'database/Model_Core.php';
 require_once 'database/Model_Project.php';
 require_once 'database/Model_Question.php';
 require_once 'database/Model_Keyword.php';
+require_once 'database/Model_Parliament.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['files'])) {
@@ -111,7 +112,12 @@ function saveProjectandQuestions($project_code, $project_indiener, $project_titl
 
 function returnHTMLResponse($project_id, $questions, $keywords, $project_indiener, $project_date_letter){
 
+    $deadline_date = date('d-m-Y', strtotime($project_date_letter . "+3 week"));
+
     $html = '';
+
+    //Get indiener full name by ID
+    $indiener_fullname = getPMemberFullNameByName($project_indiener);
 
     // With project, get the following data:
     /// - project_title
@@ -135,7 +141,6 @@ function returnHTMLResponse($project_id, $questions, $keywords, $project_indiene
                                 <td class="text-nowrap text-right"> Vraag ' . $i . ':</td>
                                 <td class="text-left">' . $question . '</td>
                             </tr>';
-
         $i++;
     }
 
@@ -158,7 +163,24 @@ function returnHTMLResponse($project_id, $questions, $keywords, $project_indiene
                     <div id="projectTitleID">
                         <p><Strong>'. $results[0]["project_title"] .'</Strong></p>
                     </div>
-                    <p>Ingediend op: <Strong>'. $project_date_letter .'</Strong></p>
+                    
+                    <div class="row">
+                        <div class="col-sm d-flex flex-row-reverse">
+                    		<p style="margin-bottom: 0;">Ingediend op: </p>
+                        </div>
+                        <div class="col-sm d-flex flex-row">
+                            <p><strong>'. $project_date_letter .'</strong></p>
+                        </div>
+                    </div>
+    				<div class="row">
+                        <div class="col-sm d-flex flex-row-reverse">
+                    		<p>Voorlopige deadline: </p>
+                        </div>
+    					<div class="col-sm d-flex flex-row">
+                            <p><strong>'. $deadline_date .'</strong></p>
+    					</div>
+                    </div>
+                    
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="col-sm col-md-6 col-lg-4">
@@ -174,7 +196,7 @@ function returnHTMLResponse($project_id, $questions, $keywords, $project_indiene
                         <div class="mb-0">
                             <label>Indiener</label>
                         </div>
-                        <p><Strong>'. $project_indiener .'</Strong></br>'. $results[0]["party_name"] .'</p>
+                        <p><Strong>'. $indiener_fullname .'</Strong></br>'. $results[0]["party_name"] .'</p>
                     </div>
                 </div>
             </div>

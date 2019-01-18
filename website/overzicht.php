@@ -72,12 +72,9 @@
 </head>
 
 <body class="page_project_overview2">
-    <!-- 此处显示demo图作为参考-->
-    <div class="demopage hidden">
-        <img src="assets/demo/overzicht.jpg">
-    </div>
 
     <div class="container-fluid my-layout d-flex flex-column">
+
         <div class="row flex-none">
             <!-- layout_nav -->
             <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
@@ -485,13 +482,12 @@
             </div>
             <!-- layout_content -->
             <div class="col-sm p-0 layout_content py-md-3 justify-content-center positon-relative">
-                <!-- content -->
 
                 <!-- index Page -->
-                <div id="indexPage"
-                     class="container-fluid py-3 py-md-0">
+                <div id="indexPage" class="container-fluid py-3 py-md-0">
                     <div class="row">
                         <div class="col-sm mx-md-3 mx-ld-5">
+
                             <div class="jq-question-assigned-content">
                             <?php
                                 getAssignedQuestionsHtml(2)

@@ -97,19 +97,11 @@ function getAssignedQuestionsHtml($user_id) {
     foreach ($res_proj_questions as $row) {
         if ($projectID != $row['project_id']){
 
-        	// Y-m-d
-        	$date_letter_mysql = $row['project_date_letter'];
+            // Dutch format
+        	$date_letter_dutch = date('d-m-Y', strtotime($row['project_date_letter']));
+        	$date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
 
-        	// Timestamp
-        	$date_timestamp = strtotime($date_letter_mysql);
-        	// Dutch format
-        	$date_letter_dutch = date('d-m-Y', $date_timestamp);
-        	$deadline_timestamp = $date_timestamp;
-        	$deadline_timestamp = strtotime("+3 weeks");
-        	$date_deadline = date('d-m-Y', $deadline_timestamp);
-
-
-
+        	// Set project ID in this loop iteration
             $projectID = $row['project_id'];
 
             // Build the project card here

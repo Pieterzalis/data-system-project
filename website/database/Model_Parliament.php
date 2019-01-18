@@ -159,4 +159,43 @@ function getPMemberIDByLastname($last_name) {
 
 }
 
+function getPMemberFullNameByName($last_name) {
+
+    $split_name = explode(" ", $last_name);
+
+    $last_name_split = end($split_name);
+    $first_name_split = reset($split_name);
+
+    // Do code
+    $query = "SELECT parliamentmember_firstname, parliamentmember_lastname_prefix, parliamentmember_lastname, parliamentmember_id 
+              FROM parliamentmember
+              WHERE parliamentmember_lastname LIKE '%". $last_name_split ."'";
+
+    $ids = DB::query($query);
+
+    // Declare final id variable
+    $final_id = 0;
+    $full_name = '';
+
+    // Check the returned ids result, check how many records are in there.
+    if (count($ids) > 1){
+
+        // Loop through the $id array, also match first name.
+        foreach ($ids as $item) {
+            if ($item['parliamentmember_firstname'] === $first_name_split){
+                $full_name = $item['parliamentmember_firstname'] . $item['parliamentmember_lastname_prefix'] . $item['parliamentmember_lastname'];
+                break;
+            }
+        }
+
+    } else {
+        $full_name = $ids[0]['parliamentmember_firstname']. ' ' . $ids[0]['parliamentmember_lastname_prefix']. ' ' . $ids[0]['parliamentmember_lastname'];
+    }
+
+    // strip any double spaces caused by absence of 'tussenvoegsel'
+    $full_name = str_replace("  ", " ", $full_name);
+
+    return $full_name;
+}
+
 
