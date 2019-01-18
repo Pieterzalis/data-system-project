@@ -74,6 +74,7 @@ function getAssignedQuestionsHtml($user_id) {
     $html = "";
     $res_proj_questions = DB::query("SELECT project_id, 
                         project_title, 
+                        project_date_letter,
                         REPLACE(CONCAT(parliamentmember_firstname, ' ', parliamentmember_lastname_prefix, ' ', parliamentmember_lastname), '  ', ' ') AS indiener_fullname, 
                         party_name,
                         question_title,
@@ -96,6 +97,19 @@ function getAssignedQuestionsHtml($user_id) {
     foreach ($res_proj_questions as $row) {
         if ($projectID != $row['project_id']){
 
+        	// Y-m-d
+        	$date_letter_mysql = $row['project_date_letter'];
+
+        	// Timestamp
+        	$date_timestamp = strtotime($date_letter_mysql);
+        	// Dutch format
+        	$date_letter_dutch = date('d-m-Y', $date_timestamp);
+        	$deadline_timestamp = $date_timestamp;
+        	$deadline_timestamp = strtotime("+3 weeks");
+        	$date_deadline = date('d-m-Y', $deadline_timestamp);
+
+
+
             $projectID = $row['project_id'];
 
             // Build the project card here
@@ -105,22 +119,28 @@ function getAssignedQuestionsHtml($user_id) {
                                 <table class=\"table table-sm mb-0\">
                                     <tbody>
                                         <tr>
-                                            <td class=\"no-border\"
+                                            <td class=\"no-border max-width-table\"
                                                 scope=\"row\">Project:</td>
                                             <th class=\"no-border\"
                                                 scope=\"row\">".$row['project_title']."</th>
                                         </tr>
                                         <tr>
-                                            <td class=\"no-border\"
-                                                scope=\"row\">Deadline:</td>
-                                            <th class=\"no-border\"
-                                                scope=\"row\">Not yet implemented in DB</th>
-                                        </tr>
-                                        <tr>
-                                            <td class=\"no-border\"
+                                            <td class=\"no-border max-width-table\"
                                                 scope=\"row\">Indiener:</td>
                                             <th class=\"no-border\"
                                                 scope=\"row\">".$row['indiener_fullname']." - ".$row['party_name']." </th>
+                                        </tr>
+                                        <tr>
+                                            <td class=\"no-border max-width-table\"
+                                                scope=\"row\">Ingediend op:</td>
+                                            <th class=\"no-border\"
+                                                scope=\"row\">". $date_letter_dutch ."</th>
+                                        </tr>
+                                       	<tr>
+                                            <td class=\"no-border max-width-table\"
+                                                scope=\"row\">Current deadline:</td>
+                                            <th class=\"no-border\"
+                                                scope=\"row\">". $date_deadline ."</th>
                                         </tr>
                                         <tr>
                                             <td class=\"no-border pt-4\"
