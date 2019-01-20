@@ -13,6 +13,7 @@
 
         // Load jquery calls after page load.
         $(document).ready(function () {
+			/*//#注释掉这里，为了使搜索按钮生效
             $(".jq-loadall-projcards").click(function () {
                 $(".jq-question-assigned-content").fadeOut(400);
 
@@ -21,8 +22,9 @@
                         // Change contents of div
                         $(".jq-question-assigned-content").html(data).fadeIn(400);
                     })
-                });
-        });
+                });*/
+            });
+
 
 
         var lastClick = $('select-all-nav-item');
@@ -52,7 +54,7 @@
             // childNavPage.attr('src', 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=' + pageId); 
 
             // 真实请求
-            childNavPage.attr('src', 'overzicht-detail.html?id=' + pageId);
+            childNavPage.attr('src', 'overzicht-detail.php?id=' + pageId);//#这里换成php文件
         }
         function back() {
             lastClick.removeClass("actived");
@@ -72,9 +74,12 @@
 </head>
 
 <body class="page_project_overview2">
+    <!-- 此处显示demo图作为参考-->
+    <div class="demopage hidden">
+        <img src="assets/demo/overzicht.jpg">
+    </div>
 
-    <div class="container-fluid my-layout d-flex flex-column">
-
+    <div class="container-fluid my-layout d-flex flex-column" id="leftMenu">
         <div class="row flex-none">
             <!-- layout_nav -->
             <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
@@ -157,7 +162,7 @@
                                      id="tab1"
                                      role="tabpanel"
                                      aria-labelledby="tab1-tab">
-                                    <form class="p-2">
+                                    <form class="p-2" method="post" action="">
 
                                         <div class="form-group mb-0">
                                             <label for="exampleInputEmail1"> Zoek een project</label>
@@ -170,127 +175,37 @@
                                                 </div>
                                                 <input type="text"
                                                        class="form-control"
-                                                       id="Search"
-                                                       placeholder="">
+                                                       id="Search" name="Search" value="<?=$_POST['Search']?>"
+                                                       placeholder="Search Keyword">
                                             </div>
                                         </div>
                                         <div class="text-center py-3 px-2">
-                                            <button type="button" class="btn btn-outline-light jq-loadall-projcards">Alle toegewezen kamervragen</button>
+                                            <button type="submit" class="btn btn-outline-light jq-loadall-projcards">Alle toegewezen kamervragen</button>
                                         </div>
                                     </form>
                                     <div id="accordion">
                                         <!-- card -->
-                                        <div class="card m-2">
-                                            <div class="card-header"
-                                                 id="headingOne"
-                                                 data-toggle="collapse"
-                                                 data-target="#collapseOne"
-                                                 aria-expanded="true"
-                                                 aria-controls="collapseOne">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-none mr-2">
-                                                        <i class="fa fa-file fa-fw"
-                                                           aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="flex-1">
-                                                        het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden"</div>
-                                                    <div class="flex-none  ml-2">
-                                                        <i class="fa fa-angle-down"
-                                                           aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div id="collapseOne"
-                                                 class="collapse show"
-                                                 aria-labelledby="headingOne"
-                                                 data-parent="#accordion">
-                                                <!-- card-body -->
-                                                <div class="card-body">
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:1})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#1</p>
-                                                            </div>
-                                                            <div class="flex-1">Bent u bekend met het artikel "Kinderen kunnen voortaan – zonder medisch dossier – slecht rijgedrag van ouders melden"?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:2})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#2</p>
-                                                            </div>
-                                                            <div class="flex-1">Waarom is het mogelijk dat een geloofwaardige melding van slecht rijgedrag zonder bewijsvoering in behandeling wordt genomen en de rijbevoegdheid wordt opgeschort? Hoe wenselijk acht u deze situatie? Kunt u uw antwoord toelichten?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:3})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#4</p>
-                                                            </div>
-                                                            <div class="flex-1">Bent u het eens met de stelling dat dit kan leiden tot willekeur en misbruik van deze regeling? Kunt u uw antwoord toelichten?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#6</p>
-                                                            </div>
-                                                            <div class="flex-1">Kunt u aangeven welke overige criteria gelden bij het beoordelen van de geloofwaardigheid van de melding van slecht rijgedrag? Wie heeft deze criteria vastgesteld?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- card -->
+										<?php
+										//#从数据库取出所有project
+										$sql = "select project_id,project_title from project order by project_id desc";
+										if(isset($_POST['Search']))//#如果有搜索就用这个sql来查project
+											$sql = "select project_id,project_title from project where project_title like '%{$_POST['Search']}%' order by project_id desc";
+										$a = DB::query($sql);
+										foreach($a as $v){//#显示project列表
+										?>
                                         <div class="card m-2">
                                             <div class="card-header collapsed"
-                                                 id="headingTwo"
+                                                 id="headingOne<?=$v['project_id']?>"
                                                  data-toggle="collapse"
-                                                 data-target="#collapseTwo"
+                                                 data-target="#collapseOne<?=$v['project_id']?>"
                                                  aria-expanded="false"
-                                                 aria-controls="collapseTwo">
-
+                                                 aria-controls="collapseOne<?=$v['project_id']?>">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-none mr-2">
                                                         <i class="fa fa-file fa-fw"
                                                            aria-hidden="true"></i>
                                                     </div>
-                                                    <div class="flex-1">
-                                                        het bericht "De overheid is de regie kwijt in het bestrijden van overlast van ratten"</div>
+                                                    <div class="flex-1"><?=$v['project_title']?></div>
                                                     <div class="flex-none  ml-2">
                                                         <i class="fa fa-angle-down"
                                                            aria-hidden="true"></i>
@@ -298,175 +213,41 @@
                                                 </div>
 
                                             </div>
-                                            <div id="collapseTwo"
+
+                                            <div id="collapseOne<?=$v['project_id']?>"
                                                  class="collapse"
-                                                 aria-labelledby="headingTwo"
+                                                 aria-labelledby="headingOne<?=$v['project_id']?>"
                                                  data-parent="#accordion">
                                                 <!-- card-body -->
                                                 <div class="card-body">
+													<?php
+													//#project下的各个问题
+													$aa = DB::query("select * from question where question_project_id={$v['project_id']} order by question_id desc");
+													foreach($aa as $kk=>$vv){
+													?>
                                                     <!-- child-item -->
                                                     <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
+                                                       onclick="changePage(this,{pageId:<?=$vv['question_id']?>})">
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#1</p>
+                                                                   aria-hidden="true"></i><p>#<?=$kk+1?></p>
                                                             </div>
-                                                            <div class="flex-1">Bent u bekend met bericht "Steeds meer overlast in steden en buitengebie-den. Rattenbestrijding strandt"?
-                                                            </div>
+                                                            <div class="flex-1"><?=$vv['question_title']?></div>
                                                             <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
+                                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
                                                             </div>
                                                         </div>
                                                     </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#2</p>
-                                                            </div>
-                                                            <div class="flex-1">Kunt u bevestigen dat er een groot risico is voor de volksgezondheid als de overlast van ratten verder toeneemt omdat ratten ziektes (waaronder dierziektes) kunnen verspreiden en ratten drager zijn van verschillende bacteriën?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#3</p>
-                                                            </div>
-                                                            <div class="flex-1">Deelt u de mening van het Kennis- en Adviescentrum Dierplagen dat de preventie niet goed geregeld is? Deelt u de mening van ongediertebestrijders die waarschuwen voor »middeleeuwse taferelen met veel ziektes»? Zo nee waarom niet?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#4</p>
-                                                            </div>
-                                                            <div class="flex-1">Deelt u de mening van het Kennis- en Adviescentrum Dierplagen dat de preventie niet goed geregeld is? Deelt u de mening van ongediertebestrijders die waarschuwen voor »middeleeuwse taferelen met veel ziektes»? Zo nee waarom niet?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
+													<?php
+													}
+													?>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- card -->
-                                        <div class="card m-2">
-                                            <div class="card-header collapsed"
-                                                 data-toggle="collapse"
-                                                 data-target="#collapseThree"
-                                                 aria-expanded="false"
-                                                 aria-controls="collapseThree"
-                                                 id="headingThree">
-
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-none mr-2">
-                                                        <i class="fa fa-file fa-fw"
-                                                           aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="flex-1">
-                                                    het uitstempelen van zeevarenden in de haven van Rotterdam</div>
-                                                    <div class="flex-none  ml-2">
-                                                        <i class="fa fa-angle-down"
-                                                           aria-hidden="true"></i>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div id="collapseThree"
-                                                 class="collapse"
-                                                 aria-labelledby="headingThree"
-                                                 data-parent="#accordion">
-                                                <!-- card-body -->
-                                                <div class="card-body">
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#1</p>
-                                                            </div>
-                                                            <div class="flex-1">Bent u bekend met het bericht «Oude dieselauto’s niet meer welkom in Arnhemse binnenstad (met kaartje)»?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#2</p>
-                                                            </div>
-                                                            <div class="flex-1">Wat valt er te zeggen over de data waarop het Arnhemse gemeentebestuur zich beroept? In hoeverre zijn de Arnhemse metingen van een regionale Gemeentelijke Gezondheidsdienst (GGD) of metingen van Milieudefensie gelet op het feit dat in Amsterdam afwijkingen in meetmethoden zijn geconstateerd representatief en conform de richtlijnen van het Rijksinstituut voor Volksgezondheid en Milieu (RIVM)?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#3</p>
-                                                            </div>
-                                                            <div class="flex-1">Wat is de planning van Arnhem? Wat zijn de gevolgen voor mensen met een oudere diesel die hun stad niet meer in kunnen? Hoe worden mensen die de binnenstad bezoeken bijvoorbeeld met een youngtimer gecompenseerd voor de schade? Wat doet de gemeente Arnhem voor deze mensen?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:'unknow'})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#4</p>
-                                                            </div>
-                                                            <div class="flex-1">Hoe voorkomen we een wirwar van bebording voor milieuzones? Zijn er al ideeën hoe de gewenste eenduidigheid in te vullen is gezien het feit dat er nu sprake is van willekeur aan de hand van jaartallen van voertuigen die eigenlijk niets zeggen over de echte uitstoot (zo kan een kleine oudere diesel een stuk schoner zijn dan een grotere nieuwere auto)? Hoe denkt u daarover? Wanneer valt duidelijkheid te verwachten en welke norm per voertuig wordt dan geldend?
-                                                            </div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right"
-                                                                   aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
+										<?php
+										}
+										?>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade"
@@ -482,15 +263,17 @@
             </div>
             <!-- layout_content -->
             <div class="col-sm p-0 layout_content py-md-3 justify-content-center positon-relative">
+                <!-- content -->
 
                 <!-- index Page -->
-                <div id="indexPage" class="container-fluid py-3 py-md-0">
+                <div id="indexPage"
+                     class="container-fluid py-3 py-md-0">
                     <div class="row">
                         <div class="col-sm mx-md-3 mx-ld-5">
-
                             <div class="jq-question-assigned-content">
                             <?php
                                 getAssignedQuestionsHtml(2)
+									
                             ?>
                             </div>
                         </div>
@@ -502,7 +285,8 @@
                         src=""
                         name="listReload"
                         class="iframe-child-page"
-                        style="display: none">
+						frameborder="0"
+                        style="display: none; min-height:1800px; width:100%; margin:0;"><!--#这里改了下style，让子框架全部显示-->
                 </iframe>
 
                 <!-- 此处显示demo图作为参考-->
