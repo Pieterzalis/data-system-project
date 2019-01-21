@@ -107,16 +107,18 @@ $a = DB::queryOneRow("select a.question_id,a.question_title,a.question_project_i
                     </div>
                 </div>
             </div>
+            <div class="row justify-content-center">
+                <div class="col-sm col-md-12">
+                    <button type="button" class="btn btn-primary"><i class="fa fa-search"
+                           aria-hidden="true"></i>
+                        Informatie zoeken
+                    </button>
+                </div>
+            </div>
         </div>
 
         <!-- row-table -->
         <div class="project-table mt-3">
-            <button type="button"
-                    class="btn btn-primary">
-                <i class="fa fa-search"
-                   aria-hidden="true"></i>
-                Naar zeek
-            </button>
             <h6 class="m-3">Kennisbank</h6>
             <div class="card-list">
 

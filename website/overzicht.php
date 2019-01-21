@@ -175,7 +175,7 @@
                                                 </div>
                                                 <input type="text"
                                                        class="form-control"
-                                                       id="Search" name="Search" value="<?=$_POST['Search']?>"
+                                                       id="Search" name="Search" value=""
                                                        placeholder="Search Keyword">
                                             </div>
                                         </div>
