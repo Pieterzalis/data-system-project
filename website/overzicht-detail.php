@@ -2,40 +2,29 @@
 require_once 'database/Model_Project.php';
 $id = intval($_GET['id']);
 if($id <= 0) exit('Parameter Error');//#如果id不对提示错误
-$a = DB::queryOneRow("select a.question_id,a.question_title,a.question_project_id,b.project_title from question a left join project b on b.project_id=a.question_project_id where a.question_id=$id");//#查询问题和对应的project
+$a = DB::queryOneRow("SELECT a.question_id, 
+            a.question_title, 
+            a.question_project_id, b.project_title, 
+            REPLACE(CONCAT(pm.parliamentmember_firstname, ' ', pm.parliamentmember_lastname_prefix, ' ', pm.parliamentmember_lastname), '  ', ' ') as indiener_fullname,
+            pa.party_name
+              FROM question a 
+              LEFT JOIN project b ON b.project_id=a.question_project_id 
+              LEFT JOIN parliamentmember pm ON b.project_submitter = pm.parliamentmember_id
+              LEFT JOIN party pa ON pm.parliamentmember_party_id = pa.party_id
+              WHERE a.question_id=".$id." ");
+
+$indiener_name = $a['indiener_fullname'];
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
-    <title>Nieuw Project</title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
-          href="assets/style.css" />
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
-          href="bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet"
-          href="assets/icon-font/css/font-awesome.min.css">
-
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-
-    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-
-    <script src="assets/js/index.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <title>Project overzicht</title>
+    <?php
+    include_once("templates/template_head.php");
+    ?>
 </head>
+
 
 <body class="page_search_engine">
 
@@ -50,18 +39,20 @@ $a = DB::queryOneRow("select a.question_id,a.question_title,a.question_project_i
                 <div class="col-sm col-md-6 col-lg-4">
 
                     <h6 class="text-secondary">Project</h6>
-                    <a href="overzicht-detail-keyword.html"
-                       class="w-100 text-dark a-hover-none">
                         <div class="card">
                             <div class="card-body">
-                                <p><strong><?=$a['project_title']?></strong></p>
-                                <div class="mb-0">
-                                    <strong class="text-secondary">Keyword</strong>
+                                <a href="overzicht-detail-keyword.html"
+                                   class="w-100 text-dark a-hover-none">
+                                    <p><strong><?= $a['project_title']?></strong></p>
                                     <i class="fa fa-angle-right text-dark"
                                        style="
                                        float:
                                        right"
                                        aria-hidden="true"></i>
+                                </a>
+                                <div class="mb-0">
+                                    <strong class="text-secondary">Keywords</strong>
+
                                 </div>
                                 <div><?php
 								//#列出该project的所有keyword
@@ -73,29 +64,27 @@ $a = DB::queryOneRow("select a.question_id,a.question_title,a.question_project_i
                                 </div>
                             </div>
                         </div>
-                    </a>
+
                 </div>
                 <div class="col-sm col-md-6 col-lg-4">
 
                     <h6 class="text-secondary">Indiener</h6>
                     <div class="card">
-                        <div class="card-body">
-                            <a href="#"
-                               class="w-100 d-flex align-items-center">
+                        <div class="card-body w-100 d-flex align-items-center">
+<!--                            <a href="#"-->
+<!--                               class="w-100 d-flex align-items-center">-->
                                 <div class="flex-none avatar avatar-md">
-                                    <img class="rounded-circle"
-                                         src="assets/img/man.jpg"
-                                         alt="">
+                                    <h5 style="display:flex; align-items: center; margin-bottom: 0;"><?php echo $a['party_name'] ?></h5>
                                 </div>
                                 <div class="flex-auto text-dark text-left">
-                                    <p class="mb-0 pl-3">Keyword</p>
+                                    <p class="mb-0 pl-3"><?php echo $a['indiener_fullname'] ?></p>
                                 </div>
                                 <div class="flex-none">
                                     <i class="fa fa-angle-right text-dark"
                                        style="float:right"
                                        aria-hidden="true"></i>
                                 </div>
-                            </a>
+<!--                            </a>-->
                         </div>
                     </div>
                     <h6 class="text-secondary mt-3">Experts</h6>
