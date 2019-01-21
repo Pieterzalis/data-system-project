@@ -297,7 +297,7 @@
                         name="listReload"
                         class="iframe-child-page"
 						frameborder="0"
-                        style="display: none; min-height:1800px; width:100%; margin:0;"><!--#这里改了下style，让子框架全部显示-->
+                        style="display: none; min-height:800px; width:100%; margin:0;"><!--#这里改了下style，让子框架全部显示-->
                 </iframe>
 
                 <!-- 此处显示demo图作为参考-->
