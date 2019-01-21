@@ -4,7 +4,10 @@ $id = intval($_GET['id']);
 if($id <= 0) exit('Parameter Error');//#如果id不对提示错误
 $a = DB::queryOneRow("SELECT a.question_id, 
             a.question_title, 
-            a.question_project_id, b.project_title, 
+            a.question_project_id, 
+            b.project_title, 
+            b.project_code,
+            b.project_date_letter,
             REPLACE(CONCAT(pm.parliamentmember_firstname, ' ', pm.parliamentmember_lastname_prefix, ' ', pm.parliamentmember_lastname), '  ', ' ') as indiener_fullname,
             pa.party_name
               FROM question a 
@@ -13,7 +16,15 @@ $a = DB::queryOneRow("SELECT a.question_id,
               LEFT JOIN party pa ON pm.parliamentmember_party_id = pa.party_id
               WHERE a.question_id=".$id." ");
 
-$indiener_name = $a['indiener_fullname'];
+$assigned_experts = DB::query("SELECT exp.user_id, REPLACE(CONCAT(u.user_firstname, ' ', u.user_lastname_prefix, ' ', u.user_lastname), ' ', ' ') as expert_name 
+                              FROM question_has_experts exp 
+                              INNER JOIN `user` u ON exp.user_id = u.user_id 
+                              WHERE exp.question_id = ".$id." ");
+
+// Deadline
+$date_letter_dutch = date('d-m-Y', strtotime($a['project_date_letter']));
+$date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -33,7 +44,8 @@ $indiener_name = $a['indiener_fullname'];
         <div class="project-info">
             <div>
                 <p><Strong><?=$a['question_title']?></Strong></p>
-                <p>xxxxxxx: <Strong>4352-32423</Strong></p>
+                <p>Project Code: <Strong><?= $a['project_code'] ?></Strong></p>
+                <p>Deadline: <Strong><?= $date_deadline ?></p>
             </div>
            <div class="row justify-content-md-center">
                 <div class="col-sm col-md-6 col-lg-4">
@@ -43,7 +55,7 @@ $indiener_name = $a['indiener_fullname'];
                             <div class="card-body">
                                 <a href="overzicht-detail-keyword.html"
                                    class="w-100 text-dark a-hover-none">
-                                    <p><strong><?= $a['project_title']?></strong></p>
+                                    <p><?= $a['project_title']?></p>
                                     <i class="fa fa-angle-right text-dark"
                                        style="
                                        float:
@@ -88,19 +100,21 @@ $indiener_name = $a['indiener_fullname'];
                         </div>
                     </div>
                     <h6 class="text-secondary mt-3">Experts</h6>
-                    <div class="avatar avatar-md">
-                        <img class="rounded-circle"
-                             src="assets/img/man.jpg"
-                             alt="">
-                        <p class="text-mini">name</p>
-                    </div>
+                    <?php foreach ($assigned_experts as $expert) { ?>
+                        <div class="avatar avatar-md">
+                            <img class="rounded-circle"
+                                 src="assets/img/tenNoord.png"
+                                 alt="">
+                            <p class="text-mini"><?= $expert['expert_name'] ?></p>
+                        </div>
+                    <?php } // end foreach ?>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-sm col-md-12">
                     <button type="button" class="btn btn-primary"><i class="fa fa-search"
                            aria-hidden="true"></i>
-                        Informatie zoeken
+                        Zoek informatie
                     </button>
                 </div>
             </div>
@@ -108,7 +122,7 @@ $indiener_name = $a['indiener_fullname'];
 
         <!-- row-table -->
         <div class="project-table mt-3">
-            <h6 class="m-3">Kennisbank</h6>
+            <p class="m-3" style="padding-top:8px;">Kennisbank</p>
             <div class="card-list">
 
                 <div class="card mb-3 text-left">
@@ -116,7 +130,7 @@ $indiener_name = $a['indiener_fullname'];
                         <div class="d-flex">
                             <div class="flex-1 title">
                                 <p>
-                                    <strong>Title xxxx xxxx xxxxxxx</strong>
+                                    Title xxxx xxxx xxxxxxx
                                 </p>
                             </div>
                             <div class="flex-none">
@@ -130,9 +144,9 @@ $indiener_name = $a['indiener_fullname'];
                         </div>
                         <div class="row">
                             <div class="col-md-auto info">
-                                Bron: <strong><u>xxxxx</u></strong>
+                                Bron: <u>xxxxx</u>
                                 <br>
-                                Datum: <strong>xxxxxx</strong>
+                                Datum: xxxxxx
                             </div>
                             <div class="col-md content">content content content content content content content content content content </div>
                         </div>
