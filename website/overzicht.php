@@ -9,14 +9,28 @@
     <?php
     include_once("templates/template_head.php");
     ?>
+    <style>
+        .btn-outline-light-trans{
+        border-color: #ffffff55;
+    }
+        .btn-outline-light-trans:hover,
+        .btn-outline-light-trans:focus{
+        border-color: #ffffff55 !important;
+        background: #ffffff22 !important;
+        color: #fff !important
+    }
+        .btn-outline-light-trans:active{
+        border-color: #ffffff77 !important;
+        background: #ffffff11 !important;
+        color: #fff !important
+    }
+    </style>
     <script>
-
         // Load jquery calls after page load.
         $(document).ready(function () {
 			/*//#注释掉这里，为了使搜索按钮生效
             $(".jq-loadall-projcards").click(function () {
                 $(".jq-question-assigned-content").fadeOut(400);
-
                 $.post( "database/Model_Project.php", { func: "getAssignedQuestionsHtml" })
                     .done(function( data ) {
                         // Change contents of div
@@ -24,11 +38,7 @@
                     })
                 });*/
             });
-
-
-
         var lastClick = $('select-all-nav-item');
-
         function changePage(node, { pageId }) {
             lastClick.removeClass("actived");
             lastClick = $(node);
@@ -36,23 +46,18 @@
             console.log(pageId);//选中的ID
             jump(pageId);//跳转
         }
-
         function search() {
             back();
         }
-
         function jump(pageId) {
             // indexPage
             var indexNavPage = $('#indexPage');
             // childPage
             var childNavPage = $('#childPage');
-
             indexNavPage.hide();
             childNavPage.show();
-
             // 测试百度
             // childNavPage.attr('src', 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=' + pageId); 
-
             // 真实请求
             childNavPage.attr('src', 'overzicht-detail.php?id=' + pageId);//#这里换成php文件
         }
@@ -62,13 +67,11 @@
             var indexNavPage = $('#indexPage');
             // childPage
             var childNavPage = $('#childPage');
-
             childNavPage.hide();
             indexNavPage.show();
             // 请求清空
             childNavPage.attr('src', '');
         }
-
     </script>
 
 </head>
@@ -180,7 +183,15 @@
                                             </div>
                                         </div>
                                         <div class="text-center py-3 px-2">
-                                            <button type="submit" class="btn btn-outline-light jq-loadall-projcards">Alle toegewezen kamervragen</button>
+                                            <button type="button"
+                                                    class="btn btn-outline-light btn-outline-light-trans shadow"
+                                                    onclick="search()">
+                                                <i class="fa fa-home"
+                                                   aria-hidden="true"></i>
+
+                                                Jouw Kamervragen
+                                            </button>
+                                            
                                         </div>
                                     </form>
                                     <div id="accordion">
