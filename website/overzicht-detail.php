@@ -25,6 +25,8 @@ $assigned_experts = DB::query("SELECT exp.user_id, REPLACE(CONCAT(u.user_firstna
 $date_letter_dutch = date('d-m-Y', strtotime($a['project_date_letter']));
 $date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
 
+$sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id."  AND source_active=1");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -83,8 +85,6 @@ $date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
                     <h6 class="text-secondary">Indiener</h6>
                     <div class="card">
                         <div class="card-body w-100 d-flex align-items-center">
-<!--                            <a href="#"-->
-<!--                               class="w-100 d-flex align-items-center">-->
                                 <div class="flex-none avatar avatar-md">
                                     <h5 style="display:flex; align-items: center; margin-bottom: 0;"><?php echo $a['party_name'] ?></h5>
                                 </div>
@@ -92,11 +92,8 @@ $date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
                                     <p class="mb-0 pl-3"><?php echo $a['indiener_fullname'] ?></p>
                                 </div>
                                 <div class="flex-none">
-                                    <i class="fa fa-angle-right text-dark"
-                                       style="float:right"
-                                       aria-hidden="true"></i>
                                 </div>
-<!--                            </a>-->
+
                         </div>
                     </div>
                     <h6 class="text-secondary mt-3">Experts</h6>
@@ -125,60 +122,73 @@ $date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
             <p class="m-3" style="padding-top:8px;">Kennisbank</p>
             <div class="card-list">
 
-                <div class="card mb-3 text-left">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="flex-1 title">
-                                <p>
-                                    Title xxxx xxxx xxxxxxx
-                                </p>
+                <?php if (empty($sources)) { ?>
+                    <div class="card mb-3 text-left">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="flex-1 title">
+                                    <p>Er zijn geen bronnen gevonden voor deze kamervraag. Om informatie te vinden gebruik je de 'Zoek informatie' knop en sla dan de gewenste bron op in de kennisbank.</p>
+                                </div>
                             </div>
-                            <div class="flex-none">
-                                <a href=""
-                                   class="card-close-btn text-secondary">
-                                    <!-- close -->
-                                    <i class="fa fa-close"
-                                       aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-auto info">
-                                Bron: <u>xxxxx</u>
-                                <br>
-                                Datum: xxxxxx
-                            </div>
-                            <div class="col-md content">content content content content content content content content content content </div>
                         </div>
                     </div>
-                </div>
-                <div class="card mb-3 text-left">
-                    <div class="card-body">
-                        <div class="d-flex">
-                            <div class="flex-1 title">
-                                <p>
-                                    <strong>Title xxxx xxxx xxxxxxx</strong>
-                                </p>
-                            </div>
-                            <div class="flex-none">
-                                <a href=""
-                                   class="card-close-btn text-secondary">
-                                    <!-- close -->
-                                    <i class="fa fa-close"
-                                       aria-hidden="true"></i>
-                                </a>
+                <?php } else { ?>
+                    <?php foreach ($sources as $source) { ?>
+                        <div class="card mb-3 text-left">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="flex-1 title">
+                                        <p>Titel: <?= $source['source_title'] ?></p>
+                                    </div>
+                                    <div class="flex-none">
+                                        <a href=""
+                                           class="card-close-btn text-secondary">
+                                            <!-- close -->
+                                            <i class="fa fa-close"
+                                               aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-auto info">
+                                        Bron: <a href="<?= $source['source_url'] ?>" target="_blank"><u><?= $source['source_outlet'] ?></u></a>
+                                        <br>
+                                        Datum: <?= $source['source_date_published'] ?>
+                                    </div>
+                                    <div class="col-md content"><?= $source['source_snippet']  ?></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-auto info">
-                                Bron: <strong><u>xxxxx</u></strong>
-                                <br>
-                                Datum: <strong>xxxxxx</strong>
-                            </div>
-                            <div class="col-md content">content content content content content content content content content content </div>
-                        </div>
-                    </div>
-                </div>
+                        <?php } ?>
+                <?php } ?>
+<!--                <div class="card mb-3 text-left">-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="d-flex">-->
+<!--                            <div class="flex-1 title">-->
+<!--                                <p>-->
+<!--                                    <strong>Title xxxx xxxx xxxxxxx</strong>-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="flex-none">-->
+<!--                                <a href=""-->
+<!--                                   class="card-close-btn text-secondary">-->
+<!--                                    <!-- close -->
+<!--                                    <i class="fa fa-close"-->
+<!--                                       aria-hidden="true"></i>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="row">-->
+<!--                            <div class="col-md-auto info">-->
+<!--                                Bron: <strong><u>xxxxx</u></strong>-->
+<!--                                <br>-->
+<!--                                Datum: <strong>xxxxxx</strong>-->
+<!--                            </div>-->
+<!--                            <div class="col-md content">content content content content content content content content content content </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
             </div>
         </div>
     </div>
