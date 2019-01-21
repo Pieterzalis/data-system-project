@@ -16,7 +16,7 @@ function isUserExpert($user_id) {
 								INNER JOIN role ON user_role_id = role_id 
 								WHERE user_id= " . $user_id . " ");
 
-	if ($role["role_name"] === "Expert") {
+	if ($role[0]["role_name"] === "Expert") {
 		// User is expert
 		return true;
 	} else {

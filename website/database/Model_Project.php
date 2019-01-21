@@ -85,7 +85,7 @@ function getAssignedQuestionsHtml($user_id) {
                         INNER JOIN party ON parliamentmember_party_id = party_id
                         WHERE question_id IN (
                                 SELECT question_id FROM question_has_experts
-                                WHERE user_id = 2
+                                WHERE user_id = $user_id
                         )
     "); // End Query
 
@@ -93,103 +93,115 @@ function getAssignedQuestionsHtml($user_id) {
 
     $projectID = 0;
 
-    // TODO build HTML according to screens
-    foreach ($res_proj_questions as $row) {
-        if ($projectID != $row['project_id']){
+    if (empty($res_proj_questions)) {
+        $html .= "
+            <div class=\"card project-card\" id=\"project-card-1\">
+                                <div class=\"card-body\">
+                                    <table class=\"table table-sm mb-0\">
+                                        <p>Geen kamervragen gevonden.</p>
+                                    </table>           
+                                        </div>
+                          </div>
+        
+        ";
+    } else {
+        // TODO build HTML according to screens
+        foreach ($res_proj_questions as $row) {
+            if ($projectID != $row['project_id']) {
 
-            // Dutch format
-        	$date_letter_dutch = date('d-m-Y', strtotime($row['project_date_letter']));
-        	$date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
+                // Dutch format
+                $date_letter_dutch = date('d-m-Y', strtotime($row['project_date_letter']));
+                $date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
 
-        	// Set project ID in this loop iteration
-            $projectID = $row['project_id'];
+                // Set project ID in this loop iteration
+                $projectID = $row['project_id'];
 
-            // Build the project card here
-            $html .= "
-                        <div class=\"card project-card\" id=\"project-card-1\">
-                            <div class=\"card-body\">
-                                <table class=\"table table-sm mb-0\">
-                                    <tbody>
-                                        <tr>
-                                            <td class=\"no-border max-width-table\"
-                                                scope=\"row\">Project:</td>
-                                            <th class=\"no-border\"
-                                                scope=\"row\">".$row['project_title']."</th>
-                                        </tr>
-                                        <tr>
-                                            <td class=\"no-border max-width-table\"
-                                                scope=\"row\">Indiener:</td>
-                                            <th class=\"no-border\"
-                                                scope=\"row\">".$row['indiener_fullname']." - ".$row['party_name']." </th>
-                                        </tr>
-                                        <tr>
-                                            <td class=\"no-border max-width-table\"
-                                                scope=\"row\">Ingediend op:</td>
-                                            <th class=\"no-border\"
-                                                scope=\"row\">". $date_letter_dutch ."</th>
-                                        </tr>
-                                       	<tr>
-                                            <td class=\"no-border max-width-table\"
-                                                scope=\"row\">Current deadline:</td>
-                                            <th class=\"no-border\"
-                                                scope=\"row\">". $date_deadline ."</th>
-                                        </tr>
-                                        <tr>
-                                            <td class=\"no-border pt-4\"
-                                                scope=\"row\">Vragen:</td>
-                                        </tr>
-                                    </tbody>
-                                </table>";
+                // Build the project card here
+                $html .= "
+                            <div class=\"card project-card\" id=\"project-card-1\">
+                                <div class=\"card-body\">
+                                    <table class=\"table table-sm mb-0\">
+                                        <tbody>
+                                            <tr>
+                                                <td class=\"no-border max-width-table\"
+                                                    scope=\"row\">Project:</td>
+                                                <th class=\"no-border\"
+                                                    scope=\"row\">" . $row['project_title'] . "</th>
+                                            </tr>
+                                            <tr>
+                                                <td class=\"no-border max-width-table\"
+                                                    scope=\"row\">Indiener:</td>
+                                                <th class=\"no-border\"
+                                                    scope=\"row\">" . $row['indiener_fullname'] . " - " . $row['party_name'] . " </th>
+                                            </tr>
+                                            <tr>
+                                                <td class=\"no-border max-width-table\"
+                                                    scope=\"row\">Ingediend op:</td>
+                                                <th class=\"no-border\"
+                                                    scope=\"row\">" . $date_letter_dutch . "</th>
+                                            </tr>
+                                            <tr>
+                                                <td class=\"no-border max-width-table\"
+                                                    scope=\"row\">Current deadline:</td>
+                                                <th class=\"no-border\"
+                                                    scope=\"row\">" . $date_deadline . "</th>
+                                            </tr>
+                                            <tr>
+                                                <td class=\"no-border pt-4\"
+                                                    scope=\"row\">Vragen:</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>";
 
-            // TODO add database field for question_number and show them here
-            // Right now ill just count them
-            $i = 0;
-            foreach ($res_proj_questions as $q_item){
-                if ($q_item['project_id'] === $projectID) {
+                // TODO add database field for question_number and show them here
+                // Right now ill just count them
+                $i = 0;
+                foreach ($res_proj_questions as $q_item) {
+                    if ($q_item['project_id'] === $projectID) {
 
-                    $source_result = DB::queryFirstRow(" SELECT COUNT(`source_id`) AS amount_sources 
-                                 FROM `source` 
-                                  WHERE `source_question_id` = ". $q_item["question_id"]." ");
-                    $amount_sources = $source_result['amount_sources'];
+                        $source_result = DB::queryFirstRow(" SELECT COUNT(`source_id`) AS amount_sources 
+                                     FROM `source` 
+                                      WHERE `source_question_id` = " . $q_item["question_id"] . " ");
+                        $amount_sources = $source_result['amount_sources'];
 
 
-                    $i++;
-                    $html .="           <!-- begin questions!!! -->
-                                <ul class=\"my-list-group container-fluid\">
-                                    <a class=\"child-item\" \">
-                                    <li onclick=\"changePage(this,{pageId:".$q_item['question_id']."})\" class=\"my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center questions\">
-                                        <div class=\"col-3 col-md-auto pr-sm-2 pr-md-3\">#".$i."</div>
-                                        <div class=\"col-9 col-md px-sm-2 px-md-3 border-md-right\">".$q_item['question_title']."</div>
-                                        <div class=\"col-9 col-md-auto px-sm-2 px-md-3\">
-                                            <span class=\"fa-stack\">
-                                                <i class=\"fa fa-floppy-o fa-stack-2x\"
+                        $i++;
+                        $html .= "           <!-- begin questions!!! -->
+                                    <ul class=\"my-list-group container-fluid\">
+                                        <a class=\"child-item\" \">
+                                        <li onclick=\"changePage(this,{pageId:" . $q_item['question_id'] . "})\" class=\"my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center questions\">
+                                            <div class=\"col-3 col-md-auto pr-sm-2 pr-md-3\">#" . $i . "</div>
+                                            <div class=\"col-9 col-md px-sm-2 px-md-3 border-md-right\">" . $q_item['question_title'] . "</div>
+                                            <div class=\"col-9 col-md-auto px-sm-2 px-md-3\">
+                                                <span class=\"fa-stack\">
+                                                    <i class=\"fa fa-floppy-o fa-stack-2x\"
+                                                       aria-hidden=\"true\"></i>
+                                                </span>
+                                                <span class=\"fa-stack\">
+                                                    <i class=\"fa fa-circle fa-stack-2x\"></i>
+                                                    <i class=\"fa fa-stack-1x fa-inverse text-dark\">" . $amount_sources . "</i>
+                                                </span>
+                                                <span>opgeslagen bronnen</span>
+                                            </div>
+                                            <div class=\"col-3 col-md-auto pl-sm-4 pl-md-3\">
+                                                <i class=\"fa fa-angle-right\"
                                                    aria-hidden=\"true\"></i>
-                                            </span>
-                                            <span class=\"fa-stack\">
-                                                <i class=\"fa fa-circle fa-stack-2x\"></i>
-                                                <i class=\"fa fa-stack-1x fa-inverse text-dark\">".$amount_sources."</i>
-                                            </span>
-                                            <span>opgeslagen bronnen</span>
-                                        </div>
-                                        <div class=\"col-3 col-md-auto pl-sm-4 pl-md-3\">
-                                            <i class=\"fa fa-angle-right\"
-                                               aria-hidden=\"true\"></i>
-                                        </div>
-                                    </li></a>
-                                </ul>";
+                                            </div>
+                                        </li></a>
+                                    </ul>";
 
+                    }
                 }
+
+                // Close the card divs
+                $html .= "    </div>
+                          </div>";
+                // End creating html
             }
 
-            // Close the card divs
-            $html .= "    </div>
-                      </div>";
-            // End creating html
         }
 
     }
-
-    // Then do a nested foreach, to also load the questions into the card.
 
 
     echo $html;

@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    $user_check = $_SESSION['login_username'];
+    $user_fullname = $_SESSION['login_fullname'];
+    $user_id = $_SESSION['login_id'];
+
     require_once 'database/Model_Project.php';
 ?>
 <!DOCTYPE html>
@@ -101,13 +106,13 @@
                                 <a href="">
                                     <div class="avatar">
                                         <img class="rounded-circle"
-                                             src="assets/img/woman.jpg"
+                                             src="assets/img/<?=$user_check?>.jpg"
                                              alt="">
                                     </div>
-                                    Francine ten Noord
+                                    <?= $user_fullname ?>
                                 </a>
                                 <!-- sign-out -->
-                                <a href="login.html"
+                                <a href="logout.php"
                                    class="ml-3 mr-3">
                                     <i class="fa fa-sign-out"
                                        aria-hidden="true"></i>
@@ -283,7 +288,7 @@
                         <div class="col-sm mx-md-3 mx-ld-5">
                             <div class="jq-question-assigned-content">
                             <?php
-                                getAssignedQuestionsHtml(2)
+                                getAssignedQuestionsHtml($user_id)
 									
                             ?>
                             </div>
