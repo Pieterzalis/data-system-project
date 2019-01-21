@@ -146,6 +146,13 @@ function getAssignedQuestionsHtml($user_id) {
             $i = 0;
             foreach ($res_proj_questions as $q_item){
                 if ($q_item['project_id'] === $projectID) {
+
+                    $source_result = DB::queryFirstRow(" SELECT COUNT(`source_id`) AS amount_sources 
+                                 FROM `source` 
+                                  WHERE `source_question_id` = ". $q_item["question_id"]." ");
+                    $amount_sources = $source_result['amount_sources'];
+
+
                     $i++;
                     $html .="           <!-- begin questions!!! -->
                                 <ul class=\"my-list-group container-fluid\">
@@ -160,7 +167,7 @@ function getAssignedQuestionsHtml($user_id) {
                                             </span>
                                             <span class=\"fa-stack\">
                                                 <i class=\"fa fa-circle fa-stack-2x\"></i>
-                                                <i class=\"fa fa-stack-1x fa-inverse text-dark\">0</i>
+                                                <i class=\"fa fa-stack-1x fa-inverse text-dark\">".$amount_sources."</i>
                                             </span>
                                             <span>opgeslagen bronnen</span>
                                         </div>
@@ -187,6 +194,8 @@ function getAssignedQuestionsHtml($user_id) {
 
     echo $html;
 }
+
+
 
 
 
