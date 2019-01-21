@@ -15,18 +15,14 @@ $a = DB::queryOneRow("SELECT a.question_id,
               LEFT JOIN parliamentmember pm ON b.project_submitter = pm.parliamentmember_id
               LEFT JOIN party pa ON pm.parliamentmember_party_id = pa.party_id
               WHERE a.question_id=".$id." ");
-
 $assigned_experts = DB::query("SELECT exp.user_id, REPLACE(CONCAT(u.user_firstname, ' ', u.user_lastname_prefix, ' ', u.user_lastname), ' ', ' ') as expert_name 
                               FROM question_has_experts exp 
                               INNER JOIN `user` u ON exp.user_id = u.user_id 
                               WHERE exp.question_id = ".$id." ");
-
 // Deadline
 $date_letter_dutch = date('d-m-Y', strtotime($a['project_date_letter']));
 $date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
-
 $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id."  AND source_active=1");
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -109,7 +105,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
             </div>
             <div class="row justify-content-center">
                 <div class="col-sm col-md-12">
-                    <button type="button" class="btn btn-primary"><i class="fa fa-search"
+                    <button type="button" class="btn btn-primary" onclick="location.href='search_engine.php'"><i class="fa fa-search"
                            aria-hidden="true"></i>
                         Zoek informatie
                     </button>

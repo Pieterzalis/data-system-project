@@ -1,3 +1,8 @@
+<?php
+    require_once 'database/Model_Project.php';
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -12,11 +17,11 @@
     <link rel="stylesheet"
           type="text/css"
           media="screen"
-          href="bootstrap/css/bootstrap.min.css" />
+          href="assets/style.css" />
     <link rel="stylesheet"
           type="text/css"
           media="screen"
-          href="assets/style.css" />
+          href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet"
           href="assets/icon-font/css/font-awesome.min.css">
 
@@ -112,10 +117,7 @@
                 }
 
                 // Change parsing status to step-2
-                $("#progress-step2").addClass("activated");
-                $("#step-num-2").addClass("current");
-                $("#step-num-1").removeClass("current");
-                $("#step-num-1").html('<i class="fa fa-check"></i>');
+                $("#progress-step2").addClass("actived");
                 $("#step-1").hide();
                 $("#step-2").show();
 
@@ -132,14 +134,15 @@
                         $('#jq-step3-div').html(text);
 
                         // Set progress in top of screen
-                        $("#progress-step3").addClass("activated");
-                        $("#step-num-3").addClass("current");
-                        $("#step-num-2").removeClass("current");
-                        $("#step-num-2").html('<i class="fa fa-check"></i>');
+                        $("#progress-step3").addClass("actived");
 
                         // First hide the div step 1
                         $("#step-2").hide();
                         $("#step-3").show();
+						
+						let txt = $("#projectTitleID strong").html();
+						
+						$("#cardText").html(txt);
 
                     });
 
@@ -177,6 +180,15 @@
             step_1.show();
             step_2.hide();
             step_3.hide();
+			
+			var file_init = $("#file-init");
+            var file_name = $("#file-name");
+            var file_error = $("#file-error");
+
+            file_init.show();
+            file_name.hide();
+            file_error.hide();
+
         }
 
         
@@ -298,7 +310,7 @@
                                 <!-- step-line -->
                                 <div class="container step-container">
                                     <div class="row step-line m-3 justify-content-md-center">
-                                        <div class="col step activated" id="progress-step1">
+                                        <div class="col step actived" id="progress-step1">
                                             <div class="step-icon">
                                                 <i class="fa fa-file fa-2x d-block d-md-none"></i>
                                                 <i class="fa fa-file fa-3x d-none d-md-block"></i>
@@ -306,7 +318,7 @@
                                             <div class="step-text">
                                                 <p>Upload</p>
                                             </div>
-                                            <div class="step-num current" id="step-num-1">
+                                            <div class="step-num">
                                                 <label>1</label>
                                             </div>
                                         </div>
@@ -323,7 +335,7 @@
                                             <div class="step-text">
                                                 <p>Verwerk</p>
                                             </div>
-                                            <div class="step-num" id="step-num-2">
+                                            <div class="step-num">
                                                 <label>2</label>
                                             </div>
                                         </div>
@@ -340,7 +352,7 @@
                                             <div class="step-text">
                                                 <p>Controleer</p>
                                             </div>
-                                            <div class="step-num" id="step-num-3">
+                                            <div class="step-num">
                                                 <label>3</label>
                                             </div>
                                         </div>
@@ -356,16 +368,17 @@
                                             <h4>Upload hier de kamervragen</h4>
                                         </div>
                                         <div class="options mt-2 mx-2">
-                                            <div class="step-1-block" id="step-1-form">
+                                            <div class="step-1-block"
+                                                 id="step-1-form">
                                                 <form id="UploadForm"
                                                       method="post"
                                                       enctype="multipart/form-data">
 
                                                     <!-- file-init -->
                                                     <div id="file-init">
-                                                        <p>Klik
+                                                        <p>Sleep het bestand hier naar toe of
                                                             <a id="Choose_click_1" class="a_choose_click" style="cursor: pointer;" href=""
-                                                               title="Choose file">hier<input style="cursor: pointer;" type="file" class="file-uploader" name="uploadDataField" id="FileUploader1"/></a>
+                                                               title="Choose file">Klik<input style="cursor: pointer;" type="file" class="file-uploader" name="uploadDataField" id="FileUploader1" /></a>
                                                              om te zoeken op uw computer</p>
                                                     </div>
 
@@ -397,20 +410,20 @@
                                                     <div id="file-error"
                                                          style="display:none"
                                                          class="file-error">
-                                                        error
+                                                       
 
                                                         <!-- 数据文件格式不支持 -->
                                                         <!-- 点击这里选择另一个文件 -->
-                                                        <p>XXX XXXXX XX XXXXXX XXXXXX
+                                                        <p>Bestandsformaat niet ondersteund
                                                             <a id="Choose_click_3"
                                                                class="a_choose_click"
                                                                href=""
-                                                               title="Choose file">click<input type="file"
+                                                               title="Choose file">Klik<input type="file"
                                                                        class="file-uploader"
                                                                        name="uploadDataField"
                                                                        id="FileUploader3" />
                                                             </a>
-                                                            XXX XXXXX XX XXXXXX XXXXXX</p>
+                                                            hier om een ander bestand te kiezen</p>
                                                     </div>
 
                                                 </form>
@@ -543,7 +556,7 @@
                                         </div>
                                     </div>
                                     <a><button class="btn btn-danger" onclick="gotoStep1()">ANNULEER </button></a>
-                                    <a><button class="btn btn-success mx-3" >VOEG TOE</button></a>
+                                    <a><button class="btn btn-success mx-3"  onclick="showAlert()">VOEG TOE</button></a>
                                 </div>
                             </div>
                         </div>
@@ -559,8 +572,8 @@
              style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title text-center">Project opgeslagen</h5>
-
-                <p class="card-text">Het project is opgeslagen in de database.</p>
+				
+                <p class="card-text" id="cardText"></p>
 
                 <div class="text-right">
                     <a href="overzicht.php"
