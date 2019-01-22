@@ -33,12 +33,26 @@
 	</script>
 	<script>
 		function do_search(){
+			$("#sourcecontainer").html("Searching for relevant sources...");
+			var use_news_articles = $('#gridCheck1:checked').val();
+			var use_old_answers = $('#gridCheck2:checked').val();
+			console.log(use_news_articles);
+			console.log(use_old_answers);
+			var userkeywords = $("#Searchfield").val().split(',');
+			var autokeywords = [];
+			$("#autokeywordsection").children('span').each(function(index){
+				autokeywords.push($(this).text());
+			});
+			keywords = userkeywords.concat(autokeywords);
+			console.log(keywords);
 			console.log($("#datefrom").val());
 			var form = new FormData();
 			form.append('question_id','1');
-			form.append('keywords',JSON.stringify($("#Searchfield").val().split(' ')));
+			form.append('keywords',JSON.stringify(keywords));
 			form.append('fromdate',$("#datefrom").val());
-			form.append('todate','2012');
+			form.append('todate',$("#dateto").val());
+			form.append('use_news_articles',use_news_articles);
+			form.append('use_old_answers',use_old_answers);
 		fetch('process_search.php', {
 			method: 'POST',
 			body: form
@@ -120,15 +134,12 @@
                                                 <div class="form-group mb-0"><!--  -->
                                                     <label>Sleutelwoorden</label>
                                                 </div>
-                                                <div>
+                                                <div id="autokeywordsection">
                                                     <span class="badge badge-pill badge-primary">Rijgedrag</span>
                                                     <span class="badge badge-pill badge-secondary">Geloofwaardig</span>
                                                     <span class="badge badge-pill badge-success">Melding</span>
                                                     <span class="badge badge-pill badge-danger">Slecht</span>
                                                     <span class="badge badge-pill badge-warning">Opschorten</span>
-                                                    <span class="badge badge-pill badge-info">Info</span>
-                                                    <span class="badge badge-pill badge-light">Light</span>
-                                                    <span class="badge badge-pill badge-dark">Dark</span>
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -176,24 +187,15 @@
                                                            id="gridCheck1">
                                                     <label class="form-check-label"
                                                            for="gridCheck1">
-                                                        Wetenschappelijke bronnen
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input"
-                                                           type="checkbox"
-                                                           id="gridCheck1">
-                                                    <label class="form-check-label"
-                                                           for="gridCheck1">
                                                         Media bronnen
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input"
                                                            type="checkbox"
-                                                           id="gridCheck1">
+                                                           id="gridCheck2">
                                                     <label class="form-check-label"
-                                                           for="gridCheck1">
+                                                           for="gridCheck2">
                                                         Oude kamervragen
                                                     </label>
                                                 </div>
