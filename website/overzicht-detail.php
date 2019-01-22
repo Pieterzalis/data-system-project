@@ -15,10 +15,28 @@ $a = DB::queryOneRow("SELECT a.question_id,
               LEFT JOIN parliamentmember pm ON b.project_submitter = pm.parliamentmember_id
               LEFT JOIN party pa ON pm.parliamentmember_party_id = pa.party_id
               WHERE a.question_id=".$id." ");
-$assigned_experts = DB::query("SELECT exp.user_id, REPLACE(CONCAT(u.user_firstname, ' ', u.user_lastname_prefix, ' ', u.user_lastname), ' ', ' ') as expert_name 
+
+$assigned_experts = DB::query("SELECT exp.user_id, u.user_firstname, u.user_lastname_prefix, u.user_lastname, u.user_username 
                               FROM question_has_experts exp 
                               INNER JOIN `user` u ON exp.user_id = u.user_id 
                               WHERE exp.question_id = ".$id." ");
+
+$expert_fullnames = array();
+foreach ($assigned_experts as $expert){
+
+	if (is_null($expert["user_lastname_prefix"])) {
+		array_push($expert_fullnames, array(
+		        "name" => $expert["user_firstname"] . ' ' . $expert["user_lastname"],
+                "username" => $expert["user_username"]));
+	} else {
+		array_push($expert_fullnames, array(
+		        "name" => $expert["user_firstname"] . ' ' . $expert["user_lastname_prefix"] . ' ' . $expert["user_lastname"],
+                "username" => $expert["user_username"]));
+	}
+
+}
+
+
 // Deadline
 $date_letter_dutch = date('d-m-Y', strtotime($a['project_date_letter']));
 $date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
@@ -92,15 +110,19 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 
                         </div>
                     </div>
+
                     <h6 class="text-secondary mt-3">Experts</h6>
-                    <?php foreach ($assigned_experts as $expert) { ?>
-                        <div class="avatar avatar-md">
-                            <img class="rounded-circle"
-                                 src="assets/img/tenNoord.png"
-                                 alt="">
-                            <p class="text-mini"><?= $expert['expert_name'] ?></p>
-                        </div>
-                    <?php } // end foreach ?>
+                    <div class="row">
+                        <?php foreach ($expert_fullnames as $item) { ?>
+                            <div class="avatar avatar-md col-sm">
+                                <img class="rounded-circle"
+                                     src="assets/img/<?=$item['username']?>.jpg"
+                                     alt="">
+                                <p class="text-mini"><?= $item['name'] ?></p>
+                            </div>
+                        <?php } // end foreach ?>
+                    </div>
+
                 </div>
             </div>
             <div class="row justify-content-center">
