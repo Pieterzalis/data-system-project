@@ -401,6 +401,10 @@ hr.color-white {
     object-fit: cover;
 }
 
+.avatar-md, .avatar {
+    min-width:95px;
+}
+
 .avatar.avatar-md img {
     width: 45px;
     height: 45px;
