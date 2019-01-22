@@ -85,7 +85,7 @@ function prepareDataforDB($data)
     $date_int = (int)$date_english;
     $date = date("Y-m-d", $date_int);
 
-    $questions = getQuestions($data->questions);
+    $questions = $data->questions;
 
     $keywords = $data->keywords;
 
@@ -244,22 +244,3 @@ function getParty($string)
 
     return $str;
 }
-
-function getQuestions($questions){
-
-    // Strip 'vraag 1; vraag 2; etc from question
-    $questions_stripped = array();
-
-    $i = 1;
-    foreach ($questions as $question) {
-
-        // Get position of question number
-        $strpos_number = strpos($question, ''.$i.'') + 2; // Add 2 to include the number and space after it
-        array_push($questions_stripped, (substr($question, $strpos_number)));
-
-        $i++;
-    }
-
-    return $questions_stripped;
-}
-

@@ -20,29 +20,23 @@ def read_pdf(target):
 		text = page.extractText()
 		full_text += text + ' '
 	return full_text
-	
-def read_docx(target):
-	text = docx2txt.process(target)
-	return text
-	
-def remove_footnotes(text):
-	return text
 
 def read_file(target):
 	extension = target.rpartition('.')[2]
 	if extension == 'pdf':
 		text = read_pdf(target)
 	elif extension == 'docx':
-		text = read_docx(target)
+		text = docx2txt.process(target)
 	else:
 		text = ''
-	return remove_footnotes(text)
+	#print(text)
+	return text
 
 
 def doc_to_metadata(doc):
-	print(doc.split('\n')[0].strip())
+	#print(doc.split('\n')[0].strip())
 	metadict = {} # dictionary with metadata
-	doc = doc.replace('Vragen door', 'Vragen van').replace('\naan', ' aan ').replace('aan\n', ' aan ').replace('inzake', 'over').replace('\n', ' ')
+	doc = doc.replace('Vragen door', 'Vragen van').replace('\naan', ' aan ').replace('aan\n', ' aan ').replace('inzake', 'over').replace('\n', ' ').replace('\r','')
 	metadict['indiener'] = doc.split('Vragen van')[1].split('aan')[0].replace('de leden','').replace('het lid','').replace('lid','').replace('leden','').strip()
 	if ',' in metadict['indiener']:
 		metadict['indiener'] = metadict['indiener'].split(',')[0].strip()	
@@ -56,27 +50,64 @@ def doc_to_metadata(doc):
 	metadict['date'] = doc.replace('Ingezonden','ingezonden').split('ingezonden')[1].split(')')[0].strip()
 	return metadict
 
-
+def remove_footnotes(text):
+	#example pdf with multiple pages with footnotes: 2019D00032_%202019-1-02.
+	#example pdf with footnote: 2018D50780_ 2018-10-24
+	text = re.sub(r'-\n+','',text) # handle dashes breaking up words at end of line
+	text = text.replace('\n',' ')
+	words = text.split(' ')
+	all_removed = False
+	footerstart = -1
+	footerend = -1
+	for i in range(len(words)):
+		word = words[i]
+		if len(word) > 1 and word[-1].isdigit() and not word[-2].isdigit() and 'CO2' not in word:
+			words[i] = words[i][:-1]
+			print(word)
+		if len(word) > 1 and word[-1] == ')' and word[0].isdigit(): #remove footnote numbers in doc files
+			print(word)
+			words[i] = ' '
+			#print(words)
+	while not all_removed:
+		for i in range(len(words)):
+			word = words[i]
+			if footerstart is -1 and 'kv-tk' in word: #Start of a footer
+				footerstart = i
+			# Start of a footnote section, which is followed by the footer proper
+			elif len(word) > 1 and 'Vergaderjaar' not in word and word[0].isdigit() and word[1].isalpha(): #this assumes that there are no more than 9 footnotes
+				footerstart = i
+			# Always at the end of page
+			elif len(word) > 0 and 'Vragen' in word and word[-1].isdigit():
+				footerend = i
+				words = words[:footerstart] + words[footerend+1:] #cut out the words of the footer
+				footerstart = -1
+				footerend = -1
+				break
+		all_removed = True	
+	text = ''
+	for word in words:
+		text += word + ' '
+	text = text.strip()
+	print(text)
+	return text
+	
 # Parse questions from file text
 def doc_to_questions(text):
-	# To do: Handle footnotes ending up in questions crossing the page boundary. e.g. 2018D50780_ 2018-10-24.
-	# Proposed solution: first and last of the words to remove seem always to contain both letters and number,
-	# use that to remove them.
 	# To do: special characters (e met puntjes)
-	# To do: numbers footnotes: Remove every number that is directly attached to the end of a non-number
+	# To do: numbers of footnotes: Remove every number that is like 1)
+	# For doc: Footnotes are all separate paragraph, no need to filter out
+	text = remove_footnotes(text)
 	questions = []
 	if 'Vraag ' in text: #for pdf files
-		questions = text.split('Vraag ')
-		questions = questions[1:]
+		questions = [result[2:] for result in text.split('Vraag ')] #[2:] to remove 
+		questions = questions[1:] #remove section before first occurrence of Vraag, as that is not a question
 	else: #for doc files
-		paragraphs = text.split('\n')
-		questions = [paragraph for paragraph in paragraphs if '? ' in paragraph]
+		paragraphs = text.split('  ')
+		questions = [paragraph for paragraph in paragraphs if '?' in paragraph]
 	for i in range(len(questions)):
 		question = questions[i]
 		question = question[:question.rfind('?')]
-		question = re.sub(r'-\n','',question) # handle dashes breaking up words at end of line
-		question = re.sub(r'\n',' ',question)
-		question = 'Vraag ' + question + '?'
+		question = question + '?'
 		question = re.sub(r'\s+', ' ', question)
 		questions[i] = question
 	return questions
@@ -90,7 +121,6 @@ def tf_idf_keywords(text, bow, dictionary):
 	sorted_tfidf_weights = sorted(tfidf_weights, key=lambda w: w[1], reverse=True) # sort by value
 	keywords = []
 	for term_id, weight in sorted_tfidf_weights[:5]:
-		print(str(dictionary.get(term_id)), weight)
 		keywords.append(str(dictionary.get(term_id)))
 	return keywords
 
@@ -125,7 +155,7 @@ def questions_to_keywords(questions, per_question):
 
 def main(argv):
 	target = argv[1].replace('%26', '&').replace('%20', ' ')
-	print(target)
+#	print(target)
 	text = read_file(target)
 
 	metadata = doc_to_metadata(text)
