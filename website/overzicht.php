@@ -15,20 +15,7 @@
     include_once("templates/template_head.php");
     ?>
     <style>
-        .btn-outline-light-trans{
-        border-color: #ffffff55;
-    }
-        .btn-outline-light-trans:hover,
-        .btn-outline-light-trans:focus{
-        border-color: #ffffff55 !important;
-        background: #ffffff22 !important;
-        color: #fff !important
-    }
-        .btn-outline-light-trans:active{
-        border-color: #ffffff77 !important;
-        background: #ffffff11 !important;
-        color: #fff !important
-    }
+
     </style>
     <script>
         // Load jquery calls after page load.
@@ -55,6 +42,7 @@
             back();
         }
         function jump(pageId) {
+            $('.page-title')[0].innerText='Kamervraag';
             // indexPage
             var indexNavPage = $('#indexPage');
             // childPage
@@ -182,12 +170,12 @@
                                                 <input type="text"
                                                        class="form-control"
                                                        id="Search" name="Search" value=""
-                                                       placeholder="Search Keyword">
+                                                       placeholder="Zoek op projectnaam">
                                             </div>
                                         </div>
                                         <div class="text-center py-3 px-2">
                                             <button type="button"
-                                                    class="btn btn-outline-light btn-outline-light-trans shadow"
+                                                    class="btn btn-primary shadow bluebutton"
                                                     onclick="search()">
                                                 <i class="fa fa-home"
                                                    aria-hidden="true"></i>Jouw Kamervragen

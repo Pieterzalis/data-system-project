@@ -11,6 +11,66 @@
     /*box-shadow: 0 2px 20px -5px rgba(0,0,0,1);*/
 }
 
+.project-info .row {
+    padding-bottom: 10px;
+}
+
+.project-info div{
+    padding-bottom: 10px;
+}
+
+.project-info p{
+    margin-bottom: 5px;
+}
+
+.kamervragencard{
+    border: none;
+}
+
+.kamervragencard a{
+    text-decoration: none;
+}
+
+.kamervragencardbody{
+    padding: 3px 10px;
+    box-shadow: 0 2px 15px -5px rgba(0, 0, 0, 1);
+    border: 1px solid #fff;
+}
+
+.kamervragennum{
+    font-size: 0.75rem;
+}
+
+.kamervragennum fa-angle-right, .kamervragennum fa{
+    float: right;
+    font-size: 20px;
+}
+
+.btn-outline-light-trans{
+    border-color: #ffffff55;
+}
+
+.bluebutton{
+    background-color: #154274;
+    border: solid 2px #3F648D;
+}
+
+.bluebutton:hover{
+    background-color: #3F648D;
+    border: solid 2px #3F648D;
+}
+
+.bluebutton:pressed, bluebutton:active, bluebutton:focus, bluebutton:target{
+    background-color: #3F648D;
+}
+
+.bluebutton:focus{
+    box-shadow: none;
+}
+
+.fa-home{
+    margin-right: 10px;
+}
 
 .partylogo{
     border: solid;
@@ -35,6 +95,8 @@
 
 .questions{
     background-color: #3f648d;
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
 .demopage {
@@ -141,7 +203,9 @@ hr.color-white {
 
 .people-list {}
 
-.people-list .avatar {}
+.people-list .avatar {
+    
+}
 
 .people-list .avatar img {
     width: 45px;
@@ -405,9 +469,6 @@ hr.color-white {
     object-fit: cover;
 }
 
-.avatar-md, .avatar {
-    min-width:95px;
-}
 
 .avatar.avatar-md img {
     width: 45px;

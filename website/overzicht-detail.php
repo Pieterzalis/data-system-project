@@ -59,25 +59,24 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
         <!-- row-info -->
         <div class="project-info">
             <div>
-                <p><Strong><?=$a['question_title']?></Strong></p>
-                <p>Project Code: <Strong><?= $a['project_code'] ?></Strong></p>
-                <p>Deadline: <Strong><?= $date_deadline ?></p>
+                <h4><Strong><?=$a['question_title']?></Strong></h4>
+                <p>Deadline: <Strong><?= $date_deadline ?></Strong></p>
             </div>
            <div class="row justify-content-md-center">
                 <div class="col-sm col-md-6 col-lg-4">
 
                     <h6 class="text-secondary">Onderdeel van kamervragen:</h6>
-                        <div class="card">
-                            <div class="card-body">
-                                <a href="overzicht-detail-keyword.html"
-                                   class="w-100 text-dark a-hover-none">
-                                    <p><?= $a['project_title']?></p>
-                                    <i class="fa fa-angle-right text-dark"
+                        <div class="card kamervragencard">
+                            <a href="overzicht-detail-keyword.html" class="w-100 text-dark a-hover-none">
+                            <div class="card-body kamervragencardbody">
+                                    <span class="kamervragennum">Kamervragen #: <Strong><?= $a['project_code'] ?></Strong></span>
+                                    <h5><strong><?= $a['project_title']?></strong></h5>
+                                    <i class="fa fa-angle-right fa-lg"
                                        style="
                                        float:
                                        right"
                                        aria-hidden="true"></i>
-                                </a>
+                              
                                 <div class="mb-0">
                                     <strong class="text-secondary">Keywords</strong>
 
@@ -91,6 +90,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 									?>
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                 </div>
@@ -127,7 +127,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
             </div>
             <div class="row justify-content-center">
                 <div class="col-sm col-md-12">
-                    <button type="button" class="btn btn-primary" onclick="location.href='search_engine.php'"><i class="fa fa-search"
+                    <button type="button" class="btn btn-primary bluebutton" onclick="location.href='search_engine.php'"><i class="fa fa-search"
                            aria-hidden="true"></i>
                         Zoek informatie
                     </button>
