@@ -19,14 +19,11 @@ function saveQuestionArray($questions, $project_id) {
 	// Loop through questions array, do Insert query for each
 	$questions_ids = array();
 
-	$i = 0;
 	foreach($questions as $question) {
-		$i++;
 
 		DB::insert('question', array(
 			'question_project_id' => $project_id,
-			'question_title' => $question,
-			'question_number' => $i
+			'question_title' => $question
 		));
 
         // Get the inserted question ID, needed to insert questions
@@ -35,7 +32,6 @@ function saveQuestionArray($questions, $project_id) {
         // Get the inserted question_id and add to return array
         array_push($questions_ids, DB::insertId());
 
-        // TODO do this on seperate question assign page
         // NOTE also insert questions_has_experts to simulate the assigning experts process
         DB::insert('question_has_experts', array(
             'user_id' => 2,

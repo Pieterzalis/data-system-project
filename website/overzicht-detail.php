@@ -15,10 +15,28 @@ $a = DB::queryOneRow("SELECT a.question_id,
               LEFT JOIN parliamentmember pm ON b.project_submitter = pm.parliamentmember_id
               LEFT JOIN party pa ON pm.parliamentmember_party_id = pa.party_id
               WHERE a.question_id=".$id." ");
-$assigned_experts = DB::query("SELECT exp.user_id, REPLACE(CONCAT(u.user_firstname, ' ', u.user_lastname_prefix, ' ', u.user_lastname), ' ', ' ') as expert_name 
+
+$assigned_experts = DB::query("SELECT exp.user_id, u.user_firstname, u.user_lastname_prefix, u.user_lastname, u.user_username 
                               FROM question_has_experts exp 
                               INNER JOIN `user` u ON exp.user_id = u.user_id 
                               WHERE exp.question_id = ".$id." ");
+
+$expert_fullnames = array();
+foreach ($assigned_experts as $expert){
+
+	if (is_null($expert["user_lastname_prefix"])) {
+		array_push($expert_fullnames, array(
+		        "name" => $expert["user_firstname"] . ' ' . $expert["user_lastname"],
+                "username" => $expert["user_username"]));
+	} else {
+		array_push($expert_fullnames, array(
+		        "name" => $expert["user_firstname"] . ' ' . $expert["user_lastname_prefix"] . ' ' . $expert["user_lastname"],
+                "username" => $expert["user_username"]));
+	}
+
+}
+
+
 // Deadline
 $date_letter_dutch = date('d-m-Y', strtotime($a['project_date_letter']));
 $date_deadline = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
@@ -41,25 +59,24 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
         <!-- row-info -->
         <div class="project-info">
             <div>
-                <p><Strong><?=$a['question_title']?></Strong></p>
-                <p>Project Code: <Strong><?= $a['project_code'] ?></Strong></p>
-                <p>Deadline: <Strong><?= $date_deadline ?></p>
+                <h4><Strong><?=$a['question_title']?></Strong></h4>
+                <p>Deadline: <Strong><?= $date_deadline ?></Strong></p>
             </div>
            <div class="row justify-content-md-center">
                 <div class="col-sm col-md-6 col-lg-4">
 
-                    <h6 class="text-secondary">Project</h6>
-                        <div class="card">
-                            <div class="card-body">
-                                <a href="overzicht-detail-keyword.php"
-                                   class="w-100 text-dark a-hover-none">
-                                    <p><?= $a['project_title']?></p>
-                                    <i class="fa fa-angle-right text-dark"
+                    <h6 class="text-secondary">Onderdeel van kamervragen:</h6>
+                        <div class="card kamervragencard">
+                            <a href="overzicht-detail-keyword.html" class="w-100 text-dark a-hover-none">
+                            <div class="card-body kamervragencardbody">
+                                    <span class="kamervragennum">Kamervragen #: <Strong><?= $a['project_code'] ?></Strong></span>
+                                    <h5><strong><?= $a['project_title']?></strong></h5>
+                                    <i class="fa fa-angle-right fa-lg"
                                        style="
                                        float:
                                        right"
                                        aria-hidden="true"></i>
-                                </a>
+                              
                                 <div class="mb-0">
                                     <strong class="text-secondary">Keywords</strong>
 
@@ -73,12 +90,13 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 									?>
                                 </div>
                             </div>
+                            </a>
                         </div>
 
                 </div>
                 <div class="col-sm col-md-6 col-lg-4">
 
-                    <h6 class="text-secondary">Indiener</h6>
+                    <h6 class="text-secondary grey-secondary">Indiener:</h6>
                     <div class="card">
                         <div class="card-body w-100 d-flex align-items-center">
                                 <div class="flex-none avatar avatar-md">
@@ -92,20 +110,24 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 
                         </div>
                     </div>
+
                     <h6 class="text-secondary mt-3">Experts</h6>
-                    <?php foreach ($assigned_experts as $expert) { ?>
-                        <div class="avatar avatar-md">
-                            <img class="rounded-circle"
-                                 src="assets/img/tenNoord.png"
-                                 alt="">
-                            <p class="text-mini"><?= $expert['expert_name'] ?></p>
-                        </div>
-                    <?php } // end foreach ?>
+                    <div class="row">
+                        <?php foreach ($expert_fullnames as $item) { ?>
+                            <div class="avatar avatar-md col-sm">
+                                <img class="rounded-circle"
+                                     src="assets/img/<?=$item['username']?>.jpg"
+                                     alt="">
+                                <p class="text-mini"><?= $item['name'] ?></p>
+                            </div>
+                        <?php } // end foreach ?>
+                    </div>
+
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-sm col-md-12">
-                    <button type="button" class="btn btn-primary" onclick="location.href='search_engine.php'"><i class="fa fa-search"
+                    <button type="button" class="btn btn-primary bluebutton" onclick="location.href='search_engine.php'"><i class="fa fa-search"
                            aria-hidden="true"></i>
                         Zoek informatie
                     </button>

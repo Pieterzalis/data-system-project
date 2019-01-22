@@ -78,8 +78,7 @@ function getAssignedQuestionsHtml($user_id) {
                         REPLACE(CONCAT(parliamentmember_firstname, ' ', parliamentmember_lastname_prefix, ' ', parliamentmember_lastname), '  ', ' ') AS indiener_fullname, 
                         party_name,
                         question_title,
-                        question_id,
-                        question_number
+                        question_id
                         FROM question 
                         INNER JOIN project ON question_project_id = project_id
                         INNER JOIN parliamentmember on project_submitter = parliamentmember_id
@@ -88,7 +87,6 @@ function getAssignedQuestionsHtml($user_id) {
                                 SELECT question_id FROM question_has_experts
                                 WHERE user_id = $user_id
                         )
-                        ORDER BY project_id DESC
     "); // End Query
 
     // Now build a project card for every unique project
@@ -172,7 +170,7 @@ function getAssignedQuestionsHtml($user_id) {
                                     <ul class=\"my-list-group container-fluid\">
                                         <a class=\"child-item\" \">
                                         <li onclick=\"changePage(this,{pageId:" . $q_item['question_id'] . "})\" class=\"my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center questions\">
-                                            <div class=\"col-3 col-md-auto pr-sm-2 pr-md-3\">#" . $q_item['question_number'] . "</div>
+                                            <div class=\"col-3 col-md-auto pr-sm-2 pr-md-3\">#" . $i . "</div>
                                             <div class=\"col-9 col-md px-sm-2 px-md-3 border-md-right\">" . $q_item['question_title'] . "</div>
                                             <div class=\"col-9 col-md-auto px-sm-2 px-md-3\">
                                                 <span class=\"fa-stack\">
