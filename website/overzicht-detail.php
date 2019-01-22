@@ -16,7 +16,7 @@ $a = DB::queryOneRow("SELECT a.question_id,
               LEFT JOIN party pa ON pm.parliamentmember_party_id = pa.party_id
               WHERE a.question_id=".$id." ");
 
-$assigned_experts = DB::query("SELECT exp.user_id, u.user_firstname, u.user_lastname_prefix, u.user_lastname, u.user_username 
+$assigned_experts = DB::query("SELECT exp.user_id, u.user_firstname, u.user_lastname_prefix, u.user_lastname, u.user_usernamex 
                               FROM question_has_experts exp 
                               INNER JOIN `user` u ON exp.user_id = u.user_id 
                               WHERE exp.question_id = ".$id." ");

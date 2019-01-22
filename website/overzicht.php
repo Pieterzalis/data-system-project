@@ -10,7 +10,7 @@
 <html>
 
 <head>
-    <title>Overzicht</title>
+    <title>Ministerie</title>
     <?php
     include_once("templates/template_head.php");
     ?>
@@ -98,19 +98,17 @@
                                 <img src="assets/img/logo.png"></div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Overzicht</h3>
+                            <h3 class="page-title">Jouw Kamervragen</h3>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
                             <div class="options">
                                 <!-- UserName -->
-                                <a href="">
                                     <div class="avatar">
                                         <img class="rounded-circle"
                                              src="assets/img/<?=$user_check?>.jpg"
                                              alt="">
                                     </div>
                                     <?= $user_fullname ?>
-                                </a>
                                 <!-- sign-out -->
                                 <a href="logout.php"
                                    class="ml-3 mr-3">
@@ -192,9 +190,7 @@
                                                     class="btn btn-outline-light btn-outline-light-trans shadow"
                                                     onclick="search()">
                                                 <i class="fa fa-home"
-                                                   aria-hidden="true"></i>
-
-                                                Jouw Kamervragen
+                                                   aria-hidden="true"></i>Jouw Kamervragen
                                             </button>
                                             
                                         </div>
