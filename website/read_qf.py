@@ -54,7 +54,7 @@ def remove_footnotes(text):
 	#example pdf with multiple pages with footnotes: 2019D00032_%202019-1-02.
 	#example pdf with footnote: 2018D50780_ 2018-10-24
 	text = re.sub(r'-\n+','',text) # handle dashes breaking up words at end of line
-	text = text.replace('\n',' ')
+	text = text.replace('\n',' ').replace('\xa0',' ')
 	words = text.split(' ')
 	all_removed = False
 	footerstart = -1
@@ -63,11 +63,8 @@ def remove_footnotes(text):
 		word = words[i]
 		if len(word) > 1 and word[-1].isdigit() and not word[-2].isdigit() and 'CO2' not in word:
 			words[i] = words[i][:-1]
-			print(word)
 		if len(word) > 1 and word[-1] == ')' and word[0].isdigit(): #remove footnote numbers in doc files
-			print(word)
 			words[i] = ' '
-			#print(words)
 	while not all_removed:
 		for i in range(len(words)):
 			word = words[i]
@@ -88,7 +85,6 @@ def remove_footnotes(text):
 	for word in words:
 		text += word + ' '
 	text = text.strip()
-	print(text)
 	return text
 	
 # Parse questions from file text
