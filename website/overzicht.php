@@ -1,11 +1,9 @@
 <?php
     session_start();
-
     if(!isset($_SESSION['login_id'])) {
-	    header("location: login.php");
-	    exit();
+        header("location: login.php");
+        exit();
     }
-
     $user_check = $_SESSION['login_username'];
     $user_fullname = $_SESSION['login_fullname'];
     $user_id = $_SESSION['login_id'];
@@ -16,12 +14,25 @@
 <html>
 
 <head>
-    <title>Ministerie</title>
+    <title>Overzicht</title>
     <?php
     include_once("templates/template_head.php");
     ?>
     <style>
-
+        .btn-outline-light-trans{
+        border-color: #ffffff55;
+    }
+        .btn-outline-light-trans:hover,
+        .btn-outline-light-trans:focus{
+        border-color: #ffffff55 !important;
+        background: #ffffff22 !important;
+        color: #fff !important
+    }
+        .btn-outline-light-trans:active{
+        border-color: #ffffff77 !important;
+        background: #ffffff11 !important;
+        color: #fff !important
+    }
     </style>
     <script>
         // Load jquery calls after page load.
@@ -48,8 +59,8 @@
             back();
         }
         function jump(pageId) {
-            $('.page-title')[0].innerText='Kamervraag';
-            // indexPage
+             $('.page-title')[0].innerText='Project';
+			// indexPage
             var indexNavPage = $('#indexPage');
             // childPage
             var childNavPage = $('#childPage');
@@ -92,19 +103,21 @@
                                 <img src="assets/img/logo.png"></div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Jouw Kamervragen</h3>
+                            <h3 class="page-title">Overzicht</h3>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
                             <div class="options">
                                 <!-- UserName -->
+                                <a href="">
                                     <div class="avatar">
                                         <img class="rounded-circle"
-                                             src="assets/img/<?=$user_check?>.jpg"
+                                             src="assets/img/woman.jpg"
                                              alt="">
                                     </div>
-                                    <?= $user_fullname ?>
+                                    Francine ten Noord
+                                </a>
                                 <!-- sign-out -->
-                                <a href="logout.php"
+                                <a href="login.php"
                                    class="ml-3 mr-3">
                                     <i class="fa fa-sign-out"
                                        aria-hidden="true"></i>
@@ -176,15 +189,17 @@
                                                 <input type="text"
                                                        class="form-control"
                                                        id="Search" name="Search" value=""
-                                                       placeholder="Zoek op projectnaam">
+                                                       placeholder="Search Keyword">
                                             </div>
                                         </div>
                                         <div class="text-center py-3 px-2">
                                             <button type="button"
-                                                    class="btn btn-primary shadow bluebutton"
+                                                    class="btn btn-outline-light btn-outline-light-trans shadow"
                                                     onclick="search()">
                                                 <i class="fa fa-home"
-                                                   aria-hidden="true"></i>Jouw Kamervragen
+                                                   aria-hidden="true"></i>
+
+                                                Jouw Kamervragen
                                             </button>
                                             
                                         </div>
@@ -193,10 +208,30 @@
                                         <!-- card -->
 										<?php
 										//#从数据库取出所有project
-										$sql = "select project_id,project_title from project order by project_id desc";
+										$sql = "SELECT DISTINCT project_id,project_title 
+                                                FROM question 
+                                                INNER JOIN project ON question_project_id = project_id 
+                                                WHERE question_id IN ( 
+                                                    SELECT question_id 
+                                                    FROM question_has_experts 
+                                                    WHERE user_id = '$user_id' 
+                                                )
+                                                ORDER BY project_id DESC";
+
+
 										if(isset($_POST['Search']))//#如果有搜索就用这个sql来查project
-											$sql = "select project_id,project_title from project where project_title like '%{$_POST['Search']}%' order by project_id desc";
+											$sql = "SELECT DISTINCT project_id,project_title 
+                                                    FROM question 
+                                                    INNER JOIN project ON question_project_id = project_id 
+                                                    WHERE question_id IN ( 
+                                                        SELECT question_id 
+                                                        FROM question_has_experts 
+                                                        WHERE user_id = '$user_id' 
+                                                    )
+                                                    and project_title like '%{$_POST['Search']}%' 
+                                                    order by project_id desc";
 										$a = DB::query($sql);
+
 										foreach($a as $v){//#显示project列表
 										?>
                                         <div class="card m-2">
@@ -228,7 +263,14 @@
                                                 <div class="card-body">
 													<?php
 													//#project下的各个问题
-													$aa = DB::query("select * from question where question_project_id={$v['project_id']} order by question_id desc");
+													$aa = DB::query("SELECT * FROM question 
+                                                                     WHERE question_id IN ( 
+                                                                         SELECT question_id 
+                                                                         FROM question_has_experts 
+                                                                         WHERE user_id = '$user_id'  
+                                                                     ) 
+                                                                     AND question_project_id={$v['project_id']} 
+                                                                     ORDER BY question_id DESC ");
 													foreach($aa as $kk=>$vv){
 													?>
                                                     <!-- child-item -->
@@ -278,7 +320,7 @@
                         <div class="col-sm mx-md-3 mx-ld-5">
                             <div class="jq-question-assigned-content">
                             <?php
-                                getAssignedQuestionsHtml($user_id)
+                                getAssignedQuestionsHtml(2)
 									
                             ?>
                             </div>
