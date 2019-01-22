@@ -1,4 +1,13 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['login_id'])) {
+        header("location: login.php");
+        exit();
+    }
+    $user_check = $_SESSION['login_username'];
+    $user_fullname = $_SESSION['login_fullname'];
+    $user_id = $_SESSION['login_id'];
+
     require_once 'database/Model_Project.php';
 ?>
 <!DOCTYPE html>
