@@ -23,27 +23,35 @@
     margin-bottom: 5px;
 }
 
-.kamervragencard{
+.customcard{
     border: none;
 }
 
-.kamervragencard a{
+.customcard a{
     text-decoration: none;
 }
 
-.kamervragencardbody{
+.customcardpadding{
     padding: 3px 10px;
+}
+
+.customcardbody{
+    box-shadow: none;
+    border: 1px solid #154274;
+    border-radius: 5px;
+}
+
+.customcardshadow:hover{
+    box-shadow: none;
     box-shadow: 0 2px 15px -5px rgba(0, 0, 0, 1);
-    border: 1px solid #fff;
 }
 
 .kamervragennum{
     font-size: 0.75rem;
 }
 
-.kamervragennum fa-angle-right, .kamervragennum fa{
-    float: right;
-    font-size: 20px;
+.sourcescard{
+    border: 1px solid #154274;
 }
 
 .btn-outline-light-trans{
