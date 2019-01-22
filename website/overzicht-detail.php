@@ -66,9 +66,9 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                 <div class="col-sm col-md-6 col-lg-4">
 
                     <h6 class="text-secondary">Onderdeel van kamervragen:</h6>
-                        <div class="card kamervragencard">
+                        <div class="card customcard customcardpadding">
                             <a href="overzicht-detail-keyword.html" class="w-100 text-dark a-hover-none">
-                            <div class="card-body kamervragencardbody">
+                            <div class="card-body customcardbody customcardshadow">
                                     <span class="kamervragennum">Kamervragen #: <Strong><?= $a['project_code'] ?></Strong></span>
                                     <h5><strong><?= $a['project_title']?></strong></h5>
                                     <i class="fa fa-angle-right fa-lg"
@@ -97,8 +97,8 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                 <div class="col-sm col-md-6 col-lg-4">
 
                     <h6 class="text-secondary grey-secondary">Indiener:</h6>
-                    <div class="card">
-                        <div class="card-body w-100 d-flex align-items-center">
+                    <div class="card customcard">
+                        <div class="card-body w-100 d-flex align-items-center customcardbody">
                                 <div class="flex-none avatar avatar-md">
                                     <h5 style="display:flex; align-items: center; margin-bottom: 0;"><?php echo $a['party_name'] ?></h5>
                                 </div>
@@ -136,12 +136,9 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
         </div>
 
         <!-- row-table -->
-        <div class="project-table mt-3">
-            <p class="m-3" style="padding-top:8px;">Kennisbank</p>
-            <div class="card-list">
-
+            <h4 class="m-3" style="padding-top:8px;">Kennisbank</h4>
                 <?php if (empty($sources)) { ?>
-                    <div class="card mb-3 text-left">
+                    <div class="card mb-3 text-left sourcescard">
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="flex-1 title">
@@ -152,7 +149,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                     </div>
                 <?php } else { ?>
                     <?php foreach ($sources as $source) { ?>
-                        <div class="card mb-3 text-left">
+                        <div class="card mb-3 text-left sourcescard">
                             <div class="card-body">
                                 <div class="d-flex">
                                     <div class="flex-1 title">
@@ -173,7 +170,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                                         <br>
                                         Datum: <?= $source['source_date_published'] ?>
                                     </div>
-                                    <div class="col-md content"><?= $source['source_snippet']  ?></div>
+                                    <div class="col-md content"><?= $source['source_snippet']  ?>...</div>
                                 </div>
                             </div>
                         </div>
@@ -206,9 +203,6 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
-
-            </div>
-        </div>
     </div>
 
 </body>
