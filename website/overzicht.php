@@ -193,9 +193,28 @@
                                         <!-- card -->
 										<?php
 										//#从数据库取出所有project
-										$sql = "select project_id,project_title from project order by project_id desc";
+										$sql = "SELECT DISTINCT project_id,project_title 
+                                                FROM question 
+                                                INNER JOIN project ON question_project_id = project_id 
+                                                WHERE question_id IN ( 
+                                                    SELECT question_id 
+                                                    FROM question_has_experts 
+                                                    WHERE user_id = '$user_id' 
+                                                )
+                                                ORDER BY project_id DESC";
+
+
 										if(isset($_POST['Search']))//#如果有搜索就用这个sql来查project
-											$sql = "select project_id,project_title from project where project_title like '%{$_POST['Search']}%' order by project_id desc";
+											$sql = "SELECT DISTINCT project_id,project_title 
+                                                    FROM question 
+                                                    INNER JOIN project ON question_project_id = project_id 
+                                                    WHERE question_id IN ( 
+                                                        SELECT question_id 
+                                                        FROM question_has_experts 
+                                                        WHERE user_id = '$user_id' 
+                                                    )
+                                                    and project_title like '%{$_POST['Search']}%' 
+                                                    order by project_id desc";
 										$a = DB::query($sql);
 										foreach($a as $v){//#显示project列表
 										?>
@@ -228,7 +247,14 @@
                                                 <div class="card-body">
 													<?php
 													//#project下的各个问题
-													$aa = DB::query("select * from question where question_project_id={$v['project_id']} order by question_id desc");
+													$aa = DB::query("SELECT * FROM question 
+                                                                     WHERE question_id IN ( 
+                                                                         SELECT question_id 
+                                                                         FROM question_has_experts 
+                                                                         WHERE user_id = '$user_id'  
+                                                                     ) 
+                                                                     AND question_project_id={$v['project_id']} 
+                                                                     ORDER BY question_id DESC ");
 													foreach($aa as $kk=>$vv){
 													?>
                                                     <!-- child-item -->
