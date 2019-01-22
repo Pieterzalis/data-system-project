@@ -4,12 +4,31 @@ require_once 'database/Model_Core.php';
 require_once 'database/Model_Source.php';
 
 #data from front-end:
-$keywords = array("grond", "hergebruik", "betrokken", "handen", "inzichtelijk");
-$fromdate = '2010';
-$todate = '2012';
-$question_id = "2";
+#$keywords = array("grond", "hergebruik", "betrokken", "handen", "inzichtelijk");
+#$fromdate = '2010';
+#$todate = '2012';
+#$question_id = "2";
 
-gatherInfo($question_id, $keywords, $fromdate, $todate);
+$question_id = null;
+$keywords = null;
+$fromdate = null;
+$todate = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	if (isset($_POST['question_id'])) {
+		$question_id = $_POST['question_id'];
+	} 
+	if (isset($_POST['keywords'])) {
+		$keywords = json_decode($_POST['keywords']);
+	}
+	if (isset($_POST['fromdate'])) {
+		$fromdate = $_POST['fromdate'];
+	}
+	if (isset($_POST['todate'])) {
+		$todate = $_POST['todate'];
+	}
+	gatherInfo($question_id, $keywords, $fromdate, $todate);
+}
 
 function gatherInfo($question_id, $keywords, $fromdate, $todate){
 	$keywordstring = "";
@@ -24,11 +43,12 @@ function gatherInfo($question_id, $keywords, $fromdate, $todate){
     exec("python " . $python_path . " " . $data . "", $output, $ret_code);
 	
     $output_data = end($output);
+	//$output_data = "Just for testing. Not actually searching to save time and news api requests";
     if ($output_data === false) {
         $output_data = null;
         echo 'Error: Python returned no output';
     } else {
-        $data = json_decode($output_data);
+		$data = json_decode($output_data);
         saveSources($data, $question_id);
 		returnHTMLResponse($data);
     } 
