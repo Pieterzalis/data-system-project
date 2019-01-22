@@ -16,7 +16,7 @@ $a = DB::queryOneRow("SELECT a.question_id,
               LEFT JOIN party pa ON pm.parliamentmember_party_id = pa.party_id
               WHERE a.question_id=".$id." ");
 
-$assigned_experts = DB::query("SELECT exp.user_id, u.user_firstname, u.user_lastname_prefix, u.user_lastname, u.user_usernamex 
+$assigned_experts = DB::query("SELECT exp.user_id, u.user_firstname, u.user_lastname_prefix, u.user_lastname, u.user_username 
                               FROM question_has_experts exp 
                               INNER JOIN `user` u ON exp.user_id = u.user_id 
                               WHERE exp.question_id = ".$id." ");
@@ -66,7 +66,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
            <div class="row justify-content-md-center">
                 <div class="col-sm col-md-6 col-lg-4">
 
-                    <h6 class="text-secondary">Project</h6>
+                    <h6 class="text-secondary">Onderdeel van kamervragen:</h6>
                         <div class="card">
                             <div class="card-body">
                                 <a href="overzicht-detail-keyword.html"
@@ -96,7 +96,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                 </div>
                 <div class="col-sm col-md-6 col-lg-4">
 
-                    <h6 class="text-secondary">Indiener</h6>
+                    <h6 class="text-secondary grey-secondary">Indiener:</h6>
                     <div class="card">
                         <div class="card-body w-100 d-flex align-items-center">
                                 <div class="flex-none avatar avatar-md">
