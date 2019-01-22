@@ -1,27 +1,29 @@
 <?php
-    session_start();
-
-    if(!isset($_SESSION['login_id'])) {
-	    header("location: login.php");
-	    exit();
-    }
-
-    $user_check = $_SESSION['login_username'];
-    $user_fullname = $_SESSION['login_fullname'];
-    $user_id = $_SESSION['login_id'];
-
     require_once 'database/Model_Project.php';
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Ministerie</title>
+    <title>Overzicht</title>
     <?php
     include_once("templates/template_head.php");
     ?>
     <style>
-
+        .btn-outline-light-trans{
+        border-color: #ffffff55;
+    }
+        .btn-outline-light-trans:hover,
+        .btn-outline-light-trans:focus{
+        border-color: #ffffff55 !important;
+        background: #ffffff22 !important;
+        color: #fff !important
+    }
+        .btn-outline-light-trans:active{
+        border-color: #ffffff77 !important;
+        background: #ffffff11 !important;
+        color: #fff !important
+    }
     </style>
     <script>
         // Load jquery calls after page load.
@@ -48,8 +50,8 @@
             back();
         }
         function jump(pageId) {
-            $('.page-title')[0].innerText='Kamervraag';
-            // indexPage
+             $('.page-title')[0].innerText='Project';
+			// indexPage
             var indexNavPage = $('#indexPage');
             // childPage
             var childNavPage = $('#childPage');
@@ -92,19 +94,21 @@
                                 <img src="assets/img/logo.png"></div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Jouw Kamervragen</h3>
+                            <h3 class="page-title">Overzicht</h3>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
                             <div class="options">
                                 <!-- UserName -->
+                                <a href="">
                                     <div class="avatar">
                                         <img class="rounded-circle"
-                                             src="assets/img/<?=$user_check?>.jpg"
+                                             src="assets/img/woman.jpg"
                                              alt="">
                                     </div>
-                                    <?= $user_fullname ?>
+                                    Francine ten Noord
+                                </a>
                                 <!-- sign-out -->
-                                <a href="logout.php"
+                                <a href="login.php"
                                    class="ml-3 mr-3">
                                     <i class="fa fa-sign-out"
                                        aria-hidden="true"></i>
@@ -176,15 +180,17 @@
                                                 <input type="text"
                                                        class="form-control"
                                                        id="Search" name="Search" value=""
-                                                       placeholder="Zoek op projectnaam">
+                                                       placeholder="Search Keyword">
                                             </div>
                                         </div>
                                         <div class="text-center py-3 px-2">
                                             <button type="button"
-                                                    class="btn btn-primary shadow bluebutton"
+                                                    class="btn btn-outline-light btn-outline-light-trans shadow"
                                                     onclick="search()">
                                                 <i class="fa fa-home"
-                                                   aria-hidden="true"></i>Jouw Kamervragen
+                                                   aria-hidden="true"></i>
+
+                                                Jouw Kamervragen
                                             </button>
                                             
                                         </div>
@@ -278,7 +284,7 @@
                         <div class="col-sm mx-md-3 mx-ld-5">
                             <div class="jq-question-assigned-content">
                             <?php
-                                getAssignedQuestionsHtml($user_id)
+                                getAssignedQuestionsHtml(2)
 									
                             ?>
                             </div>
