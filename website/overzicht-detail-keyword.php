@@ -70,24 +70,17 @@ foreach ($assigned_experts as $expert){
                 <div class="col-sm col-md-6 col-lg-4">
 
                     <h6 class="text-secondary">Indiener</h6>
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="login.php"
-                               class="w-100 d-flex align-items-center">
+                    <div class="card customcardbody">
+                        <div class="card-body w-100 d-flex align-items-center">
                                 <div class="flex-none avatar avatar-md">
-                                    <img class="rounded-circle"
-                                         src="assets/img/"
-                                         alt="">
+                                    <h5 style="display:flex; align-items: center; margin-bottom: 0;"><?php echo $a['party_name'] ?></h5>
                                 </div>
                                 <div class="flex-auto text-dark text-left">
-							
-                                    <p class="mb-0 pl-3"><?=$a['party_name']?>   <?=$a['indiener_fullname']?> </p>
-
+                                    <p class="mb-0 pl-3"><?php echo $a['indiener_fullname'] ?></p>
+                                </div>
+                                <div class="flex-none">
                                 </div>
 
-
-                               
-                            </a>
                         </div>
                     </div>
                 </div>
