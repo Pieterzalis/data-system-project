@@ -275,6 +275,7 @@
             $("#progress-step3").removeClass("current");
             $("#progress-step3").removeClass("activated");
             $('#progress-label2').html('2')
+            $('#progress-label2').html('1')
 
 
 
