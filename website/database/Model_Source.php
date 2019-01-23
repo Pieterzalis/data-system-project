@@ -9,14 +9,30 @@ require_once 'Model_Core.php';
 // Handle any ajax post requests to this file here
 //
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	echo "hoi";
 
     if (isset($_REQUEST['func'])) {
 
         if ($_REQUEST['func'] === 'removeFromKnowledgeBase' && $_REQUEST['id'] != '') {
             removeFromKnowledgeBase($_REQUEST['id']);
         }
+		elseif ($_REQUEST['func'] === 'addToKnowledgeBase' && $_REQUEST['question_id'] != '') {
+            addToKnowledgeBase($_REQUEST['question_id'], $_REQUEST['url'], $_REQUEST['publish_date'], $_REQUEST['title'], $_REQUEST['snippet'], $_REQUEST['type'], $_REQUEST['outlet']);
+        }
     }
 
+}
+
+function addToKnowledgeBase($question_id, $url, $publish_date, $title, $snippet, $type, $outlet){
+	DB::insert('source', array(
+		'source_question_id' => $question_id,
+		'source_url' => $url,
+		'source_date_published' => $publish_date,
+		'source_title' => $title,
+		'source_snippet' => $snippet,
+		'source_type' => $type,
+		'source_outlet' => $outlet
+	));	
 }
 
 // Set given source_id as inactive
