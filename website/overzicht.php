@@ -216,6 +216,7 @@
                                                     and project_title like '%{$_POST['Search']}%' 
                                                     order by project_id desc";
 										$a = DB::query($sql);
+
 										foreach($a as $v){//#显示project列表
 										?>
                                         <div class="card m-2">
@@ -263,7 +264,7 @@
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#<?=$kk+1?></p>
+                                                                   aria-hidden="true"></i><p>#<?=$vv['question_number']?></p>
                                                             </div>
                                                             <div class="flex-1"><?=$vv['question_title']?></div>
                                                             <div class="flex-none ml-2">

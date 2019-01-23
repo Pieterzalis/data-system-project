@@ -50,6 +50,25 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
     <?php
     include_once("templates/template_head.php");
     ?>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".card-close-btn").click(function () {
+                $(this).parents(".sourcescard").fadeOut(500);
+
+                $.post( "database/Model_Source.php", { func: "removeFromKnowledgeBase", id: this.id })
+                    .done(function( data ) {
+                        // Change contents of div
+                        if (!(data === 'success')){
+                            alert('Error removing source from knowledge base.')
+                        }
+                    })
+            });
+
+        });
+    </script>
+
 </head>
 
 
@@ -58,7 +77,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 	<div class="card m-3 p-md-3 p-lg-4 text-center">
         <!-- row-info -->
         <div class="project-info">
-            <div>
+            <div class="project-info-div">
                 <h4><Strong><?=$a['question_title']?></Strong></h4>
                 <p>Deadline: <Strong><?= $date_deadline ?></Strong></p>
             </div>
@@ -67,16 +86,11 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 
                     <h6 class="text-secondary">Onderdeel van kamervragen:</h6>
                         <div class="card customcard">
-                            <a href="overzicht-detail-keyword.html" class="w-100 text-dark a-hover-none">
+                            <a href="overzicht-detail-keyword.php?id=<?=$a['question_project_id']?>" class="w-100 text-dark a-hover-none">
                             <div class="card-body customcardbody customcardshadow">
                                     <span class="kamervragennum">Kamervragen #: <Strong><?= $a['project_code'] ?></Strong></span>
                                     <h5><strong><?= $a['project_title']?></strong></h5>
-                                    <i class="fa fa-angle-right fa-lg"
-                                       style="
-                                       float:
-                                       right"
-                                       aria-hidden="true"></i>
-                              
+                                    <i class="fa fa-angle-right fa-lg" style="float:right" aria-hidden="true"></i>
                                 <div class="mb-0">
                                     <strong class="text-secondary">Keywords</strong>
 
@@ -122,12 +136,11 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                             </div>
                         <?php } // end foreach ?>
                     </div>
-
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-sm col-md-12">
-                    <button type="button" class="btn btn-primary bluebutton" onclick="location.href='search_engine.php'"><i class="fa fa-search"
+                    <button type="button" class="btn btn-primary bluebutton" onclick="location.href='search_engine.php?qid=<?= $id ?>'"><i class="fa fa-search"
                            aria-hidden="true"></i>
                         Zoek informatie
                     </button>
@@ -158,12 +171,12 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                                         <p>Titel: <?= $source['source_title'] ?></p>
                                     </div>
                                     <div class="flex-none">
-                                        <a href=""
-                                           class="card-close-btn text-secondary">
+                                        <button type="button" class="close card-close-btn text-secondary"
+                                            id="sID-<?= $source['source_id'] ?>">
                                             <!-- close -->
                                             <i class="fa fa-close"
                                                aria-hidden="true"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="row">

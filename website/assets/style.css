@@ -12,10 +12,10 @@
 }
 
 .project-info .row {
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
-.project-info div{
+.project-info-div{
     padding-bottom: 10px;
 }
 
@@ -29,6 +29,10 @@
 
 .customcard a{
     text-decoration: none;
+}
+
+.bluehover:hover{
+    background-color: rgba(21, 66, 116, 0.3);
 }
 
 .customcardpadding{
@@ -54,6 +58,10 @@
     border: 1px solid #154274;
 }
 
+.datumtitle{
+    padding-left: 15px;
+}
+
 .btn-outline-light-trans{
     border-color: #ffffff55;
 }
@@ -76,8 +84,46 @@
     box-shadow: none;
 }
 
-.fa-home{
+.card-left{
+    padding-left: 0px;
+    margin-right: 20px;
+}
+
+.card-right{
+    padding-right: 0px;
+    margin-left: 20px;
+}
+
+.toewijzencard {
+    box-shadow: 0 2px 15px -5px rgba(0, 0, 0, 1);
+    margin: 10px 0 10px 0;
+}
+
+.toewijzenbutton {
+    width: 150px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
+.fa-home, .fa-plus{
     margin-right: 10px;
+}
+
+.fa-user-plus {
+    font-size: 35px;
+    color: rgba(255,255,255, 0.7);
+}
+
+.faicon{
+    vertical-align: middle;
+}
+
+.white{
+    color: #fff;
 }
 
 .partylogo{
@@ -119,10 +165,18 @@
     /* height: 100%; */
 }
 
+.select{
+    position: absolute;
+    
+}
+
 body {
     margin: 0
 }
 
+#toewijzen2 h4{
+    margin-bottom: 30px;
+}
 
 .color-app {
     color: #4978ad;
@@ -164,6 +218,14 @@ hr.color-white {
 
 .hidden {
     display: none;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.no-decoration{
+    text-decoration: none;
 }
 
 .no-before::before {
@@ -254,9 +316,9 @@ hr.color-white {
     font-size: 0.8rem;
 }
 
-.step-line .step.activated .step-num {
+.activated{
     color: #fff;
-    background: #4978ad;
+    background-color: #4978ad;
 }
 
 .step-line .step .current {
@@ -266,7 +328,7 @@ hr.color-white {
     width: 44px;
     line-height: 44px;
     margin: 0px auto;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .step-line .step .step-hr {
@@ -320,7 +382,9 @@ hr.color-white {
 }
 
 .badge-secondary {
-    margin: 0 1px 0 1px;
+    margin: 2px 4px 2px 4px;
+    font-weight: 100;
+    font-size: 90%;
 }
 
 .step-2 .file-analysing .file-analysing-icon .fa-spin {
@@ -359,7 +423,7 @@ hr.color-white {
 }
 
 .my-layout .layout_left .card {
-    font-size: 12px;
+    font-size: 14px;
     border-bottom-width: 0;
     background: #ffffff33;
     color: #fff;
@@ -376,7 +440,7 @@ hr.color-white {
     background: #ffffff40;
     display: block;
     padding: 5px 20px;
-    font-size: 10px;
+    font-size: 12px;
     border-bottom: 1px solid #104176;
 }
 

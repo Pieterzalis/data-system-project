@@ -32,20 +32,25 @@ def clean_articles(articles):
 		cleaned_article['title'] = article['title']
 		cleaned_article['publish_date'] = article['publishedAt'].split('T')[0]
 		cleaned_article['url'] = article['url']
-		cleaned_article['snippet'] = article['description']
+		cleaned_article['snippet'] = article['description']+'...'
 		cleaned_article['type'] = 0
 		cleaned_article['outlet'] = article['source']['name']
 		articles[i] = cleaned_article
 	return articles
 
+def date_to_english(date):
+	elements = date.split('-')
+	return elements[2]+'-'+elements[0]+'-'+elements[1]
+
 #Use queries based on the keywords to retrieve articles from the NewsAPI
 def get_news_articles(queries, fromdate, todate):
-	fromdate = '2015-19-10'
-	todate = '2018-20-10'
+	fromdate = '2015-19-10'#'' if fromdate == 'nobound' else date_to_english(fromdate)
+	todate = '2018-20-10'#'' if todate == 'nobound' else date_to_english(todate)
 	newsapi = NewsApiClient(api_key='2b7935c2680f46b487d833129210d4c3')
 	not_enough_articles = True
 	articles_to_find = 5
 	articles = []
+	titles = []
 	for query in queries:
 		all_articles = newsapi.get_everything(q=query,
 											  from_param=fromdate,
@@ -54,9 +59,9 @@ def get_news_articles(queries, fromdate, todate):
 											  page=1)
 		articles_found = all_articles['articles']
 		for found_article in articles_found:
-			if found_article not in articles and len(articles) < articles_to_find:
-				print(found_article)
+			if found_article['title'] not in titles and len(articles) < articles_to_find:
 				articles.append(found_article)
+				titles.append(found_article['title'])
 		if len(articles) == articles_to_find:
 			articles = clean_articles(articles)
 			return articles
@@ -112,7 +117,7 @@ def clean_answers(answers):
 		cleaned_answer['title'] = answer.findAll("a", href=True)[2].getText()
 		cleaned_answer['publish_date'] = reformat_date(answer.find("div", {"class": "card__pretitle"}).getText().strip())
 		cleaned_answer['url'] = "https://tweedekamer.nl/"+answer.find("a", {"class": "document__button"})['href']
-		cleaned_answer['snippet'] = answer.find("p").getText()
+		cleaned_answer['snippet'] = answer.find("p").getText()+'...'
 		cleaned_answer['type'] = 1
 		cleaned_answer['outlet'] = 'n.v.t.'
 		answers[i] = cleaned_answer
@@ -120,8 +125,11 @@ def clean_answers(answers):
 
 #Use queries to retrieve urls and metadata of related previous answers
 def get_previous_answers(queries, fromdate, todate):
-	fromdate = ''
-	todate = ''
+	if fromdate == 'nobound':
+		fromdate = ''
+	if todate == 'nobound':
+		todate = ''
+	titles = []
 	answers = []
 	prev_answers_to_find = 5
 	for query in queries:
@@ -129,10 +137,11 @@ def get_previous_answers(queries, fromdate, todate):
 		response = requests.get(url)
 		soup = BeautifulSoup(response.text,'html.parser')
 		articlecards = soup.findAll("article", {"class": "card"})
-		time.sleep(1)
 		for articlecard in articlecards:
-			if articlecard not in answers and len(answers) < prev_answers_to_find:
+			title = articlecard.findAll("a", href=True)[2].getText()
+			if title not in titles and len(answers) < prev_answers_to_find:
 				answers.append(articlecard)
+				titles.append(title)
 		if len(answers) == prev_answers_to_find:
 			answers = clean_answers(answers)
 			return answers
@@ -140,14 +149,19 @@ def get_previous_answers(queries, fromdate, todate):
 	return answers #if all queries together do not return 5 different previous answers, return what is found
 
 def main(argv):
-	keywords = argv[1]
-	keywords = argv[1][:-1].split(",") #[:-1] is to remove last comma
-	#fromdate = argv[2]
-	#todate = argv[3]
+	keywords = list(filter(None,argv[1][:-1].split(","))) #[:-1] is to remove last comma
+	fromdate = argv[2]
+	todate = argv[3]
+	search_news = argv[4]
+	search_prev_answers = argv[5]
 	queries = create_queries(keywords)
 	data = {}
-	news_articles = get_news_articles(keywords, fromdate=None, todate=None)
-	prev_answers = get_previous_answers(queries, fromdate=None, todate=None)
+	news_articles = []
+	prev_answers = []
+	if(search_news == 'on'):
+		news_articles = get_news_articles(keywords, fromdate, todate)
+	if(search_prev_answers == 'on'):
+		prev_answers = get_previous_answers(queries, fromdate, todate)
 	data = news_articles + prev_answers
 	json_data = json.dumps(data)
 	print(json_data)

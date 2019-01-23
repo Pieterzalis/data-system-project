@@ -3,16 +3,21 @@
 require_once 'database/Model_Core.php';
 require_once 'database/Model_Source.php';
 
-#data from front-end:
+#example data from front-end:
+#$question_id = "23";
 #$keywords = array("grond", "hergebruik", "betrokken", "handen", "inzichtelijk");
-#$fromdate = '2010';
-#$todate = '2012';
-#$question_id = "2";
+#$fromdate = '14-11-2010';
+#$todate = '17-05-2012';
+#$question_id = "23";
+#$search_news = "on";
+#$search_prev_answers = "undefined";
 
 $question_id = null;
 $keywords = null;
 $fromdate = null;
 $todate = null;
+$search_news = null;
+$search_prev_answers = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if (isset($_POST['question_id'])) {
@@ -27,16 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if (isset($_POST['todate'])) {
 		$todate = $_POST['todate'];
 	}
-	gatherInfo($question_id, $keywords, $fromdate, $todate);
+	if (isset($_POST['search_news'])) {
+		$search_news = $_POST['search_news'];
+	}
+	if (isset($_POST['search_prev_answers'])) {
+		$search_prev_answers = $_POST['search_prev_answers'];
+	}
+	gatherInfo($question_id, $keywords, $fromdate, $todate, $search_news, $search_prev_answers);
 }
 
-function gatherInfo($question_id, $keywords, $fromdate, $todate){
+function gatherInfo($question_id, $keywords, $fromdate, $todate, $search_news, $search_prev_answers){
 	$keywordstring = "";
 	foreach ($keywords as $keyword){
 		$keywordstring = $keywordstring . $keyword . ",";
 	}
-    $data = $keywordstring;// + " " + $fromdate + " " + $todate
-
+    $data = $keywordstring . " " . $fromdate . " " . $todate . " " . $search_news . " " . $search_prev_answers;
     $python_path = htmlentities('info_gathering.py');
 
     // Execute python script for retrieving relevant information
@@ -49,7 +59,7 @@ function gatherInfo($question_id, $keywords, $fromdate, $todate){
         echo 'Error: Python returned no output';
     } else {
 		$data = json_decode($output_data);
-        saveSources($data, $question_id);
+        //saveSources($data, $question_id);
 		returnHTMLResponse($data);
     } 
 }
@@ -65,7 +75,9 @@ function returnHTMLResponse($data){
 		$outlet = $source->outlet;
 		$publish_date = $source->publish_date;
 		$snippet = $source->snippet;
-		$html .= '<div class="row justify-content-md-center">
+		$url = $source->url;
+		$type = $source->type;
+		$html .= '<div class="row justify-content-md-center source-card">
 					<div class="col-sm-12 col-md-11">
 						<div class="card mb-3">
 							<div class="card-body">
@@ -87,16 +99,21 @@ function returnHTMLResponse($data){
 													<br>
 													Datum: <strong>' . $publish_date . '</strong>
 												</div>
-												<div class="col-md content">What comes here?<br></br>
-												<br></br>
-												' . $snippet . '</div>
+												<div class="col-md content">' . $snippet . '<br>
+												<br>
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="col-sm-12 mt-2 mt-md-0 col-md-3 options justify-content-center d-flex  align-items-center">
-										<button class="btn btn-secondary btn-block">
+									     <button type="button" class="close card-close-btn jq-addtokb" >
+                                            <!-- close -->
+                                            <i class="fa fa-plus-circle" aria-hidden="true"><p>Add to KB</p></i>
+                                        </button>
+									
+										<!--<button class="jq-addtokb" onclick="store_source(this, \'' . $url . '\', \'' . $publish_date . '\', \'' . $title . '\', \'' . $snippet . '\', \'' . $type . '\', \'' . $outlet . '\')" class="btn btn-secondary btn-block">
 											Toevoegen aan kennisbank
-										</button>
+									    </button> -->
 									</div>
 								</div>
 							</div>
