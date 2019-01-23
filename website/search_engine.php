@@ -1,9 +1,102 @@
+<?php
+require_once 'database/Model_Project.php';
+$question_id = intval($_GET['qid']);
+$project_id = DB::queryFirstRow("SELECT question_project_id FROM question WHERE question_id = '$question_id'");
+$project_id = $project_id['question_project_id'];
+$keywords = DB::query("select keyword_name from keyword where keyword_project_id= '$project_id' ");
+
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Zoeken</title>
-    <?php include_once("templates/template_head.php") ?>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="assets/icon-font/css/font-awesome.min.css">
+    <link rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="assets/style.css" />
+
+    <script src="assets/js/jquery-3.3.1.js"></script>
+
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+
+    <script src="assets/js/index.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+	<script>
+        $(document).ready(function () {
+
+            $(".do_search").click(function () {
+
+                    $("#sourcecontainer").html("Searching for relevant sources...");
+                    var use_news_articles = $('#gridCheck1:checked').val();
+                    if (use_news_articles == undefined){
+                        use_news_articles = 'off';
+                    }
+                    var use_old_answers = $('#gridCheck2:checked').val();
+                    if (use_old_answers == undefined){
+                        use_old_answers = 'off';
+                    }
+                    var fromdate = $("#datefrom").val();
+                    if (fromdate == ''){
+                        fromdate = 'nobound';
+                    }
+                    var todate = $("#dateto").val();
+                    if (todate == ''){
+                        todate = 'nobound';
+                    }
+                    console.log(use_news_articles);
+                    console.log(use_old_answers);
+                    var userkeywords = $("#Searchfield").val().split(',');
+                    var autokeywords = [];
+                    $(".keywordtags").children('span').each(function(index){
+                        autokeywords.push($(this).text());
+                    });
+                    keywords = userkeywords.concat(autokeywords);
+                    console.log(keywords);
+                    console.log($("#datefrom").val());
+                    var form = new FormData();
+                    form.append('question_id','1');
+                    form.append('keywords',JSON.stringify(keywords));
+                    form.append('fromdate',fromdate);
+                    form.append('todate',todate);
+                    form.append('search_news',use_news_articles);
+                    form.append('search_prev_answers',use_old_answers);
+                    fetch('process_search.php', {
+                            method: 'POST',
+                            body: form
+                        }).then(response => {
+                            response.text().then(function (text) {
+                                $("#sourcecontainer").html(text);
+                            });
+                        });
+
+            });
+
+            function store_source(button, url, publish_date, title, snippet, type, outlet){
+                alert(title);
+                $.post( "database/Model_Source.php", { func: "addToKnowledgeBase", question_id : '1', url : url, publish_date : publish_date, title: title, snippet : snippet, type : type, outlet : outlet })
+                    .done(function( data ) {
+                        if (!(data === 'success')){
+                            alert('Error adding source to knowledge base.')
+                        }
+                    })
+            }
+        });
+	</script>
 </head>
 
 <body class="page_search_engine">
@@ -13,38 +106,6 @@
     </div>
 
     <div class="container-fluid my-layout d-flex flex-column">
-        <div class="row flex-none">
-            <!-- layout_nav -->
-            <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-4 pl-0">
-                            <div class="logo">
-                                <img src="assets/img/logo.png"></div>
-                        </div>
-                        <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Zoeken</h3>
-                        </div>
-                        <div class="col-sm-4 d-flex align-items-center justify-content-end">
-                            <div class="options">
-                                <!-- UserName -->
-                                <a href="">
-                                    <i class="fa fa-user-circle"
-                                       aria-hidden="true"></i>
-                                    F.Ten Noord
-                                </a>
-                                <!-- sign-out -->
-                                <a href="login"
-                                   class="ml-3 mr-3">
-                                    <i class="fa fa-sign-out"
-                                       aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row flex-1">
             <!-- layout_content -->
             <div class="col-sm p-0 layout_content d-flex justify-content-center ">
@@ -63,32 +124,31 @@
                                         </div>
                                         <input type="text"
                                                class="form-control"
-                                               id="Search"
+                                               id="Searchfield"
                                                placeholder="voer hier uw zoekwoord in...">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="container">
                                         <div class="row justify-content-md-center">
-                                            <div class="col-md-3">
-
+                                            <div class="col-lg-3 text-center">
                                                 <div class="form-group mb-0"><!--  -->
-                                                    <label>Sleutelwoorden</label>
+                                                    <label><strong>Sleutelwoorden</strong></label>
                                                 </div>
-                                                <div>
-                                                    <span class="badge badge-pill badge-primary">Rijgedrag</span>
-                                                    <span class="badge badge-pill badge-secondary">Geloofwaardig</span>
-                                                    <span class="badge badge-pill badge-success">Melding</span>
-                                                    <span class="badge badge-pill badge-danger">Slecht</span>
-                                                    <span class="badge badge-pill badge-warning">Opschorten</span>
-                                                    <span class="badge badge-pill badge-info">Info</span>
-                                                    <span class="badge badge-pill badge-light">Light</span>
-                                                    <span class="badge badge-pill badge-dark">Dark</span>
+                                                <div class="keywordtags"><?php
+								                //#列出该project的所有keyword
+								                foreach($keywords as $v){
+                                                    echo '<span class="badge badge-pill badge-secondary">'.$v['keyword_name'].'</span>';
+								                }
+								                	?>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-lg-3 text-center">
                                                 <div class="form-group mb-0">
-                                                    <label>Zoek in deze periode</label>
+                                                    <label><strong>Zoek in deze periode (kamervragen)</strong></label>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="datumtitle">van:</span>
                                                 </div>
                                                 <div class="form-group row justify-content-center">
                                                     <div class="input-group col-sm-12">
@@ -100,10 +160,13 @@
                                                         </div>
                                                         <input type="text"
                                                                class="form-control"
-                                                               id="Search"
-                                                               placeholder="van dd-mm-yyyy">
+                                                               id="datefrom"
+                                                               placeholder="dd-mm-yyyy">
                                                         <!-- 预留 placeholder="yyy/mm/dd" -->
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="datumtitle">tot:</span>
                                                 </div>
                                                 <div class="form-group row justify-content-center">
                                                     <div class="input-group col-sm-12">
@@ -115,15 +178,15 @@
                                                         </div>
                                                         <input type="text"
                                                                class="form-control"
-                                                               id="Search"
-                                                               placeholder="tot dd-mm-yyyy">
+                                                               id="dateto"
+                                                               placeholder="dd-mm-yyyy">
                                                         <!-- 预留 placeholder="yyy/mm/dd" -->
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group mb-0">
-                                                    <label>Zoek in deze bronnen</label>
+                                            <div class="col-lg-3">
+                                                <div class="form-group mb-0 text-center">
+                                                    <label><strong>Zoek in deze bronnen</strong></label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input"
@@ -131,24 +194,15 @@
                                                            id="gridCheck1">
                                                     <label class="form-check-label"
                                                            for="gridCheck1">
-                                                        Wetenschappelijke bronnen
+                                                        Media bronnen van afgelopen maand
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input"
                                                            type="checkbox"
-                                                           id="gridCheck1">
+                                                           id="gridCheck2">
                                                     <label class="form-check-label"
-                                                           for="gridCheck1">
-                                                        Media bronnen
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input"
-                                                           type="checkbox"
-                                                           id="gridCheck1">
-                                                    <label class="form-check-label"
-                                                           for="gridCheck1">
+                                                           for="gridCheck2">
                                                         Oude kamervragen
                                                     </label>
                                                 </div>
@@ -156,55 +210,21 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row justify-content-center">
-                                    <div class="input-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
-                                        <a href="project_overview"
-                                           class="btn btn-lg btn-block btn-outline-dark">Zoek</a>
+                                <div class="row justify-content-center">
+                                    <div class="col-sm col-md-12 text-center">
+                                        <button type="button" class="btn btn-primary bluebutton do_search"><i class="fa fa-search"
+                                               aria-hidden="true"></i>
+                                            Zoek informatie
+                                        </button>
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <hr class="col-md-9">
-                    <div class="row justify-content-md-center">
-                        <div class="col-sm-12 col-md-11">
-                            <div class="card mb-3">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md title">
-                                                        <p>
-                                                            <strong>Kinderen kunnen voortaan - zonder medisch dossier - slecht rijgedrag van ouders melden</strong>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-3 info">
-                                                        Bron: <strong><u>Volkskrant</u></strong>
-                                                        <br>
-                                                        Datum: <strong>24 oktober 2017</strong>
-                                                    </div>
-                                                    <div class="col-md content">Rechter stemt in met richtlijn rijbewijsverstrekker<br></br>
-                                                    <br></br>
-                                                     Bezorgde kinderen kunnen ook zonder medisch dossier slecht rijgedrag van een ouder melden bij het CBR. De rijvaardigheidsinstantie kan vervolgens besluiten de ouder te herkeuren en autorijden tot deze keuring te verbieden. </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 mt-2 mt-md-0 col-md-3 options justify-content-center d-flex  align-items-center">
-                                            <button class="btn btn-secondary btn-block">
-                                                Toevoegen aan kennisbank
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+					<div class="sourcecontainer" id="sourcecontainer">
                     </div>
-           <!-- <nav aria-label="Page navigation example ">
+            <nav aria-label="Page navigation example ">
                                     <ul class="pagination justify-content-center">
                                         <li class="page-item"><a class="page-link"
                                                href="#">Previous</a></li>
@@ -223,7 +243,7 @@
                                         <li class="page-item"><a class="page-link"
                                                href="#">Next</a></li>
                                     </ul>
-                                </nav> -->
+                                </nav>
                 </div>
             </div>
         </div>

@@ -1,6 +1,5 @@
 <?php
 
-
 // Load core model
 // This will also load DB config
 require_once 'Model_Core.php';
@@ -9,14 +8,14 @@ require_once 'Model_Core.php';
 // Handle any ajax post requests to this file here
 //
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	echo "hoi";
 
     if (isset($_REQUEST['func'])) {
 
         if ($_REQUEST['func'] === 'removeFromKnowledgeBase' && $_REQUEST['id'] != '') {
             removeFromKnowledgeBase($_REQUEST['id']);
         }
-		elseif ($_REQUEST['func'] === 'addToKnowledgeBase' && $_REQUEST['question_id'] != '') {
+
+		if ($_REQUEST['func'] === 'addToKnowledgeBase' && $_REQUEST['question_id'] != '') {
             addToKnowledgeBase($_REQUEST['question_id'], $_REQUEST['url'], $_REQUEST['publish_date'], $_REQUEST['title'], $_REQUEST['snippet'], $_REQUEST['type'], $_REQUEST['outlet']);
         }
     }
