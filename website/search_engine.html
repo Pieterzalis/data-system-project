@@ -77,6 +77,17 @@
 		});
 	}
 	</script>
+	<script>
+	function store_source(button, url, publish_date, title, snippet, type, outlet){
+		alert(title);
+		$.post( "database/Model_Source.php", { func: "addToKnowledgeBase", question_id : '1', url : url, publish_date : publish_date, title: title, snippet : snippet, type : type, outlet : outlet })
+			.done(function( data ) {
+				if (!(data === 'success')){
+					alert('Error adding source to knowledge base.')
+				}
+			})
+	}
+	</script>
 </head>
 
 <body class="page_search_engine">
