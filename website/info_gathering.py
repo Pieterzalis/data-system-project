@@ -148,7 +148,7 @@ def get_previous_answers(queries, fromdate, todate):
 	return answers #if all queries together do not return 5 different previous answers, return what is found
 
 def main(argv):
-	keywords = argv[1][:-1].split(",") #[:-1] is to remove last comma
+	keywords = list(filter(None,argv[1][:-1].split(","))) #[:-1] is to remove last comma
 	fromdate = argv[2]
 	todate = argv[3]
 	search_news = argv[4]
