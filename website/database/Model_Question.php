@@ -167,6 +167,11 @@ function getDistributionProjectCardsHtml() {
                 // Set project ID in this loop iteration
                 $projectID = $row['project_id'];
 
+                // Get amount of toegewezen vragen
+                $amount_assigned = getAmountAssignedInProject($projectID);
+
+                $i = 1;
+
                 // Now build the card
                 $html .= "
                         <div class=\"col-xl-6 col-md-12\">
@@ -176,7 +181,7 @@ function getDistributionProjectCardsHtml() {
                                     <h4>".$row['project_title']."</h4>
                                     <span>Deadline: <strong>".$date_deadline."</strong></span>
                                     <p>Indiener: <strong>" . $row['indiener_fullname'] . " - " . $row['party_name'] . "</strong></p>
-                                    <h5>Toegewezen vragen: 0/8</h5>
+                                    <h5>Toegewezen vragen: ".$amount_assigned['assigned']."/".$amount_assigned['total']."</h5>
                                     <div class=\"toewijzenbutton\"><button type=\"button\" class=\"btn btn-primary shadow bluebutton toewijzenbutton\" onclick=\"\">Toewijzen</button></div>
                                 </div>
                             </div>
@@ -188,6 +193,27 @@ function getDistributionProjectCardsHtml() {
     }
 
     echo $html;
+
+}
+
+function getAmountAssignedInProject($project_id) {
+
+    $question_count = DB::queryFirstRow(" SELECT COUNT(`question_id`) as amountQ
+                                     FROM `question`
+                                     WHERE `question_project_id`='$project_id' ");
+
+    $amount_questions = (int)$question_count['amountQ'];
+
+    DB::query("SELECT * FROM question_has_experts qhe INNER JOIN question q ON q.question_id = qhe.question_id WHERE q.question_project_id = '$project_id' ");
+    $assigned_count = DB::count();
+    // Build return array
+
+    $returnarray = [
+        "assigned" => $assigned_count,
+        "total" => $amount_questions
+    ];
+
+    return $returnarray;
 
 }
 
