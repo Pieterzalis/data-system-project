@@ -58,6 +58,10 @@
     border: 1px solid #154274;
 }
 
+.datumtitle{
+    padding-left: 15px;
+}
+
 .btn-outline-light-trans{
     border-color: #ffffff55;
 }
