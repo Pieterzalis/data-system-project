@@ -55,7 +55,6 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
         $(document).ready(function () {
 
             $(".card-close-btn").click(function () {
-
                 $(this).parents(".sourcescard").fadeOut(500);
 
                 $.post( "database/Model_Source.php", { func: "removeFromKnowledgeBase", id: this.id })

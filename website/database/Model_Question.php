@@ -35,13 +35,6 @@ function saveQuestionArray($questions, $project_id) {
         // Get the inserted question_id and add to return array
         array_push($questions_ids, DB::insertId());
 
-        // TODO temporarily disable when we are implementing distribution..
-        // NOTE also insert questions_has_experts to simulate the assigning experts process
-//        DB::insert('question_has_experts', array(
-//            'user_id' => 2,
-//            'question_id' => $question_id
-//        ));
-
 	}
 
 	// Return the project ID
@@ -170,8 +163,6 @@ function getDistributionProjectCardsHtml() {
                 // Get amount of toegewezen vragen
                 $amount_assigned = getAmountAssignedInProject($projectID);
 
-                $i = 1;
-
                 // Now build the card
                 $html .= "
                         <div class=\"col-xl-6 col-md-12\">
@@ -182,7 +173,7 @@ function getDistributionProjectCardsHtml() {
                                     <span>Deadline: <strong>".$date_deadline."</strong></span>
                                     <p>Indiener: <strong>" . $row['indiener_fullname'] . " - " . $row['party_name'] . "</strong></p>
                                     <h5>Toegewezen vragen: ".$amount_assigned['assigned']."/".$amount_assigned['total']."</h5>
-                                    <div class=\"toewijzenbutton\"><button type=\"button\" class=\"btn btn-primary shadow bluebutton toewijzenbutton\" onclick=\"\">Toewijzen</button></div>
+                                    <div class=\"toewijzenbutton\"><button type=\"button\" class=\"btn btn-primary shadow bluebutton toewijzenbutton\" onclick=\"location.href = 'distribution-detail?id=".$projectID."'\">Toewijzen</button></div>
                                 </div>
                             </div>
                         </div>";

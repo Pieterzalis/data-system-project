@@ -13,8 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	if (isset($_REQUEST['func'])) {
 
-		if ($_REQUEST['func'] === 'getAssignedQuestionsHtml') {
-			getAssignedQuestionsHtml(2);
+		if ($_REQUEST['func'] === 'getAssignedQuestionsHtml' && $_REQUEST['id'] != '') {
+			getAssignedQuestionsHtml($_REQUEST['id']);
 		}
 	}
 
