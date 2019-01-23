@@ -104,6 +104,11 @@
     margin-right: 10px;
 }
 
+.fa-user-plus {
+    font-size: 35px;
+    color: rgba(255,255,255, 0.7);
+}
+
 .faicon{
     vertical-align: middle;
 }
@@ -147,10 +152,18 @@
     /* height: 100%; */
 }
 
+.select{
+    position: absolute;
+    
+}
+
 body {
     margin: 0
 }
 
+#toewijzen2 h4{
+    margin-bottom: 30px;
+}
 
 .color-app {
     color: #4978ad;
@@ -192,6 +205,14 @@ hr.color-white {
 
 .hidden {
     display: none;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.no-decoration{
+    text-decoration: none;
 }
 
 .no-before::before {

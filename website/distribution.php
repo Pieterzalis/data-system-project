@@ -69,7 +69,7 @@ $user_id = $_SESSION['login_id'];
                             <span>Deadline: <Strong>?= $date_deadline ?</Strong></span>
                             <p>Indiener: <strong>Corrie van Brenk - 50 Plus</strong></p>
                             <h5>Toegewezen vragen: 0/8</h5>
-                            <div class="toewijzenbutton"><button type="button" class="btn btn-primary shadow bluebutton toewijzenbutton" onclick="">Toewijzen</button></div>
+                            <button type="button" class="btn btn-primary shadow bluebutton toewijzenbutton" onclick="">Toewijzen</button>
                         </div>
                     </div>
                 </div>
