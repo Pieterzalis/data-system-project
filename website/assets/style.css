@@ -76,8 +76,36 @@
     box-shadow: none;
 }
 
+.card-left{
+    padding-left: 0px;
+    margin-right: 20px;
+}
+
+.card-right{
+    padding-right: 0px;
+    margin-left: 20px;
+}
+
+.toewijzencard {
+    box-shadow: 0 2px 15px -5px rgba(0, 0, 0, 1);
+}
+
+.toewijzenbutton {
+    width: 150px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-top: 10px;
+}
+
 .fa-home, .fa-plus{
     margin-right: 10px;
+}
+
+.faicon{
+    vertical-align: middle;
 }
 
 .partylogo{

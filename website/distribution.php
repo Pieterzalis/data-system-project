@@ -41,8 +41,66 @@
         </div>
         <div class="">
             <div class="row justify-content-md-left m-3">
-             <button type="button" class="btn btn-primary shadow bluebutton" onclick="search()">
-                 <i class="fa fa-plus" aria-hidden="true"></i>Jouw Kamervragen</button>
+             <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='upload.html'">
+                 <i class="fa fa-plus" aria-hidden="true"></i>Nieuwe Kamervragen</button>
+            </div>
+            <div class="row m-3" style="font-size:25px">
+                <p>Nog toe te wijzen kamervragen</p>
+            </div>
+            <div class="row m-3">
+                <div class="col-sm card-left">
+                    <div class="toewijzencard">
+                        <div class="card text-center">
+                            <p>kamervragen #: 23457245</p>
+                            <h4>Kamervragen titel komt hier dan</h4>
+                            <span>Deadline: <Strong>?= $date_deadline ?</Strong></span>
+                            <p>Indiener: <strong>Corrie van Brenk - 50 Plus</strong></p>
+                            <h5>Toegewezen vragen: 0/8</h5>
+                            <div class="toewijzenbutton"><button type="button" class="btn btn-primary shadow bluebutton toewijzenbutton" onclick="">Toewijzen</button></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-sm card-left">
+                    <div class="toewijzencard">
+                        <div class="card text-center">
+                            <p>kamervragen #: 23457245</p>
+                            <h4>Kamervragen titel komt hier dan</h4>
+                            <span>Deadline: <Strong>?= $date_deadline ?</Strong></span>
+                            <p>Indiener: <strong>Corrie van Brenk - 50 Plus</strong></p>
+                            <h5>Toegewezen vragen: 0/8</h5>
+                            <div class="toewijzenbutton"><button type="button" class="btn btn-primary shadow bluebutton toewijzenbutton" onclick="">Toewijzen</button></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-3" style="font-size: 25px">
+                <p>Toegewezen kamervragen</p>
+            </div>
+            <div class="row m-3">
+                <div class="col-sm card-left">
+                    <div class="toewijzencard">
+                        <div class="card text-center">
+                            <p>kamervragen #: 23457245</p>
+                            <h4>Kamervragen titel komt hier dan</h4>
+                            <span>Deadline: <Strong>?= $date_deadline ?</Strong></span>
+                            <p>Indiener: <strong>Corrie van Brenk - 50 Plus</strong></p>
+                            <h5>Toegewezen vragen: 0/8</h5>
+                            <div class="toewijzenbutton"><button type="button" class="btn btn-primary shadow bluebutton toewijzenbutton" onclick="">Toewijzen</button></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-sm card-left">
+                    <div class="toewijzencard">
+                        <div class="card text-center">
+                            <p>kamervragen #: 23457245</p>
+                            <h4>Kamervragen titel komt hier dan</h4>
+                            <span>Deadline: <Strong>?= $date_deadline ?</Strong></span>
+                            <p>Indiener: <strong>Corrie van Brenk - 50 Plus</strong></p>
+                            <h5>Toegewezen vragen: 0/8</h5>
+                            <div class="toewijzenbutton"><button type="button" class="btn btn-primary shadow bluebutton toewijzenbutton" onclick="">Toewijzen</button></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
