@@ -37,39 +37,6 @@ $user_id = $_SESSION['login_id'];
     
 <body class="distribution-detail-page">
     <div class="container-fluid my-layout d-flex flex-column" id="leftMenu">
-        <div class="row flex-none">
-            <!-- layout_nav -->
-            <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-4 pl-0">
-                            <div class="logo">
-                                <img src="assets/img/logo.png"></div>
-                        </div>
-                        <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Jouw Kamervragen</h3>
-                        </div>
-                        <div class="col-sm-4 d-flex align-items-center justify-content-end">
-                            <div class="options">
-                                <!-- UserName -->
-                                    <div class="avatar">
-                                        <img class="rounded-circle"
-                                             src="assets/img/<?=$user_check?>.jpg"
-                                             alt="">
-                                    </div>
-                                    <?= $user_fullname ?>
-                                <!-- sign-out -->
-                                <a href="logout.php"
-                                   class="ml-3 mr-3">
-                                    <i class="fa fa-sign-out"
-                                       aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="m-3 p-md-3 p-lg-4 text-center">
         <!-- row-table -->
         <div class="card mt-3 shadow">
@@ -139,29 +106,27 @@ $user_id = $_SESSION['login_id'];
             <div class="card-body" id="toewijzen2">
                 <h4>Expert toewijzen</h4>
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-xl-2 col-lg-3 col-md-4 bluehover">
                         <img src="assets/img/Amersfoort.png">
                         <p>M. Amersfoort</p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-xl-2 col-lg-3 col-md-4 bluehover">
                         <img src="assets/img/Amersfoort.png">
                         <p>M. Amersfoort</p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-xl-2 col-lg-3 col-md-4 bluehover">
                         <img src="assets/img/Amersfoort.png">
                         <p>M. Amersfoort</p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-xl-2 col-lg-3 col-md-4 bluehover">
                         <img src="assets/img/Amersfoort.png">
                         <p>M. Amersfoort</p>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
+                    <div class="col-xl-2 col-lg-3 col-md-4 bluehover">
                         <img src="assets/img/Amersfoort.png">
                         <p>M. Amersfoort</p>
                     </div>
-                    <div class="col-3">
+                    <div class="col-xl-2 col-lg-3 col-md-4 bluehover">
                         <img src="assets/img/Amersfoort.png">
                         <p>M. Amersfoort</p>
                     </div>
