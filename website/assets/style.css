@@ -12,10 +12,10 @@
 }
 
 .project-info .row {
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
-.project-info div{
+.project-info-div{
     padding-bottom: 10px;
 }
 
@@ -76,7 +76,7 @@
     box-shadow: none;
 }
 
-.fa-home{
+.fa-home, .fa-plus{
     margin-right: 10px;
 }
 
@@ -359,7 +359,7 @@ hr.color-white {
 }
 
 .my-layout .layout_left .card {
-    font-size: 12px;
+    font-size: 14px;
     border-bottom-width: 0;
     background: #ffffff33;
     color: #fff;
@@ -376,7 +376,7 @@ hr.color-white {
     background: #ffffff40;
     display: block;
     padding: 5px 20px;
-    font-size: 10px;
+    font-size: 12px;
     border-bottom: 1px solid #104176;
 }
 

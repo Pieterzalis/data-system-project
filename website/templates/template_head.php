@@ -10,13 +10,11 @@
           href="bootstrap/css/bootstrap.min.css" />
    <link rel="stylesheet"
           href="assets/icon-font/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet"
           type="text/css"
           media="screen"
           href="assets/style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-
     <script src="assets/js/jquery-3.3.1.js"></script>
 
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"

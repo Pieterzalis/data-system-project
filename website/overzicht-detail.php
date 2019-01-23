@@ -58,7 +58,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 	<div class="card m-3 p-md-3 p-lg-4 text-center">
         <!-- row-info -->
         <div class="project-info">
-            <div>
+            <div class="project-info-div">
                 <h4><Strong><?=$a['question_title']?></Strong></h4>
                 <p>Deadline: <Strong><?= $date_deadline ?></Strong></p>
             </div>
@@ -71,12 +71,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                             <div class="card-body customcardbody customcardshadow">
                                     <span class="kamervragennum">Kamervragen #: <Strong><?= $a['project_code'] ?></Strong></span>
                                     <h5><strong><?= $a['project_title']?></strong></h5>
-                                    <i class="fa fa-angle-right fa-lg"
-                                       style="
-                                       float:
-                                       right"
-                                       aria-hidden="true"></i>
-                              
+                                    <i class="fa fa-angle-right fa-lg" style="float:right" aria-hidden="true"></i>
                                 <div class="mb-0">
                                     <strong class="text-secondary">Keywords</strong>
 
