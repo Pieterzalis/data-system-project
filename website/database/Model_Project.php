@@ -162,8 +162,9 @@ function getAssignedQuestionsHtml($user_id) {
                     if ($q_item['project_id'] === $projectID) {
 
                         $source_result = DB::queryFirstRow(" SELECT COUNT(`source_id`) AS amount_sources 
-                                     FROM `source` 
-                                      WHERE `source_question_id` = " . $q_item["question_id"] . " ");
+                                     FROM `source`
+                                     WHERE `source_active`=1 
+                                     AND `source_question_id` = " . $q_item["question_id"] . " ");
                         $amount_sources = $source_result['amount_sources'];
 
 
