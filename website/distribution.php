@@ -54,7 +54,7 @@ $user_id = $_SESSION['login_id'];
         </div>
         <div class="">
             <div class="row justify-content-md-left m-3">
-             <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='upload.html'">
+             <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='upload.php'">
                  <i class="fa fa-plus" aria-hidden="true"></i>Nieuwe Kamervragen</button>
             </div>
             <div class="row m-3" style="font-size:25px">
