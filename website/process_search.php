@@ -99,16 +99,21 @@ function returnHTMLResponse($data){
 													<br>
 													Datum: <strong>' . $publish_date . '</strong>
 												</div>
-												<div class="col-md content">' . $snippet . '<br></br>
-												<br></br>
+												<div class="col-md content">' . $snippet . '<br>
+												<br>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="col-sm-12 mt-2 mt-md-0 col-md-3 options justify-content-center d-flex  align-items-center">
-										<button onclick="store_source(this, \'' . $url . '\', \'' . $publish_date . '\', \'' . $title . '\', \'' . $snippet . '\', \'' . $type . '\', \'' . $outlet . '\')" class="btn btn-secondary btn-block">
+									     <button type="button" class="close card-close-btn jq-addtokb" >
+                                            <!-- close -->
+                                            <i class="fa fa-plus-circle" aria-hidden="true"><p>Add to KB</p></i>
+                                        </button>
+									
+										<!--<button class="jq-addtokb" onclick="store_source(this, \'' . $url . '\', \'' . $publish_date . '\', \'' . $title . '\', \'' . $snippet . '\', \'' . $type . '\', \'' . $outlet . '\')" class="btn btn-secondary btn-block">
 											Toevoegen aan kennisbank
-										</button>
+									    </button> -->
 									</div>
 								</div>
 							</div>

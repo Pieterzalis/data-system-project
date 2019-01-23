@@ -86,6 +86,10 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
 
             });
 
+            $(".jq-addtokb").click(function () {
+                alert('test');
+            });
+
             function store_source(button, url, publish_date, title, snippet, type, outlet){
                 alert(title);
                 $.post( "database/Model_Source.php", { func: "addToKnowledgeBase", question_id : '1', url : url, publish_date : publish_date, title: title, snippet : snippet, type : type, outlet : outlet })
@@ -96,6 +100,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                     })
             }
         });
+
 	</script>
 </head>
 
