@@ -87,7 +87,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 
                     <h6 class="text-secondary">Onderdeel van kamervragen:</h6>
                         <div class="card customcard">
-                            <a href="overzicht-detail-keyword.html" class="w-100 text-dark a-hover-none">
+                            <a href="overzicht-detail-keyword.php?id=<?=$a['question_project_id']?>" class="w-100 text-dark a-hover-none">
                             <div class="card-body customcardbody customcardshadow">
                                     <span class="kamervragennum">Kamervragen #: <Strong><?= $a['project_code'] ?></Strong></span>
                                     <h5><strong><?= $a['project_title']?></strong></h5>

@@ -11,6 +11,7 @@
     $user_id = $_SESSION['login_id'];
 
     require_once 'database/Model_Project.php';
+    require_once 'database/Model_User.php';
 ?>
 <?php
     require_once 'database/Model_Project.php';
@@ -63,7 +64,64 @@
             var file_error = $("#file-error");
             file_name.hide();
             file_error.hide();
-            if (fileUploader1.addEventListener) {
+            
+			
+			
+			// 查找到 id=step-1的控件
+            var dragWidget=document.getElementById("step-1");
+            // 给控件添加 拖拽进入的事件
+            dragWidget.ondragenter=function(){
+                // this.innerHTML="可以释放了";
+            }
+            // 给控件添加 拖拽 悬浮的事件（鼠标没有释放）
+            dragWidget.ondragover=function(ev){
+                ev.preventDefault();
+            }
+            // 给控件添加 拖拽 离开的事件
+            dragWidget.ondragleave=function(){
+                // this.innerHTML="将文件拖拽到此区域";
+            }
+            // 给控件添加 拖拽 鼠标释放的 事件
+            dragWidget.ondrop=function(ev){
+                ev.preventDefault();
+                // 触发上传文件的功能
+                fileDragChangeHandler(ev)
+            }
+            // 拖拽上传文件的方法，这个方法与fileUploaderChangeHandler一模一样，只是事件对象获取文件的方式不一样，后面的逻辑就跟手动选择文件上传是一致的了
+            function fileDragChangeHandler(e, a, b, c) {
+                step1.removeClass('alert alert-danger');
+                var strFileName = '';
+                if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+                    strFileName = e.dataTransfer.files["0"].name;
+                    if (strFileName && strFileName.length) {
+                        if (strFileName.endsWith('.pdf')) {
+                            //
+                            file_init.hide();
+                            file_name.show();
+                            file_error.hide();
+                            // alert('文件符合要求');
+                            saveFile(e.dataTransfer.files["0"]);
+                            // 完成上传文件的功能，这里面就是step步骤的切换，
+                            upload(e.dataTransfer.files);
+                        } else {
+                            step1.addClass('alert alert-danger');
+                            // alert('文件不符合要求');
+                            file_init.hide();
+                            file_name.hide();
+                            file_error.show();
+                            strFileName = '';
+                        }
+                    } else {
+                        strFileName = '';
+                    }
+                }
+                pathDisplayer.innerText = strFileName;
+            }
+			
+			
+			
+			
+			if (fileUploader1.addEventListener) {
                 fileUploader1.addEventListener('change', fileUploaderChangeHandler, false);
             } else if (fileUploader1.attachEvent) {
                 fileUploader1.attachEvent('onclick', fileUploaderClickHandler);
@@ -131,9 +189,13 @@
                 }
 
                 // Change parsing status to step-2
-                $("#progress-step2").addClass("actived");
+                $("#progress-step2").addClass("activated");
+                $("#progress-step1").removeClass("current");
+                $('#progress-step2').addClass('current');
+                $('#progress-label1').html('<i class="fa fa-check white"></i>')
                 $("#step-1").hide();
                 $("#step-2").show();
+
 
                 fetch('process.php', {
                     method: 'POST',
@@ -148,7 +210,10 @@
                         $('#jq-step3-div').html(text);
 
                         // Set progress in top of screen
-                        $("#progress-step3").addClass("actived");
+                        $("#progress-step3").addClass("activated");
+                        $("#progress-step2").removeClass("current");
+                        $("#progress-step3").addClass("current");
+                        $('#progress-label2').html('<i class="fa fa-check white"></i>')
 
                         // First hide the div step 1
                         $("#step-2").hide();
@@ -202,6 +267,17 @@
             file_init.show();
             file_name.hide();
             file_error.hide();
+            
+            $("#progress-step1").addClass("activated");
+            $("#progress-step1").addClass("current");
+            $("#progress-step2").removeClass("current");
+            $("#progress-step2").removeClass("activated");
+            $("#progress-step3").removeClass("current");
+            $("#progress-step3").removeClass("activated");
+            $('#progress-label2').html('2')
+            $('#progress-label2').html('1')
+
+
 
         }
 
@@ -210,8 +286,8 @@
             var step_1 = $('#step-1');
             var step_2 = $('#step-2');
             var step_3 = $('#step-3');
-            step_1.hide();
-            step_2.show();
+            step_1.show();
+            step_2.hide();
             step_3.hide();
 
             setTimeout(() => {
@@ -229,6 +305,9 @@
             step_1.hide();
             step_2.hide();
             step_3.show();
+            
+            $('#progress-step2').removeClass('current');
+            $('#progress-step3').addClass('current');
         }
 
         //默认调用第1步
@@ -324,7 +403,7 @@
                                 <!-- step-line -->
                                 <div class="container step-container">
                                     <div class="row step-line m-3 justify-content-md-center">
-                                        <div class="col step actived" id="progress-step1">
+                                        <div class="col step">
                                             <div class="step-icon">
                                                 <i class="fa fa-file fa-2x d-block d-md-none"></i>
                                                 <i class="fa fa-file fa-3x d-none d-md-block"></i>
@@ -332,8 +411,8 @@
                                             <div class="step-text">
                                                 <p>Upload</p>
                                             </div>
-                                            <div class="step-num">
-                                                <label>1</label>
+                                            <div class="step-num" id="progress-step1">
+                                                <label id="progress-label1">1</label>
                                             </div>
                                         </div>
                                         <div class="col step p-0">
@@ -341,7 +420,7 @@
                                                 <hr>
                                             </div>
                                         </div>
-                                        <div class="col step" id="progress-step2">
+                                        <div class="col step">
                                             <div class="step-icon">
                                                 <i class="fa fa-cog fa-2x d-block d-md-none"></i>
                                                 <i class="fa fa-cog fa-3x d-none d-md-block"></i>
@@ -349,8 +428,8 @@
                                             <div class="step-text">
                                                 <p>Verwerk</p>
                                             </div>
-                                            <div class="step-num">
-                                                <label>2</label>
+                                            <div class="step-num" id="progress-step2">
+                                                <label id="progress-label2">2</label>
                                             </div>
                                         </div>
                                         <div class="col step p-0">
@@ -358,7 +437,7 @@
                                                 <hr>
                                             </div>
                                         </div>
-                                        <div class="col step" id="progress-step3">
+                                        <div class="col step">
                                             <div class="step-icon">
                                                 <i class="fa fa-check-square fa-2x d-block d-md-none"></i>
                                                 <i class="fa fa-check-square fa-3x d-none d-md-block"></i>
@@ -366,8 +445,8 @@
                                             <div class="step-text">
                                                 <p>Controleer</p>
                                             </div>
-                                            <div class="step-num">
-                                                <label>3</label>
+                                            <div class="step-num" id="progress-step3">
+                                                <label id="progress-label3">3</label>
                                             </div>
                                         </div>
                                     </div>
@@ -392,8 +471,8 @@
                                                     <div id="file-init">
                                                         <p>Sleep het bestand hier naar toe of
                                                             <a id="Choose_click_1" class="a_choose_click" style="cursor: pointer;" href=""
-                                                               title="Choose file">Klik<input style="cursor: pointer;" type="file" class="file-uploader" name="uploadDataField" id="FileUploader1" /></a>
-                                                             om te zoeken op uw computer</p>
+                                                               title="Choose file">klik<input style="cursor: pointer;" type="file" class="file-uploader" name="uploadDataField" id="FileUploader1" /></a>
+                                                             hier om te zoeken op uw computer</p>
                                                     </div>
 
                                                     <!-- file-name -->
@@ -590,8 +669,11 @@
                 <p class="card-text" id="cardText"></p>
 
                 <div class="text-right">
-                    <a href="overzicht.php"
-                       class="card-link text-secondary"><strong>OK</strong></a>
+                    <?php if (isUserExpert($user_id)) { ?>
+                        <a href="overzicht.php" class="card-link text-secondary"><strong>OK</strong></a>
+                    <?php } else { ?>
+                        <a href="distribution.php" class="card-link text-secondary"><strong>OK</strong></a>
+                    <?php } ?>
                 </div>
             </div>
         </div>

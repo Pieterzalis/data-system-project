@@ -11,13 +11,13 @@
     <link rel="stylesheet"
           type="text/css"
           media="screen"
-          href="assets/style.css" />
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
           href="bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet"
           href="assets/icon-font/css/font-awesome.min.css">
+    <link rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="assets/style.css" />
 
     <script src="assets/js/jquery-3.3.1.js"></script>
 
@@ -86,38 +86,6 @@
     </div>
 
     <div class="container-fluid my-layout d-flex flex-column">
-        <div class="row flex-none">
-            <!-- layout_nav -->
-            <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-4 pl-0">
-                            <div class="logo">
-                                <img src="assets/img/logo.png"></div>
-                        </div>
-                        <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Zoeken</h3>
-                        </div>
-                        <div class="col-sm-4 d-flex align-items-center justify-content-end">
-                            <div class="options">
-                                <!-- UserName -->
-                                <a href="">
-                                    <i class="fa fa-user-circle"
-                                       aria-hidden="true"></i>
-                                    F.Ten Noord
-                                </a>
-                                <!-- sign-out -->
-                                <a href="login"
-                                   class="ml-3 mr-3">
-                                    <i class="fa fa-sign-out"
-                                       aria-hidden="true"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row flex-1">
             <!-- layout_content -->
             <div class="col-sm p-0 layout_content d-flex justify-content-center ">
@@ -143,22 +111,25 @@
                                 <div class="form-group row">
                                     <div class="container">
                                         <div class="row justify-content-md-center">
-                                            <div class="col-md-3">
-
+                                            <div class="col-lg-3 text-center">
                                                 <div class="form-group mb-0"><!--  -->
-                                                    <label>Sleutelwoorden</label>
+                                                    <label><strong>Sleutelwoorden</strong></label>
                                                 </div>
-                                                <div id="autokeywordsection">
-                                                    <span class="badge badge-pill badge-primary">Rijgedrag</span>
-                                                    <span class="badge badge-pill badge-secondary">Geloofwaardig</span>
-                                                    <span class="badge badge-pill badge-success">Melding</span>
-                                                    <span class="badge badge-pill badge-danger">Slecht</span>
-                                                    <span class="badge badge-pill badge-warning">Opschorten</span>
+                                                <div class="keywordtags"><?php
+								                //#列出该project的所有keyword
+								                $ak = DB::query('select keyword_name from keyword where keyword_project_id='.$a['question_project_id']);
+								                foreach($ak as $v){
+                                                    echo '<span class="badge badge-pill badge-secondary">'.$v['keyword_name'].'</span>';
+								                }
+								                	?>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-lg-3 text-center">
                                                 <div class="form-group mb-0">
-                                                    <label>Zoek in deze periode (kamervragen)</label>
+                                                    <label><strong>Zoek in deze periode (kamervragen)</strong></label>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="datumtitle">van:</span>
                                                 </div>
                                                 <div class="form-group row justify-content-center">
                                                     <div class="input-group col-sm-12">
@@ -171,9 +142,12 @@
                                                         <input type="text"
                                                                class="form-control"
                                                                id="datefrom"
-                                                               placeholder="van dd-mm-yyyy">
+                                                               placeholder="dd-mm-yyyy">
                                                         <!-- 预留 placeholder="yyy/mm/dd" -->
                                                     </div>
+                                                </div>
+                                                <div class="row">
+                                                    <span class="datumtitle">tot:</span>
                                                 </div>
                                                 <div class="form-group row justify-content-center">
                                                     <div class="input-group col-sm-12">
@@ -186,14 +160,14 @@
                                                         <input type="text"
                                                                class="form-control"
                                                                id="dateto"
-                                                               placeholder="tot dd-mm-yyyy">
+                                                               placeholder="dd-mm-yyyy">
                                                         <!-- 预留 placeholder="yyy/mm/dd" -->
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group mb-0">
-                                                    <label>Zoek in deze bronnen</label>
+                                            <div class="col-lg-3">
+                                                <div class="form-group mb-0 text-center">
+                                                    <label><strong>Zoek in deze bronnen</strong></label>
                                                 </div>
                                                 <div class="form-check">
                                                     <input class="form-check-input"
@@ -217,9 +191,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row justify-content-center">
-                                    <div onclick="do_search()" class="input-group col-xs-12 col-sm-8 col-md-6 col-lg-4">
-                                        <a class="btn btn-lg btn-block btn-outline-dark">Zoek</a>
+                                <div class="row justify-content-center">
+                                    <div class="col-sm col-md-12 text-center">
+                                        <button type="button" class="btn btn-primary bluebutton" onclick="location.href='search_engine.html'"><i class="fa fa-search"
+                                               aria-hidden="true"></i>
+                                            Zoek informatie
+                                        </button>
                                     </div>
                                 </div>
                             </form>
