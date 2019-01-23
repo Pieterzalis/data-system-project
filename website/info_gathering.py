@@ -44,8 +44,8 @@ def date_to_english(date):
 
 #Use queries based on the keywords to retrieve articles from the NewsAPI
 def get_news_articles(queries, fromdate, todate):
-	fromdate = '' if fromdate == 'nobound' else date_to_english(fromdate)
-	todate = '' if todate == 'nobound' else date_to_english(todate)
+	fromdate = '2015-19-10'#'' if fromdate == 'nobound' else date_to_english(fromdate)
+	todate = '2018-20-10'#'' if todate == 'nobound' else date_to_english(todate)
 	newsapi = NewsApiClient(api_key='2b7935c2680f46b487d833129210d4c3')
 	not_enough_articles = True
 	articles_to_find = 5
@@ -148,7 +148,6 @@ def get_previous_answers(queries, fromdate, todate):
 	return answers #if all queries together do not return 5 different previous answers, return what is found
 
 def main(argv):
-	keywords = argv[1]
 	keywords = argv[1][:-1].split(",") #[:-1] is to remove last comma
 	fromdate = argv[2]
 	todate = argv[3]
