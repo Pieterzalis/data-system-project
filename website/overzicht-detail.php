@@ -142,7 +142,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
             </div>
             <div class="row justify-content-center">
                 <div class="col-sm col-md-12">
-                    <button type="button" class="btn btn-primary bluebutton" onclick="location.href='search_engine.php'"><i class="fa fa-search"
+                    <button type="button" class="btn btn-primary bluebutton" onclick="location.href='search_engine.html'"><i class="fa fa-search"
                            aria-hidden="true"></i>
                         Zoek informatie
                     </button>
