@@ -59,7 +59,7 @@ function gatherInfo($question_id, $keywords, $fromdate, $todate, $search_news, $
         echo 'Error: Python returned no output';
     } else {
 		$data = json_decode($output_data);
-        saveSources($data, $question_id);
+        //saveSources($data, $question_id);
 		returnHTMLResponse($data);
     } 
 }
@@ -75,7 +75,9 @@ function returnHTMLResponse($data){
 		$outlet = $source->outlet;
 		$publish_date = $source->publish_date;
 		$snippet = $source->snippet;
-		$html .= '<div class="row justify-content-md-center">
+		$url = $source->url;
+		$type = $source->type;
+		$html .= '<div class="row justify-content-md-center source-card">
 					<div class="col-sm-12 col-md-11">
 						<div class="card mb-3">
 							<div class="card-body">
@@ -97,14 +99,14 @@ function returnHTMLResponse($data){
 													<br>
 													Datum: <strong>' . $publish_date . '</strong>
 												</div>
-												<div class="col-md content">What comes here?<br></br>
+												<div class="col-md content">' . $snippet . '<br></br>
 												<br></br>
-												' . $snippet . '</div>
+												</div>
 											</div>
 										</div>
 									</div>
 									<div class="col-sm-12 mt-2 mt-md-0 col-md-3 options justify-content-center d-flex  align-items-center">
-										<button class="btn btn-secondary btn-block">
+										<button onclick="store_source(this, \'' . $url . '\', \'' . $publish_date . '\', \'' . $title . '\', \'' . $snippet . '\', \'' . $type . '\', \'' . $outlet . '\')" class="btn btn-secondary btn-block">
 											Toevoegen aan kennisbank
 										</button>
 									</div>

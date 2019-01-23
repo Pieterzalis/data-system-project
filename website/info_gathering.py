@@ -60,7 +60,6 @@ def get_news_articles(queries, fromdate, todate):
 		articles_found = all_articles['articles']
 		for found_article in articles_found:
 			if found_article['title'] not in titles and len(articles) < articles_to_find:
-				print(found_article)
 				articles.append(found_article)
 				titles.append(found_article['title'])
 		if len(articles) == articles_to_find:
@@ -130,6 +129,7 @@ def get_previous_answers(queries, fromdate, todate):
 		fromdate = ''
 	if todate == 'nobound':
 		todate = ''
+	titles = []
 	answers = []
 	prev_answers_to_find = 5
 	for query in queries:
@@ -137,10 +137,11 @@ def get_previous_answers(queries, fromdate, todate):
 		response = requests.get(url)
 		soup = BeautifulSoup(response.text,'html.parser')
 		articlecards = soup.findAll("article", {"class": "card"})
-		time.sleep(1)
 		for articlecard in articlecards:
-			if articlecard not in answers and len(answers) < prev_answers_to_find:
+			title = articlecard.findAll("a", href=True)[2].getText()
+			if title not in titles and len(answers) < prev_answers_to_find:
 				answers.append(articlecard)
+				titles.append(title)
 		if len(answers) == prev_answers_to_find:
 			answers = clean_answers(answers)
 			return answers
