@@ -122,6 +122,10 @@
     vertical-align: middle;
 }
 
+.white{
+    color: #fff;
+}
+
 .partylogo{
     border: solid;
     border-color: #3f648d;
@@ -312,9 +316,9 @@ hr.color-white {
     font-size: 0.8rem;
 }
 
-.step-line .step.activated .step-num {
+.activated{
     color: #fff;
-    background: #4978ad;
+    background-color: #4978ad;
 }
 
 .step-line .step .current {
@@ -378,7 +382,9 @@ hr.color-white {
 }
 
 .badge-secondary {
-    margin: 0 1px 0 1px;
+    margin: 2px 4px 2px 4px;
+    font-weight: 100;
+    font-size: 90%;
 }
 
 .step-2 .file-analysing .file-analysing-icon .fa-spin {

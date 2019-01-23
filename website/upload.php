@@ -189,9 +189,13 @@
                 }
 
                 // Change parsing status to step-2
-                $("#progress-step2").addClass("actived");
+                $("#progress-step2").addClass("activated");
+                $("#progress-step1").removeClass("current");
+                $('#progress-step2').addClass('current');
+                $('#progress-label1').html('<i class="fa fa-check white"></i>')
                 $("#step-1").hide();
                 $("#step-2").show();
+
 
                 fetch('process.php', {
                     method: 'POST',
@@ -206,7 +210,10 @@
                         $('#jq-step3-div').html(text);
 
                         // Set progress in top of screen
-                        $("#progress-step3").addClass("actived");
+                        $("#progress-step3").addClass("activated");
+                        $("#progress-step2").removeClass("current");
+                        $("#progress-step3").addClass("current");
+                        $('#progress-label2').html('<i class="fa fa-check white"></i>')
 
                         // First hide the div step 1
                         $("#step-2").hide();
@@ -260,6 +267,10 @@
             file_init.show();
             file_name.hide();
             file_error.hide();
+            
+            $("#progress-step1").addClass("activated");
+            $("#progress-step1").addClass("current");
+
 
         }
 
@@ -268,8 +279,8 @@
             var step_1 = $('#step-1');
             var step_2 = $('#step-2');
             var step_3 = $('#step-3');
-            step_1.hide();
-            step_2.show();
+            step_1.show();
+            step_2.hide();
             step_3.hide();
 
             setTimeout(() => {
@@ -287,6 +298,9 @@
             step_1.hide();
             step_2.hide();
             step_3.show();
+            
+            $('#progress-step2').removeClass('current');
+            $('#progress-step3').addClass('current');
         }
 
         //默认调用第1步
@@ -382,7 +396,7 @@
                                 <!-- step-line -->
                                 <div class="container step-container">
                                     <div class="row step-line m-3 justify-content-md-center">
-                                        <div class="col step actived" id="progress-step1">
+                                        <div class="col step">
                                             <div class="step-icon">
                                                 <i class="fa fa-file fa-2x d-block d-md-none"></i>
                                                 <i class="fa fa-file fa-3x d-none d-md-block"></i>
@@ -390,8 +404,8 @@
                                             <div class="step-text">
                                                 <p>Upload</p>
                                             </div>
-                                            <div class="step-num">
-                                                <label>1</label>
+                                            <div class="step-num" id="progress-step1">
+                                                <label id="progress-label1">1</label>
                                             </div>
                                         </div>
                                         <div class="col step p-0">
@@ -399,7 +413,7 @@
                                                 <hr>
                                             </div>
                                         </div>
-                                        <div class="col step" id="progress-step2">
+                                        <div class="col step">
                                             <div class="step-icon">
                                                 <i class="fa fa-cog fa-2x d-block d-md-none"></i>
                                                 <i class="fa fa-cog fa-3x d-none d-md-block"></i>
@@ -407,8 +421,8 @@
                                             <div class="step-text">
                                                 <p>Verwerk</p>
                                             </div>
-                                            <div class="step-num">
-                                                <label>2</label>
+                                            <div class="step-num" id="progress-step2">
+                                                <label id="progress-label2">2</label>
                                             </div>
                                         </div>
                                         <div class="col step p-0">
@@ -416,7 +430,7 @@
                                                 <hr>
                                             </div>
                                         </div>
-                                        <div class="col step" id="progress-step3">
+                                        <div class="col step">
                                             <div class="step-icon">
                                                 <i class="fa fa-check-square fa-2x d-block d-md-none"></i>
                                                 <i class="fa fa-check-square fa-3x d-none d-md-block"></i>
@@ -424,8 +438,8 @@
                                             <div class="step-text">
                                                 <p>Controleer</p>
                                             </div>
-                                            <div class="step-num">
-                                                <label>3</label>
+                                            <div class="step-num" id="progress-step3">
+                                                <label id="progress-label3">3</label>
                                             </div>
                                         </div>
                                     </div>
@@ -450,8 +464,8 @@
                                                     <div id="file-init">
                                                         <p>Sleep het bestand hier naar toe of
                                                             <a id="Choose_click_1" class="a_choose_click" style="cursor: pointer;" href=""
-                                                               title="Choose file">Klik<input style="cursor: pointer;" type="file" class="file-uploader" name="uploadDataField" id="FileUploader1" /></a>
-                                                             om te zoeken op uw computer</p>
+                                                               title="Choose file">klik<input style="cursor: pointer;" type="file" class="file-uploader" name="uploadDataField" id="FileUploader1" /></a>
+                                                             hier om te zoeken op uw computer</p>
                                                     </div>
 
                                                     <!-- file-name -->
