@@ -49,7 +49,64 @@
             var file_error = $("#file-error");
             file_name.hide();
             file_error.hide();
-            if (fileUploader1.addEventListener) {
+            
+			
+			
+			// 查找到 id=step-1的控件
+            var dragWidget=document.getElementById("step-1");
+            // 给控件添加 拖拽进入的事件
+            dragWidget.ondragenter=function(){
+                // this.innerHTML="可以释放了";
+            }
+            // 给控件添加 拖拽 悬浮的事件（鼠标没有释放）
+            dragWidget.ondragover=function(ev){
+                ev.preventDefault();
+            }
+            // 给控件添加 拖拽 离开的事件
+            dragWidget.ondragleave=function(){
+                // this.innerHTML="将文件拖拽到此区域";
+            }
+            // 给控件添加 拖拽 鼠标释放的 事件
+            dragWidget.ondrop=function(ev){
+                ev.preventDefault();
+                // 触发上传文件的功能
+                fileDragChangeHandler(ev)
+            }
+            // 拖拽上传文件的方法，这个方法与fileUploaderChangeHandler一模一样，只是事件对象获取文件的方式不一样，后面的逻辑就跟手动选择文件上传是一致的了
+            function fileDragChangeHandler(e, a, b, c) {
+                step1.removeClass('alert alert-danger');
+                var strFileName = '';
+                if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+                    strFileName = e.dataTransfer.files["0"].name;
+                    if (strFileName && strFileName.length) {
+                        if (strFileName.endsWith('.pdf')) {
+                            //
+                            file_init.hide();
+                            file_name.show();
+                            file_error.hide();
+                            // alert('文件符合要求');
+                            saveFile(e.dataTransfer.files["0"]);
+                            // 完成上传文件的功能，这里面就是step步骤的切换，
+                            upload(e.dataTransfer.files);
+                        } else {
+                            step1.addClass('alert alert-danger');
+                            // alert('文件不符合要求');
+                            file_init.hide();
+                            file_name.hide();
+                            file_error.show();
+                            strFileName = '';
+                        }
+                    } else {
+                        strFileName = '';
+                    }
+                }
+                pathDisplayer.innerText = strFileName;
+            }
+			
+			
+			
+			
+			if (fileUploader1.addEventListener) {
                 fileUploader1.addEventListener('change', fileUploaderChangeHandler, false);
             } else if (fileUploader1.attachEvent) {
                 fileUploader1.attachEvent('onclick', fileUploaderClickHandler);
@@ -81,7 +138,7 @@
                 if (e.currentTarget && e.currentTarget.files && e.currentTarget.files.length) {
                     strFileName = e.currentTarget.files["0"].name;
                     if (strFileName && strFileName.length) {
-                        if (strFileName.endsWith('.doc') || strFileName.endsWith('.docx') || strFileName.endsWith('.txt') || strFileName.endsWith('.pdf')) {
+                        if (strFileName.endsWith('.pdf')) {
                             //
                             file_init.hide();
                             file_name.show();
