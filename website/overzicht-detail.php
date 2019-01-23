@@ -50,6 +50,26 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
     <?php
     include_once("templates/template_head.php");
     ?>
+
+    <script>
+        $(document).ready(function () {
+
+            $(".card-close-btn").click(function () {
+
+                $(this).parents(".sourcescard").fadeOut(500);
+
+                $.post( "database/Model_Source.php", { func: "removeFromKnowledgeBase", id: this.id })
+                    .done(function( data ) {
+                        // Change contents of div
+                        if (!(data === 'success')){
+                            alert('Error removing source from knowledge base.')
+                        }
+                    })
+            });
+
+        });
+    </script>
+
 </head>
 
 
@@ -153,12 +173,12 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                                         <p>Titel: <?= $source['source_title'] ?></p>
                                     </div>
                                     <div class="flex-none">
-                                        <a href=""
-                                           class="card-close-btn text-secondary">
+                                        <button type="button" class="close card-close-btn text-secondary"
+                                            id="sID-<?= $source['source_id'] ?>">
                                             <!-- close -->
                                             <i class="fa fa-close"
                                                aria-hidden="true"></i>
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="row">
