@@ -264,7 +264,7 @@
                                                         <div class="d-flex align-items-center">
                                                             <div class="flex-none mr-2">
                                                                 <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#<?=$kk+1?></p>
+                                                                   aria-hidden="true"></i><p>#<?=$vv['question_number']?></p>
                                                             </div>
                                                             <div class="flex-1"><?=$vv['question_title']?></div>
                                                             <div class="flex-none ml-2">
