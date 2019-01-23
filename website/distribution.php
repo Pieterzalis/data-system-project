@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if(!isset($_SESSION['login_id'])) {
+header("location: login.php");
+exit();
+}
+
+$user_check = $_SESSION['login_username'];
+$user_fullname = $_SESSION['login_fullname'];
+$user_id = $_SESSION['login_id'];
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
