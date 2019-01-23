@@ -270,6 +270,12 @@
             
             $("#progress-step1").addClass("activated");
             $("#progress-step1").addClass("current");
+            $("#progress-step2").removeClass("current");
+            $("#progress-step2").removeClass("activated");
+            $("#progress-step3").removeClass("current");
+            $("#progress-step3").removeClass("activated");
+            $('#progress-label2').html('2')
+
 
 
         }
