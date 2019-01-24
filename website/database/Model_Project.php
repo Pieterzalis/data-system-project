@@ -172,7 +172,7 @@ function getAssignedQuestionsHtml($user_id) {
                         $html .= "           <!-- begin questions!!! -->
                                     <ul class=\"my-list-group container-fluid\">
                                         <a class=\"child-item\" \">
-                                        <li onclick=\"changePage(this,{pageId:" . $q_item['question_id'] . "})\" class=\"my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center questions\">
+                                        <li onclick=\"changePage(this,{pageId:" . $q_item['question_id'] . "})\" class=\"my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center questions cursor-pointer\">
                                             <div class=\"col-3 col-md-auto pr-sm-2 pr-md-3\">#" . $q_item['question_number'] . "</div>
                                             <div class=\"col-9 col-md px-sm-2 px-md-3 border-md-right\">" . $q_item['question_title'] . "</div>
                                             <div class=\"col-9 col-md-auto px-sm-2 px-md-3\">
