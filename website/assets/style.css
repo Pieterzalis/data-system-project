@@ -122,7 +122,11 @@
     margin-top: 10px;
 }
 
-.fa-home, .fa-plus, fa-arrow-left{
+.fa-home, .fa-plus{
+    margin-right: 10px;
+}
+
+.fa-arrow-left{
     margin-right: 10px;
 }
 
