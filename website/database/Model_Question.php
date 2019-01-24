@@ -165,7 +165,7 @@ function getDistributionProjectCardsHtml() {
 
                 // Now build the card
                 $html .= "
-                        <div class=\"col-xl-6 col-md-12\">
+                        <div class=\"col-xl-6 col-md-12 removeleftpadding\">
                             <div class=\"toewijzencard\">
                                 <div class=\"card text-center\">
                                     <p>Kamervragen #".$row['project_code']."</p>
@@ -177,7 +177,6 @@ function getDistributionProjectCardsHtml() {
                                 </div>
                             </div>
                         </div>";
-
             }
         }
 

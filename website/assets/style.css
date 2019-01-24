@@ -99,6 +99,14 @@
     margin: 10px 0 10px 0;
 }
 
+.removeleftpadding{
+    padding-left: 0;
+}
+
+.removeleftmargin{
+    margin-left: 0px;
+}
+
 .toewijzenbutton {
     width: 150px;
     margin: 0 auto;

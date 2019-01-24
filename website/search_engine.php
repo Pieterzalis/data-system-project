@@ -109,6 +109,15 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
         }
 
 	</script>
+    <script>
+        $(document).ready(function () {
+            
+            $("#help").on("click", function(){
+                alert("De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden");
+            }); 
+        });
+        
+    </script>
 </head>
 
 <body class="page_search_engine">
@@ -144,8 +153,11 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                                     <div class="container">
                                         <div class="row justify-content-md-center">
                                             <div class="col-lg-3 text-center">
-                                                <div class="form-group mb-0"><!--  -->
-                                                    <label><strong>Sleutelwoorden</strong></label>
+                                                <div class="form-group mb-0">
+                                                    <label>
+                                                        <strong>Keywords </strong>
+                                                        <i class="fa fa-question-circle cursor-pointer" id="help" title="De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden"></i>
+                                                    </label>
                                                 </div>
                                                 <div class="keywordtags"><?php
 								                //#列出该project的所有keyword
