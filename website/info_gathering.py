@@ -77,7 +77,7 @@ def monthname_to_int(month):
 		return '01'
 	elif month == 'feb':
 		return '02'
-	elif month == 'mar':
+	elif month == 'mrt':
 		return '03'
 	elif month == 'apr':
 		return '04'
