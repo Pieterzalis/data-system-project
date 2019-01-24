@@ -200,11 +200,12 @@
                                                 ORDER BY project_id DESC";
 
 
-										if(isset($_POST['Search']))//#如果有搜索就用这个sql来查project
+										if(isset($_POST['Search'])) { //#如果有搜索就用这个sql来查project
 											$sql = "SELECT  project_id,project_title 
-                                                    FROM question
-                                                    and project_title like '%{$_POST['Search']}%' 
+                                                    FROM project
+                                                    WHERE project_title like '%{$_POST['Search']}%' 
                                                     order by project_id desc";
+										}
 										$projects = DB::query($sql);
 
 										foreach($projects as $project){//#显示project列表

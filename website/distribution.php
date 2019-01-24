@@ -40,32 +40,7 @@
             <div class="row m-3" style="font-size: 25px">
                 <p>Toegewezen kamervragen</p>
             </div>
-            <div class="row m-3">
-                <div class="col-sm card-left">
-                    <div class="toewijzencard">
-                        <div class="card text-center">
-                            <p>kamervragen #: 23457245</p>
-                            <h4>Kamervragen titel komt hier dan</h4>
-                            <span>Deadline: <Strong>?= $date_deadline ?</Strong></span>
-                            <p>Indiener: <strong>Corrie van Brenk - 50 Plus</strong></p>
-                            <h5>Toegewezen vragen: 0/8</h5>
-                            <button type="button" class="btn btn-primary shadow bluebutton toewijzenbutton" onclick="">Toewijzen</button>
-                        </div>
-                    </div>
-                </div>
-                 <div class="col-sm card-left">
-                    <div class="toewijzencard">
-                        <div class="card text-center">
-                            <p>kamervragen #: 23457245</p>
-                            <h4>Kamervragen titel komt hier dan</h4>
-                            <span>Deadline: <Strong>?= $date_deadline ?</Strong></span>
-                            <p>Indiener: <strong>Corrie van Brenk - 50 Plus</strong></p>
-                            <h5>Toegewezen vragen: 0/8</h5>
-                            <button type="button" class="btn btn-primary shadow bluebutton toewijzenbutton" onclick="">Toewijzen</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          
         </div>
     </div>
             <!-- layout_content -->    
