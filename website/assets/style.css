@@ -208,6 +208,10 @@ hr.color-white {
     background: #563d7c;
 }
 
+.bg-darkblue{
+    background: #275192;
+}
+
 .bg-shadow {
     background: #00000088;
 }

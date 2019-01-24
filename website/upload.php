@@ -22,35 +22,10 @@
 <html>
 
 <head>
-
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible"
-          content="IE=edge">
-    <title>Nieuw Project</title>
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
-          href="assets/style.css" />
-    <link rel="stylesheet"
-          type="text/css"
-          media="screen"
-          href="bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet"
-          href="assets/icon-font/css/font-awesome.min.css">
-
-    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-            crossorigin="anonymous"></script>
-
-    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-
-    <script src="../website/assets/js/index.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-
+    <title>Nieuwe Kamervragen</title>
+    <?php
+    include_once("templates/template_head.php");
+    ?>
 
     <script>
         $(document).ready(function () {
@@ -227,26 +202,6 @@
 
                 });
             }
-
-            /*
-                form.append('uploads[]', file, file.name);
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = () => {
-                    if (xhr.readyState === 4) {
-                        if (xhr.status === 200) {
-                            // 上传成功提示
-                            alert('上传成功');
-                        } else {
-                            // TODO：失败提示
-                            alert('上传失败');
-                        }
-                    }
-                };
-                var APIurl = 'http://www.baidu.com';
-                xhr.open('POST', 'C:\\xampp\\htdocs\\', true);
-                xhr.setRequestHeader('Content-Type', 'multipart/form-data');
-                xhr.send(form);
-            }*/
         });
     </script>
     <script>
@@ -275,14 +230,14 @@
             $("#progress-step3").removeClass("current");
             $("#progress-step3").removeClass("activated");
             $('#progress-label2').html('2')
-            $('#progress-label2').html('1')
+            $('#progress-label1').html('1')
 
 
 
         }
 
         
-        function gotoStep2() {
+        /*unction gotoStep2() {
             var step_1 = $('#step-1');
             var step_2 = $('#step-2');
             var step_3 = $('#step-3');
@@ -295,10 +250,10 @@
                 gotoStep3();
             }, 5000);
 
-        }
+        }*/
 
         //进入第3步
-        function gotoStep3() {
+        /*function gotoStep3() {
             var step_1 = $('#step-1');
             var step_2 = $('#step-2');
             var step_3 = $('#step-3');
@@ -308,9 +263,9 @@
             
             $('#progress-step2').removeClass('current');
             $('#progress-step3').addClass('current');
-        }
+        }*/
 
-        //默认调用第1步
+        //When the page loads, execute GoToStep1();
         $(document).ready(function () {
             gotoStep1();
         })
@@ -332,6 +287,16 @@
             hideAlert();
         });
     </script>
+    
+    <script>
+        $(document).ready(function () {
+            function goToDistribution(){
+                window.location = "distribution.php";
+            }
+        });
+    </script>
+    
+    
     <style>
         .a_choose_click{
             position: relative;
@@ -352,10 +317,6 @@
 
 <body class="page_search_engine">
     <!-- 此处显示demo图作为参考-->
-    <div class="demopage hidden">
-        <img src="assets/demo/upload-1.png">
-    </div>
-
     <div class="container-fluid my-layout d-flex flex-column">
         <div class="row flex-none">
             <!-- layout_nav -->
@@ -367,18 +328,17 @@
                                 <img src="assets/img/logo.png"></div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Nieuw Project</h3>
+                            <h3 class="page-title">Nieuwe Kamervragen</h3>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
                             <div class="options">
                                 <!-- UserName -->
-                                <a href="">
                                     <div class="avatar">
                                         <img class="rounded-circle"
                                              src="assets/img/girl.png"
                                              alt="">
                                     </div>
-                                    Laura Zuidensteijn</a>
+                                <span class="profilename">Laura Zuidensteijn</span>
                                 <!-- sign-out -->
                                 <a href="login.html"
                                    class="ml-3 mr-3">
@@ -531,33 +491,17 @@
                                                     <hr>
                                                     <hr>
                                                 </i>
-                                                <!--<i class="fa m-sm-2 my-icon-file">-->
-                                                    <!--<span class="bg-primary text-white">doc</span>-->
-                                                    <!--<hr>-->
-                                                    <!--<hr>-->
-                                                    <!--<hr>-->
-                                                <!--</i>-->
-                                                <!--<i class="fa m-sm-2 my-icon-file">-->
-                                                    <!--<span class="bg-purple text-white">docx</span>-->
-                                                    <!--<hr>-->
-                                                    <!--<hr>-->
-                                                    <!--<hr>-->
-                                                <!--</i>-->
-                                                <!--<i class="fa m-sm-2 my-icon-file">-->
-                                                    <!--<span class="bg-warning text-white">...</span>-->
-                                                    <!--<hr>-->
-                                                    <!--<hr>-->
-                                                    <!--<hr>-->
-                                                <!--</i>-->
-                                                <!-- <i class="mx-1 fa fa-3x fa-file-pdf-o"></i>
-                                                <i class="mx-1 fa fa-3x fa-file-excel-o"></i>
-                                                <i class="mx-1 fa fa-3x fa-file-word-o"></i>
-                                                <i class="mx-1 fa fa-3x fa-file-text-o"></i> -->
+                                                <i class="fa m-sm-2 my-icon-file">
+                                                    <span class="bg-darkblue text-white">docx</span>
+                                                    <hr>
+                                                    <hr>
+                                                    <hr>
+                                                </i>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <a><button class="btn btn-danger">ANNULEER</button></a>
+                                    <button onclick="goToDistribution()" class="btn btn-danger">ANNULEER</button>
                                 </div>
 
 
