@@ -71,7 +71,7 @@ function saveSources($data, $question_id){
 function returnHTMLResponse($data){
 	$html = "";
 	foreach($data as $source){
-		$title = preg_replace("'", "\'", $source->title);
+		$title = $source->title;
 		$outlet = $source->outlet;
 		$publish_date = $source->publish_date;
 		$snippet = preg_replace("/\r|\n/", " ", $source->snippet);
