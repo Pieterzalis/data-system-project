@@ -89,7 +89,8 @@
                     <div class="row">
                         <div class="col-sm-4 pl-0">
                             <div class="logo">
-                                <img src="assets/img/logo.png"></div>
+                                <img src="assets/img/logo.png">
+                            </div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-center">
                             <h3 class="page-title">Jouw Kamervragen</h3>

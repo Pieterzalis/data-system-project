@@ -2,6 +2,17 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.active-keyword {
+	background-color : #6c757d;
+	color: #fff;
+}
+
+.nonactive-keyword {
+	background-color : white;
+	color: black;
+	border: 1px solid;
+}
+
 .project-table {
     box-shadow: 0 2px 20px -5px rgba(0, 0, 0, 0.5);
     margin-top: 2rem;
@@ -97,6 +108,14 @@
 .toewijzencard {
     box-shadow: 0 2px 15px -5px rgba(0, 0, 0, 1);
     margin: 10px 0 10px 0;
+}
+
+.removeleftpadding{
+    padding-left: 0;
+}
+
+.removeleftmargin{
+    margin-left: 0px;
 }
 
 .toewijzenbutton {
@@ -206,6 +225,10 @@ hr.color-white {
 
 .bg-purple {
     background: #563d7c;
+}
+
+.bg-darkblue{
+    background: #275192;
 }
 
 .bg-shadow {
@@ -586,12 +609,31 @@ hr.color-white {
     overflow: auto;
 }
 
+.page_login{
+    background-image: url("img/loginbackground.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logorow{
+    margin-bottom: 10px;
+}
+
+.formcontainer{
+    background: white;
+    border: solid 2px #154274;
+    border-radius: 5px;
+}
+
 .page_login .login-form {
     margin: 20px auto;
 }
 
 .page_login .login-form .logo img {
-    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
 
 .page_login .login-form .title {
@@ -601,12 +643,11 @@ hr.color-white {
 .page_login .login-form form {
     margin-top: 20px;
     padding: 20px;
-    border: 1px solid #000;
 }
 
 @media (min-width: 768px) {
     .page_login .login-form {
-        margin-top: 130px !important;
+        margin-top: 60px !important;
     }
 }
 

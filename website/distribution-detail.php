@@ -111,44 +111,9 @@ if(isset($_GET['uid'])&& isset($_GET['qid'])){
     </head>
     
 <body class="distribution-detail-page">
-
-    <div class="row flex-none">
-        <!-- layout_nav -->
-        <div class="col-sm p-0 layout_nav d-flex flex-row justify-content-between align-items-center">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-4 pl-0">
-                        <div class="logo">
-                            <img src="assets/img/logo.png"></div>
-                    </div>
-                    <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                        <h3 class="page-title">Jouw Kamervragen</h3>
-                    </div>
-                    <div class="col-sm-4 d-flex align-items-center justify-content-end">
-                        <div class="options">
-                            <!-- UserName -->
-                            <div class="avatar">
-                                <img class="rounded-circle"
-                                     src="assets/img/<?=$user_check?>.jpg"
-                                     alt="">
-                            </div>
-                            <?= $user_fullname ?>
-                            <!-- sign-out -->
-                            <a href="logout.php"
-                               class="ml-3 mr-3">
-                                <i class="fa fa-sign-out"
-                                   aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="container-fluid my-layout d-flex flex-column" id="leftMenu">
         <div class="m-3 p-md-3 p-lg-4 text-center">
-            <div class="row justify-content-md-left">
+            <div class="row justify-content-md-left removeleftmargin">
                 <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='distribution.php'">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>Terug naar overzicht</button>
             </div>
@@ -193,32 +158,6 @@ if(isset($_GET['uid'])&& isset($_GET['qid'])){
                             <?php } ?>
                         </li>
                     <?php } ?>
-
-                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">#1</div>
-                            <div class="col-9 col-md px-sm-2 px-md-3">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
-                            <div class="col-9 col-md-auto px-sm-2 px-md-5">
-                                <div class="avatar avatar-md mx-3">
-                                    <img class="rounded-circle"
-                                         src="assets/img/man.jpg"
-                                         alt="">
-                                    <p class="text-mini mb-0">name</p>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">#1</div>
-                            <div class="col-9 col-md px-sm-2 px-md-3">XXXX XXXX XXXX XXXXX XXXX XXXX XXXX XXXXX</div>
-                            <div class="col-9 col-md-auto px-sm-2 px-md-5">
-                                <div class="avatar avatar-md mx-3">
-                                    <img class="rounded-circle"
-                                         src="assets/img/man.jpg"
-                                         alt="">
-                                    <p class="text-mini mb-0">name</p>
-                                </div>
-                            </div>
-                        </li>
                 </ul>
             </div>
             <div class="card-body" id="toewijzen2">

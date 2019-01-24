@@ -69,58 +69,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row justify-content-md-center">
             <div class="col-sm-12 col-md-7 col-lg-6 col-xl-5">
                 <div class="login-form">
-                    <div class="logo">
-                        <img src="assets/img/logo.png"
-                             alt="">
+                    <div class="row logorow justify-content-center">
+                        <div class="logo justify-content-center">
+                            <img src="assets/img/logologin.jpg"
+                                 alt="">
+                        </div>
                     </div>
-                    <form action="" method="post">
-                        <h1 class="text-center title">Log in</h1>
-                        <div class="form-group row">
-                            <label for="inputUser"
-                                   class="col-sm-6 col-form-label">
-                                <i class="fa fa-user-circle"
-                                   aria-hidden="true"></i>
-                                Gebruikersnaam
-                            </label>
-                            <div class="col-sm">
-                                <input type="text"
-                                       class="form-control"
-                                       id="inputUser"
-                                       name="username"
-                                       placeholder="">
-                            </div>
+                    <div class="row justify-content-center">
+                        <div class="formcontainer">
+                            <form action="" method="post">
+                                <h1 class="text-center title">Log in</h1>
+                                <div class="form-group row">
+                                    <label for="inputUser"
+                                           class="col-sm-6 col-form-label">
+                                        <i class="fa fa-user-circle"
+                                           aria-hidden="true"></i>
+                                        Gebruikersnaam
+                                    </label>
+                                    <div class="col-sm">
+                                        <input type="text"
+                                               class="form-control"
+                                               id="inputUser"
+                                               name="username"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword"
+                                           class="col-sm-6 col-form-label">
+                                        <i class="fa fa-lock"
+                                           aria-hidden="true"></i>
+                                        Wachtwoord
+                                    </label>
+                                    <div class="col-sm">
+                                        <input type="password"
+                                               class="form-control"
+                                               id="inputPassword"
+                                               name="password"
+                                               placeholder="">
+                                    </div>
+                                </div>
+                                <div class="form-group row flex-column">
+                                    <label for="inputPassword"
+                                           class="col-sm-12 col-form-label align-self-end text-right">
+                                    </label>
+                                </div>
+                                <?php if (!empty($error)) { ?>
+                                <div class="justify-content-center" style ="color:#cc0000; margin:10px 0 10px 0"><?php echo $error; ?></div>
+                                <?php } ?>
+        
+                                <div class="form-group row justify-content-center">
+                                    <input class="btn btn-lg btn-outline-dark" type = "submit" value = " Submit "/>
+<!--                                    <a type="submit" class="btn btn-lg btn-outline-dark">Log in</a>-->
+                                </div>
+        
+                            </form>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputPassword"
-                                   class="col-sm-6 col-form-label">
-                                <i class="fa fa-lock"
-                                   aria-hidden="true"></i>
-                                Wachtwoord
-                            </label>
-                            <div class="col-sm">
-                                <input type="password"
-                                       class="form-control"
-                                       id="inputPassword"
-                                       name="password"
-                                       placeholder="">
-                            </div>
-                        </div>
-                        <div class="form-group row flex-column">
-                            <label for="inputPassword"
-                                   class="col-sm-12 col-form-label align-self-end text-right">
-                                <a href="">Wachtwoord vergeten?</a>
-                            </label>
-                        </div>
-                        <?php if (!empty($error)) { ?>
-                        <div class="justify-content-center" style ="color:#cc0000; margin:10px 0 10px 0"><?php echo $error; ?></div>
-                        <?php } ?>
-
-                        <div class="form-group row justify-content-center">
-                            <input class="btn btn-lg btn-outline-dark" type = "submit" value = " Submit "/>
-<!--                            <a type="submit" class="btn btn-lg btn-outline-dark">Log in</a>-->
-                        </div>
-
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

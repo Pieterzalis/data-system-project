@@ -71,10 +71,11 @@ function saveSources($data, $question_id){
 function returnHTMLResponse($data){
 	$html = "";
 	foreach($data as $source){
-		$title = $source->title;
+		$title = str_replace('"', "'", $source->title);
 		$outlet = $source->outlet;
 		$publish_date = $source->publish_date;
 		$snippet = preg_replace("/\r|\n/", " ", $source->snippet);
+		$snippet = str_replace('"', "'", $snippet);
 		$url = $source->url;
 		$type = $source->type;
 		$html .= '<div class="row justify-content-md-center source-card">
@@ -95,7 +96,7 @@ function returnHTMLResponse($data){
 										<div class="container">
 											<div class="row">
 												<div class="col-md-3 info">
-													Bron: <strong><u>' . $outlet. '</u></strong>
+													Bron: <a href="'.$url.'" target="_blank"><strong><u>' . $outlet. '</u></strong></a>
 													<br>
 													Datum: <strong>' . $publish_date . '</strong>
 												</div>
@@ -107,7 +108,7 @@ function returnHTMLResponse($data){
 									</div>
 									<div class="col-sm-12 mt-2 mt-md-0 col-md-3 options justify-content-center d-flex  align-items-center">
 										<div class="jq-addsource">
-											<button onclick="store_source(this, \'' . $url . '\', \'' . $publish_date . '\', \'' . $title . '\', \'' . $snippet . '\', \'' . $type . '\', \'' . $outlet . '\')" class="btn btn-secondary btn-block jq-addtokb">
+											<button onclick="store_source(this, &quot;' . $url . '&quot;, &quot;' . $publish_date . '&quot;, &quot;' . $title . '&quot;, &quot;' . $snippet . '&quot;, &quot;' . $type . '&quot;, &quot;' . $outlet . '&quot;)" class="btn btn-secondary btn-block jq-addtokb">
 												Toevoegen aan kennisbank
 										    </button>
 									    </div>

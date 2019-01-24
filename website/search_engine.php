@@ -38,9 +38,11 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
     <script src="bootstrap/js/bootstrap.min.js"></script>
 	<script>
         $(document).ready(function () {
-
+			$('.badge-secondary').click(function(){
+				$(this).toggleClass('active-keyword');
+				$(this).toggleClass('nonactive-keyword');
+			});
             $(".do_search").click(function () {
-
                     $("#sourcecontainer").html("Searching for relevant sources...");
                     var use_news_articles = $('#gridCheck1:checked').val();
                     if (use_news_articles == undefined){
@@ -62,7 +64,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                     console.log(use_old_answers);
                     var userkeywords = $("#Searchfield").val().split(',');
                     var autokeywords = [];
-                    $(".keywordtags").children('span').each(function(index){
+                    $(".keywordtags").children('.active-keyword').each(function(index){
                         autokeywords.push($(this).text());
                     });
                     keywords = userkeywords.concat(autokeywords);
@@ -109,6 +111,15 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
         }
 
 	</script>
+    <script>
+        $(document).ready(function () {
+            
+            $("#help").on("click", function(){
+                alert("De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden");
+            }); 
+        });
+        
+    </script>
 </head>
 
 <body class="page_search_engine">
@@ -144,13 +155,16 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                                     <div class="container">
                                         <div class="row justify-content-md-center">
                                             <div class="col-lg-3 text-center">
-                                                <div class="form-group mb-0"><!--  -->
-                                                    <label><strong>Sleutelwoorden</strong></label>
+                                                <div class="form-group mb-0">
+                                                    <label>
+                                                        <strong>Keywords </strong>
+                                                        <i class="fa fa-question-circle cursor-pointer" id="help" title="De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden"></i>
+                                                    </label>
                                                 </div>
                                                 <div class="keywordtags"><?php
 								                //#列出该project的所有keyword
 								                foreach($keywords as $v){
-                                                    echo '<span class="badge badge-pill badge-secondary">'.$v['keyword_name'].'</span>';
+                                                    echo '<span class="badge badge-pill badge-secondary active-keyword">'.$v['keyword_name'].'</span>';
 								                }
 								                	?>
                                                 </div>
