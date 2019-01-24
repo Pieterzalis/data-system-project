@@ -43,7 +43,20 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
 				$(this).toggleClass('nonactive-keyword');
 			});
             $(".do_search").click(function () {
-                    $("#sourcecontainer").html("Searching for relevant sources...");
+                    $("#sourcecontainer").html("<div class=\"row justify-content-md-center source-card\">\n" +
+                        "\t<div class=\"col-sm-12 col-md-11\">\n" +
+                        "\t\t<div class=\"card mb-3\">\n" +
+                        "\t\t\t<div class=\"card-body\">\n" +
+                        "\t\t\t\t<div class=\"row justify-content-center\">\n" +
+                        "\t\t\t\t\t\t<img src=\"assets/img/load-gif.gif\" height=\"60\" width=\"60\">\n" +
+                        "</div>\n" +
+                        "<div class=\"row justify-content-center\">\n" +
+                        "\t\t    <p>Zoeken...</p>\n" +
+                        "\t\t\t\t</div>\n" +
+                        "\t\t\t</div>\n" +
+                        "\t\t</div>\n" +
+                        "\t</div>\n" +
+                        "</div>");
                     var use_news_articles = $('#gridCheck1:checked').val();
                     if (use_news_articles == undefined){
                         use_news_articles = 'off';
@@ -69,7 +82,17 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                     });
                     keywords = userkeywords.concat(autokeywords);
 					if((keywords.length < 3 && userkeywords == "") || keywords.length < 2){
-						$("#sourcecontainer").html("Te weinig keywords. Gebruik minimaal twee keywords voor een zoekopdracht.");
+						$("#sourcecontainer").html("<div class=\"row justify-content-md-center source-card\">\n" +
+                            "\t<div class=\"col-sm-12 col-md-11\">\n" +
+                            "\t\t<div class=\"card mb-3\">\n" +
+                            "\t\t\t<div class=\"card-body\">\n" +
+                            "\t\t\t\t<div class=\"row justify-content-center\">\n" +
+                            "\t\t\t\t\t<p>Te weinig keywords. Gebruik minimaal twee keywords voor een zoekopdracht.</p>\n" +
+                            "\t\t\t\t</div>\n" +
+                            "\t\t\t</div>\n" +
+                            "\t\t</div>\n" +
+                            "\t</div>\n" +
+                            "</div>");
 					} else {
 						console.log(keywords);
 						console.log($("#datefrom").val());
