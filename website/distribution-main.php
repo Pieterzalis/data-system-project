@@ -49,6 +49,7 @@
             back();
         }
         function jump(pageId) {
+            console.log('testblablabla');
             $('.page-title')[0].innerText='Kamervraag';
             // indexPage
             var indexNavPage = $('#indexPage');
@@ -59,7 +60,7 @@
             // 测试百度
             // childNavPage.attr('src', 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=' + pageId); 
             // 真实请求
-            childNavPage.attr('src', 'distrihbution-detail.php?id=' + pageId);//#这里换成php文件
+            childNavPage.attr('src', 'distribution-detail.php?id=' + pageId);//#这里换成php文件
         }
         function back() {
             lastClick.removeClass("actived");
@@ -195,88 +196,39 @@
 										<?php
 										//#从数据库取出所有project
 										$sql = "SELECT  project_id,project_title 
-                                                FROM question 
-                                                INNER JOIN project ON question_project_id = project_id 
-                                                WHERE question_id IN ( 
-                                                    SELECT question_id 
-                                                    FROM question_has_experts 
-                                                    WHERE user_id = '$user_id' 
-                                                )
+                                                FROM project
                                                 ORDER BY project_id DESC";
 
 
 										if(isset($_POST['Search']))//#如果有搜索就用这个sql来查project
 											$sql = "SELECT  project_id,project_title 
-                                                    FROM question 
-                                                    INNER JOIN project ON question_project_id = project_id 
-                                                    WHERE question_id IN ( 
-                                                        SELECT question_id 
-                                                        FROM question_has_experts 
-                                                        WHERE user_id = '$user_id' 
-                                                    )
+                                                    FROM question
                                                     and project_title like '%{$_POST['Search']}%' 
                                                     order by project_id desc";
-										$a = DB::query($sql);
+										$projects = DB::query($sql);
 
-										foreach($a as $v){//#显示project列表
+										foreach($projects as $project){//#显示project列表
 										?>
                                         <div class="card m-2">
                                             <div class="card-header collapsed"
-                                                 id="headingOne<?=$v['project_id']?>"
+                                                 id="headingOne<?=$project['project_id']?>"
+                                                 onclick="changePage(this, {pageId:<?=$project['project_id']?>})"
                                                  data-toggle="collapse"
-                                                 data-target="#collapseOne<?=$v['project_id']?>"
+                                                 data-target="#collapseOne<?=$project['project_id']?>"
                                                  aria-expanded="false"
-                                                 aria-controls="collapseOne<?=$v['project_id']?>">
+                                                 aria-controls="collapseOne<?=$project['project_id']?>">
                                                 <div class="d-flex align-items-center">
                                                     <div class="flex-none mr-2">
                                                         <i class="fa fa-file fa-fw"
                                                            aria-hidden="true"></i>
                                                     </div>
-                                                    <div class="flex-1"><?=$v['project_title']?></div>
+                                                    <div class="flex-1"><?=$project['project_title']?></div>
                                                     <div class="flex-none  ml-2">
-                                                        <i class="fa fa-angle-down"
+                                                        <i class="fa fa-angle-right"
                                                            aria-hidden="true"></i>
                                                     </div>
                                                 </div>
 
-                                            </div>
-
-                                            <div id="collapseOne<?=$v['project_id']?>"
-                                                 class="collapse"
-                                                 aria-labelledby="headingOne<?=$v['project_id']?>"
-                                                 data-parent="#accordion">
-                                                <!-- card-body -->
-                                                <div class="card-body">
-													<?php
-													//#project下的各个问题
-													$aa = DB::query("SELECT * FROM question 
-                                                                     WHERE question_id IN ( 
-                                                                         SELECT question_id 
-                                                                         FROM question_has_experts 
-                                                                         WHERE user_id = '$user_id'  
-                                                                     ) 
-                                                                     AND question_project_id={$v['project_id']} 
-                                                                     ORDER BY question_id ASC ");
-													foreach($aa as $kk=>$vv){
-													?>
-                                                    <!-- child-item -->
-                                                    <a class="child-item"
-                                                       onclick="changePage(this,{pageId:<?=$vv['question_id']?>})">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-none mr-2">
-                                                                <i class="fa fa-fw"
-                                                                   aria-hidden="true"></i><p>#<?=$vv['question_number']?></p>
-                                                            </div>
-                                                            <div class="flex-1"><?=$vv['question_title']?></div>
-                                                            <div class="flex-none ml-2">
-                                                                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-													<?php
-													}
-													?>
-                                                </div>
                                             </div>
                                         </div>
 										<?php
@@ -303,7 +255,7 @@
                 <div id="indexPage"
                      class="container-fluid py-3 py-md-0">
 					 <div class="row justify-content-md-left m-3">
-             <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='upload.php'">
+             <button type="button" class="btn btn-primary shadow bluebutton" onclick="location='upload.php'">
                  <i class="fa fa-plus" aria-hidden="true"></i>Nieuwe Kamervragen</button>
             </div>
             <div class="row m-3" style="font-size:25px">

@@ -614,7 +614,7 @@
                     <?php if (isUserExpert($user_id)) { ?>
                         <a href="overzicht.php" class="card-link text-secondary"><strong>OK</strong></a>
                     <?php } else { ?>
-                        <a href="distribution.php" class="card-link text-secondary"><strong>OK</strong></a>
+                        <a href="distribution-main.php" class="card-link text-secondary"><strong>OK</strong></a>
                     <?php } ?>
                 </div>
             </div>

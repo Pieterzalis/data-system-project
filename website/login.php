@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['login_username'] = $myusername;
                 $_SESSION['login_fullname'] = $user_fullname;
                 $_SESSION['login_id'] = $result[0]["user_id"];
-                header("location: distribution.php");
+                header("location: distribution-main.php");
             }
         } else {
             // Did not found a user or a single user
