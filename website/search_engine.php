@@ -68,7 +68,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                         autokeywords.push($(this).text());
                     });
                     keywords = userkeywords.concat(autokeywords);
-					if(keywords.length < 2){
+					if((keywords.length < 3 && userkeywords == "") || keywords.length < 2){
 						$("#sourcecontainer").html("Te weinig keywords. Gebruik minimaal twee keywords voor een zoekopdracht.");
 					} else {
 						console.log(keywords);
