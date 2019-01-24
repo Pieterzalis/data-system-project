@@ -223,8 +223,6 @@
             file_name.hide();
             file_error.hide();
             
-            $("#progress-step1").addClass("activated");
-            $("#progress-step1").addClass("current");
             $("#progress-step2").removeClass("current");
             $("#progress-step2").removeClass("activated");
             $("#progress-step3").removeClass("current");
@@ -340,7 +338,7 @@
                                     </div>
                                 <span class="profilename">Laura Zuidensteijn</span>
                                 <!-- sign-out -->
-                                <a href="login.html"
+                                <a href="login.php"
                                    class="ml-3 mr-3">
                                     <i class="fa fa-sign-out"
                                        aria-hidden="true"></i>
@@ -371,7 +369,7 @@
                                             <div class="step-text">
                                                 <p>Upload</p>
                                             </div>
-                                            <div class="step-num" id="progress-step1">
+                                            <div class="step-num activated current" id="progress-step1">
                                                 <label id="progress-label1">1</label>
                                             </div>
                                         </div>
@@ -501,7 +499,7 @@
                                         </div>
                                     </div>
 
-                                    <button onclick="goToDistribution()" class="btn btn-danger">ANNULEER</button>
+                                    <button onclick="window.location='distribution.php'" class="btn btn-danger">ANNULEER</button>
                                 </div>
 
 
@@ -529,7 +527,7 @@
                                         <p class="mt-3">Een moment geduld alstublieft...</p>
                                     </div>
 
-                                    <a><button class="btn btn-danger" onclick="gotoStep1()">ANNULEER</button></a>
+                                    <a><button class="btn btn-danger" onclick="window.location='distribution.php'">ANNULEER</button></a>
                                 </div>
 
                                 <!-- step-content -->
@@ -592,7 +590,7 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <a><button class="btn btn-danger" onclick="gotoStep1()">ANNULEER </button></a>
+                                    <a><button class="btn btn-danger" onclick="window.location='distribution.php'">ANNULEER </button></a>
                                     <a><button class="btn btn-success mx-3"  onclick="showAlert()">VOEG TOE</button></a>
                                 </div>
                             </div>

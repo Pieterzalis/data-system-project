@@ -31,8 +31,13 @@
     text-decoration: none;
 }
 
+.bluehover{
+    border: 2px solid #fff;
+}
+
 .bluehover:hover{
-    background-color: rgba(21, 66, 116, 0.3);
+    border: 2px solid #154274;
+    border-radius: 5px;
 }
 
 .customcardpadding{

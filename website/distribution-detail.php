@@ -117,6 +117,14 @@ if(isset($_GET['uid'])&& isset($_GET['qid'])){
                 <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='distribution.php'">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>Terug naar overzicht</button>
             </div>
+            <h4><Strong><?=$question_list[0]['project_title']?></Strong></h4>
+            <h6 class="text-secondary">Keyword</h6>
+            <div><?php $ak = DB::query('select keyword_name from keyword where keyword_project_id='.$project_id);
+                foreach($ak as $v){
+				echo '<span class="badge badge-pill badge-secondary">'.$v['keyword_name'].'</span>';
+				}?>
+            </div>
+
         <!-- row-table -->
         <div class="card mt-3 shadow">
             <div class="card-body" id="toewijzen1">
@@ -136,14 +144,15 @@ if(isset($_GET['uid'])&& isset($_GET['qid'])){
                             if (count($experts) >= 1) {
                                 foreach ($experts as $expert) { ?>
                                     <div class="col-9 col-md-auto px-sm-2 px-md-5" id="<?= $question['question_id']."user".$expert['user_id']?>">
-                                        <div class="avatar avatar-md mx-3">
+                                        <div class="avatar avatar-md mx-3 justify-content-center">
                                             <img class="rounded-circle"
                                                  src="assets/img/<?= $expert['user_username'] ?>.jpg"
                                                  alt="">
                                             <p class="text-mini mb-0"><?= $expert['user_firstname'] . " " .  $expert['user_lastname_prefix'] . " " .  $expert['user_lastname'] ?></p>
+                                            <i class="fa fa-trash" aria-hidden="true" onclick ="deleteUser(<?=$question['question_id']?>,<?=$expert['user_id']?>,<?= $project_id?>) "></i>
                                         </div>
 										<div>
-										<i class="fa fa-trash" aria-hidden="true" onclick ="deleteUser(<?=$question['question_id']?>,<?=$expert['user_id']?>,<?= $project_id?>) "></i>
+										
 					                    </div>
                                     </div>
                                 <?php }

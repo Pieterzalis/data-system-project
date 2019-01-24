@@ -51,7 +51,7 @@ foreach ($assigned_experts as $expert){
 
             <h6 class="m-3">#<?= $a['project_code']?></h6>
             <div>
-                <p><Strong><?=$a['project_title']?></Strong></p>
+                <h4><Strong><?=$a['project_title']?></Strong></h4>
                 <p>Deadline: <Strong><?=$a['project_date_letter']?></Strong></p>
             </div>
             <div class="row justify-content-md-center">
