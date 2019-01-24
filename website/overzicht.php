@@ -14,7 +14,7 @@
     require_once 'database/Model_User.php';
 
     if (!isUserExpert($user_id)){
-	    header("location: distribution.php");
+	    header("location: distribution-main.php");
     }
 
 

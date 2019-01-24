@@ -24,6 +24,8 @@
     <style>
 
     </style>
+    <script src="http://yui.yahooapis.com/3.18.1/build/yui/yui-min.js"></script>
+
     <script>
         // Load jquery calls after page load.
         $(document).ready(function () {
@@ -45,21 +47,32 @@
             console.log(pageId);//选中的ID
             jump(pageId);//跳转
         }
+		
+		 function changePage2(node, { pageId }) {
+            lastClick.removeClass("actived");
+            lastClick = $(node);
+            lastClick.addClass("actived");
+            console.log(pageId);//选中的ID
+            jump(pageId);//跳转
+        }
+		
         function search() {
             back();
         }
         function jump(pageId) {
             console.log('testblablabla');
-            $('.page-title')[0].innerText='Kamervraag';
+            //$('.page-title')[0].innerText='Kamervraag';
             // indexPage
             var indexNavPage = $('#indexPage');
             // childPage
             var childNavPage = $('#childPage');
+            location='distribution-detail.php?id='+pageId;
             indexNavPage.hide();
             childNavPage.show();
             // 测试百度
             // childNavPage.attr('src', 'https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=baidu&wd=' + pageId); 
             // 真实请求
+            childNavPage.attr('src', '');
             childNavPage.attr('src', 'distribution-detail.php?id=' + pageId);//#这里换成php文件
         }
         function back() {
