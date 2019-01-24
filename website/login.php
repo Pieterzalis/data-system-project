@@ -119,7 +119,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <?php } ?>
         
                                 <div class="form-group row justify-content-center">
-                                    <input class="btn btn-lg btn-outline-dark" type = "submit" value = " Submit "/>
+                                    <input class="btn btn-lg btn-outline-dark" type = "submit" value = "Log in "/>
 <!--                                    <a type="submit" class="btn btn-lg btn-outline-dark">Log in</a>-->
                                 </div>
         
