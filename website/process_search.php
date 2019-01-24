@@ -74,7 +74,7 @@ function returnHTMLResponse($data){
 		$title = $source->title;
 		$outlet = $source->outlet;
 		$publish_date = $source->publish_date;
-		$snippet = $source->snippet;
+		$snippet = preg_replace("/\r|\n/", " ", $source->snippet);
 		$url = $source->url;
 		$type = $source->type;
 		$html .= '<div class="row justify-content-md-center source-card">
@@ -106,14 +106,11 @@ function returnHTMLResponse($data){
 										</div>
 									</div>
 									<div class="col-sm-12 mt-2 mt-md-0 col-md-3 options justify-content-center d-flex  align-items-center">
-									     <button type="button" class="close card-close-btn jq-addtokb" >
-                                            <!-- close -->
-                                            <i class="fa fa-plus-circle" aria-hidden="true"><p>Add to KB</p></i>
-                                        </button>
-									
-										<!--<button class="jq-addtokb" onclick="store_source(this, \'' . $url . '\', \'' . $publish_date . '\', \'' . $title . '\', \'' . $snippet . '\', \'' . $type . '\', \'' . $outlet . '\')" class="btn btn-secondary btn-block">
-											Toevoegen aan kennisbank
-									    </button> -->
+										<div class="jq-addsource">
+											<button onclick="store_source(this, \'' . $url . '\', \'' . $publish_date . '\', \'' . $title . '\', \'' . $snippet . '\', \'' . $type . '\', \'' . $outlet . '\')" class="btn btn-secondary btn-block jq-addtokb">
+												Toevoegen aan kennisbank
+										    </button>
+									    </div>
 									</div>
 								</div>
 							</div>

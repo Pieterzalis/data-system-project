@@ -86,20 +86,27 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
 
             });
 
-            $(".jq-addtokb").click(function () {
-                alert('test');
-            });
 
-            function store_source(button, url, publish_date, title, snippet, type, outlet){
-                alert(title);
-                $.post( "database/Model_Source.php", { func: "addToKnowledgeBase", question_id : '1', url : url, publish_date : publish_date, title: title, snippet : snippet, type : type, outlet : outlet })
-                    .done(function( data ) {
-                        if (!(data === 'success')){
-                            alert('Error adding source to knowledge base.')
-                        }
-                    })
-            }
         });
+
+        function store_source(button, url, publish_date, title, snippet, type, outlet){
+
+            let questionID = $('.do_search').attr('id');
+            let parentDiv = $(button).parents(".jq-addsource");
+
+            $.post( "database/Model_Source.php", { func: "addToKnowledgeBase", question_id : questionID, url : url, publish_date : publish_date, title: title, snippet : snippet, type : type, outlet : outlet })
+                .done(function( data ) {
+                    if (!(data === 'success')){
+                        alert(data)
+
+                    } else {
+                        // Successfull adding
+
+                        $(parentDiv).html("<button class='btn btn-success jq-addtokb'><i class=\"fa fa-check-circle\" style='font-size:28px;'></i></button>");
+
+                    }
+                })
+        }
 
 	</script>
 </head>
@@ -217,7 +224,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                                 </div>
                                 <div class="row justify-content-center">
                                     <div class="col-sm col-md-12 text-center">
-                                        <button type="button" class="btn btn-primary bluebutton do_search"><i class="fa fa-search"
+                                        <button id="<?= $question_id ?>" type="button" class="btn btn-primary bluebutton do_search"><i class="fa fa-search"
                                                aria-hidden="true"></i>
                                             Zoek informatie
                                         </button>

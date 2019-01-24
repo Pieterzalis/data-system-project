@@ -31,7 +31,18 @@ function addToKnowledgeBase($question_id, $url, $publish_date, $title, $snippet,
 		'source_snippet' => $snippet,
 		'source_type' => $type,
 		'source_outlet' => $outlet
-	));	
+	));
+
+	$counter = DB::affectedRows();
+
+	if ($counter != 1) {
+		// Error removing source from the database..
+
+		echo 'Fout tijdens toevoegen bron aan de kennisbank';
+
+	} else {
+		echo 'success';
+	}
 }
 
 // Set given source_id as inactive

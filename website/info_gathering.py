@@ -119,7 +119,7 @@ def clean_answers(answers):
 		cleaned_answer['url'] = "https://tweedekamer.nl/"+answer.find("a", {"class": "document__button"})['href']
 		cleaned_answer['snippet'] = answer.find("p").getText()+'...'
 		cleaned_answer['type'] = 1
-		cleaned_answer['outlet'] = 'n.v.t.'
+		cleaned_answer['outlet'] = 'Tweede Kamer'
 		answers[i] = cleaned_answer
 	return answers
 
