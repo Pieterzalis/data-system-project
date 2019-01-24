@@ -115,7 +115,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
         $(document).ready(function () {
             
             $("#help").on("click", function(){
-                alert("De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden");
+                alert("De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden. U kunt keywords uitschakelen door deze aan te klikken.");
             }); 
         });
         
@@ -158,13 +158,13 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                                                 <div class="form-group mb-0">
                                                     <label>
                                                         <strong>Keywords </strong>
-                                                        <i class="fa fa-question-circle cursor-pointer" id="help" title="De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden"></i>
+                                                        <i class="fa fa-question-circle cursor-pointer" id="help" title="Klik op een keyword om deze uit te sluiten in de zoekresultaten"></i>
                                                     </label>
                                                 </div>
                                                 <div class="keywordtags"><?php
 								                //#列出该project的所有keyword
 								                foreach($keywords as $v){
-                                                    echo '<span class="badge badge-pill badge-secondary active-keyword">'.$v['keyword_name'].'</span>';
+                                                    echo '<span class="badge badge-pill badge-secondary active-keyword cursor-pointer">'.$v['keyword_name'].'</span>';
 								                }
 								                	?>
                                                 </div>

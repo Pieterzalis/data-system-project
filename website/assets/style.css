@@ -2,17 +2,6 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.active-keyword {
-	background-color : #6c757d;
-	color: #fff;
-}
-
-.nonactive-keyword {
-	background-color : white;
-	color: black;
-	border: 1px solid;
-}
-
 .project-table {
     box-shadow: 0 2px 20px -5px rgba(0, 0, 0, 0.5);
     margin-top: 2rem;
@@ -405,9 +394,34 @@ hr.color-white {
 }
 
 .badge-secondary {
-    margin: 2px 4px 2px 4px;
+    margin: 4px 4px 4px 4px;
     font-weight: 100;
     font-size: 90%;
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
+.active-keyword {
+	background-color : #6c757d;
+	color: #fff;
+    border: 1px solid #6c757d;
+    box-shadow: -2px 2px 2px -1px rgba(0, 0, 0, 0.5);
+    box-shadow: -1px 3px #999;
+}
+
+.active-keyword:active{
+    transform: translate(-1px, 2px);
+    background-color : #BCC0C3;
+    border: 1px solid #BCC0C3;
+    box-shadow: none;
+}
+
+.nonactive-keyword {
+	background-color : #BCC0C3;
+	border: 1px solid #BCC0C3;
+    transform: translate(-1px, 2px);
 }
 
 .step-2 .file-analysing .file-analysing-icon .fa-spin {
