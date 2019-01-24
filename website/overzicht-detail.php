@@ -46,7 +46,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
 <html>
 
 <head>
-    <title>Project overzicht</title>
+    <title>Ministerie</title>
     <?php
     include_once("templates/template_head.php");
     ?>

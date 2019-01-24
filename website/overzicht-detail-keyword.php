@@ -43,7 +43,7 @@ foreach ($assigned_experts as $expert){
     ?>
 </head>
 
-<body class="page_search_engine">
+<body class="page_overzicht_detail_keyword">
 
     <div class="card m-3 p-md-3 p-lg-4 text-center">
         <!-- row-info -->
@@ -57,7 +57,7 @@ foreach ($assigned_experts as $expert){
             <div class="row justify-content-md-center">
                 <div class="col-sm col-md-6 col-lg-4">
 
-                    <h6 class="text-secondary">Keyword</h6>
+                    <h6 class="text-secondary">Keywords</h6>
                     <div><?php
 						//#列出该project的所有keyword
 						$ak = DB::query('select keyword_name from keyword where keyword_project_id='.$id);
@@ -88,24 +88,6 @@ foreach ($assigned_experts as $expert){
             <div>
                 <h6 class="text-secondary mt-3">Experts</h6>
                 <div class="d-flex justify-content-center" id="expertsAll">
-                    <div class="avatar avatar-md mx-3">
-                        <img class="rounded-circle"
-                             src="assets/img/woman.jpg"
-                             alt="">
-                        <p class="text-mini">name</p>
-                    </div>
-                    <div class="avatar avatar-md mx-3">
-                        <img class="rounded-circle"
-                             src="assets/img/woman.jpg"
-                             alt="">
-                        <p class="text-mini">name</p>
-                    </div>
-                    <div class="avatar avatar-md mx-3">
-                        <img class="rounded-circle"
-                             src="assets/img/woman.jpg"
-                             alt="">
-                        <p class="text-mini">name</p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -113,24 +95,24 @@ foreach ($assigned_experts as $expert){
         <!-- row-table -->
         <div class="card mt-3 shadow">
             <div class="card-body">
-                <h4>Kennisbank</h4>
+                <h4>Vragen</h4>
 
                 <ul class="my-list-group container-fluid"><?php
 						$aq = DB::query("select question_id,question_title from question where question_project_id=$id order by question_id desc");
 						foreach($aq as $k=>$v){
 						?>
                         <li class="my-list-group-item py-2 py-md-3 mb-2 mb-md-3 rounded bg-app text-white row align-items-center">
-                            <div class="col-3 col-md-auto pr-sm-2 pr-md-3">#<?=$k+1?></div>
-                            <div class="col-9 col-md px-sm-2 px-md-3"><?=$v['question_title']?></div>
-                            <div class="col-9 col-md-auto px-sm-2 px-md-5"><?php
-								$ae = DB::query("select t.user_id, a.user_firstname,a.user_lastname,a.user_username from question_has_experts t left join user a on a.user_id=t.user_id where t.question_id={$v['question_id']}");
+                            <div class="col-1 pr-sm-2 pr-md-3">#<?=$k+1?></div>
+                            <div class="col-8 px-sm-2 px-md-3 text-left"><?=$v['question_title']?></div>
+                            <div class="col-3 px-sm-2 px-md-5"><?php
+								$ae = DB::query("select t.user_id, a.user_firstname,a.user_lastname_prefix, a.user_lastname,a.user_username from question_has_experts t left join user a on a.user_id=t.user_id where t.question_id={$v['question_id']}");
 								foreach($ae as $vv){
 								?>
                                 <div class="avatar avatar-md mx-3 expertSingle" style="float:left">
                                     <img class="rounded-circle"
                                          src="assets/img/<?=$vv['user_username']?>.jpg"
                                          alt="">
-                                    <p class="text-mini mb-0"><?=$vv['user_firstname']?> <?=$vv['user_lastname']?></p>
+                                    <p class="text-mini mb-0"><?= $vv['user_firstname'] . " " .  $vv['user_lastname_prefix'] . " " .  $vv['user_lastname'] ?></p>
                                 </div><?php
 								}
 								?>

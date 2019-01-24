@@ -156,6 +156,10 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
     </div>
 
     <div class="container-fluid my-layout d-flex flex-column">
+        <div class="row justify-content-md-left removeleftmargin">
+                <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='distribution.php'">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>Terug naar vraag</button>
+            </div>
         <div class="row flex-1">
             <!-- layout_content -->
             <div class="col-sm p-0 layout_content d-flex justify-content-center ">
