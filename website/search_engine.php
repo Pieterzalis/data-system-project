@@ -157,7 +157,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
 
     <div class="container-fluid my-layout d-flex flex-column">
         <div class="row justify-content-md-left removeleftmargin">
-                <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='distribution.php'">
+                <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='overzicht-detail.php?id=<?= $question_id ?>'">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>Terug naar vraag</button>
             </div>
         <div class="row flex-1">
