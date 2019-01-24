@@ -77,6 +77,11 @@ function returnHTMLResponse($data){
 			$title = str_replace('"', "'", $source->title);
 			$outlet = $source->outlet;
 			$publish_date = $source->publish_date;
+
+			// Dutch date format
+			$date_letter_dutch = date('d-m-Y', strtotime($publish_date));
+			$date_q = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
+
 			$snippet = preg_replace("/\r|\n/", " ", $source->snippet);
 			$snippet = str_replace('"', "'", $snippet);
 			$url = $source->url;
@@ -101,7 +106,7 @@ function returnHTMLResponse($data){
 													<div class="col-md-3 info">
 														Bron: <a href="'.$url.'" target="_blank"><strong><u>' . $outlet. '</u></strong></a>
 														<br>
-														Datum: <strong>' . $publish_date . '</strong>
+														Datum: <strong>' . $date_q . '</strong>
 													</div>
 													<div class="col-md content">' . $snippet . '<br>
 													<br>
