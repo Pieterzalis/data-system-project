@@ -35,6 +35,17 @@ $all_experts = DB::query("SELECT * FROM `user` WHERE `user_role_id`=2");
 
 $i=1;
 
+if(isset($_GET['uid'])&& isset($_GET['qid'])){
+	$uid =$_GET['uid'];
+	$qid = $_GET['qid'];
+	if(!empty($uid) && !empty($qid)){
+		DB::query("delete from question_has_experts where question_id=".$qid." and user_id=".$uid);	
+		$uid = "";
+		$qid = "";
+}
+}
+
+
 //
 
 ?>
@@ -45,6 +56,15 @@ $i=1;
         <?php include_once("templates/template_head.php"); ?>
         
         <script>
+			
+			function deleteUser(questionid,userid,projectid){
+				var id = "#"+questionid+"user"+userid;
+//				alert(id);
+				$(id).remove();
+				window.location= "?qid="+questionid+"&uid="+userid+"&id="+projectid;
+		
+			}
+			
             var globalQuestionID;
 
             $(document).ready(function () {
@@ -150,13 +170,16 @@ $i=1;
                             <?php
                             if (count($experts) >= 1) {
                                 foreach ($experts as $expert) { ?>
-                                    <div class="col-9 col-md-auto px-sm-2 px-md-5">
+                                    <div class="col-9 col-md-auto px-sm-2 px-md-5" id="<?= $question['question_id']."user".$expert['user_id']?>">
                                         <div class="avatar avatar-md mx-3">
                                             <img class="rounded-circle"
                                                  src="assets/img/<?= $expert['user_username'] ?>.jpg"
                                                  alt="">
                                             <p class="text-mini mb-0"><?= $expert['user_firstname'] . " " .  $expert['user_lastname_prefix'] . " " .  $expert['user_lastname'] ?></p>
                                         </div>
+										<div>
+										<i class="fa fa-trash" aria-hidden="true" onclick ="deleteUser(<?=$question['question_id']?>,<?=$expert['user_id']?>,<?= $project_id?>) "></i>
+					                    </div>
                                     </div>
                                 <?php }
                             } else { ?>
