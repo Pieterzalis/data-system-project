@@ -29,7 +29,7 @@ def read_file(target):
 		text = docx2txt.process(target)
 	else:
 		text = ''
-	#print(text)
+	text = text.replace('\u2122','\u2019')#remove single quote to TM bug
 	return text
 
 
