@@ -255,7 +255,7 @@
                                                                          WHERE user_id = '$user_id'  
                                                                      ) 
                                                                      AND question_project_id={$v['project_id']} 
-                                                                     ORDER BY question_id DESC ");
+                                                                     ORDER BY question_id ASC ");
 													foreach($aa as $kk=>$vv){
 													?>
                                                     <!-- child-item -->
