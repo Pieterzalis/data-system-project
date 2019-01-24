@@ -11,6 +11,13 @@
     $user_id = $_SESSION['login_id'];
 
     require_once 'database/Model_Project.php';
+    require_once 'database/Model_User.php';
+
+    if (!isUserExpert($user_id)){
+	    header("location: distribution.php");
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -256,7 +263,7 @@
                                                                          WHERE user_id = '$user_id'  
                                                                      ) 
                                                                      AND question_project_id={$v['project_id']} 
-                                                                     ORDER BY question_id DESC ");
+                                                                     ORDER BY question_id ASC ");
 													foreach($aa as $kk=>$vv){
 													?>
                                                     <!-- child-item -->
