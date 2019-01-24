@@ -81,32 +81,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <h1 class="text-center title">Log in</h1>
                                 <div class="form-group row">
                                     <label for="inputUser"
-                                           class="col-sm-6 col-form-label">
+                                           class="col-sm-1 col-form-label text-center">
                                         <i class="fa fa-user-circle"
                                            aria-hidden="true"></i>
-                                        Gebruikersnaam
                                     </label>
                                     <div class="col-sm">
                                         <input type="text"
                                                class="form-control"
                                                id="inputUser"
                                                name="username"
-                                               placeholder="">
+                                               placeholder="Gebruikersnaam">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputPassword"
-                                           class="col-sm-6 col-form-label">
-                                        <i class="fa fa-lock"
+                                           class="col-sm-1 col-form-label">
+                                        <i class="fa fa-lg fa-lock"
                                            aria-hidden="true"></i>
-                                        Wachtwoord
                                     </label>
                                     <div class="col-sm">
                                         <input type="password"
                                                class="form-control"
                                                id="inputPassword"
                                                name="password"
-                                               placeholder="">
+                                               placeholder="Wachtwoord">
                                     </div>
                                 </div>
                                 <div class="form-group row flex-column">

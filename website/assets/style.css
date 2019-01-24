@@ -663,6 +663,10 @@ hr.color-white {
     .page_login .login-form {
         margin-top: 60px !important;
     }
+    
+    .formcontainer .form-control{
+        width: 300px;
+    }
 }
 
 .my-icon-file.bg-app {
