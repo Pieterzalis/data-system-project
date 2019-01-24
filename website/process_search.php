@@ -70,54 +70,63 @@ function saveSources($data, $question_id){
 
 function returnHTMLResponse($data){
 	$html = "";
-	foreach($data as $source){
-		$title = str_replace('"', "'", $source->title);
-		$outlet = $source->outlet;
-		$publish_date = $source->publish_date;
-		$snippet = preg_replace("/\r|\n/", " ", $source->snippet);
-		$snippet = str_replace('"', "'", $snippet);
-		$url = $source->url;
-		$type = $source->type;
-		$html .= '<div class="row justify-content-md-center source-card">
-					<div class="col-sm-12 col-md-11">
-						<div class="card mb-3">
-							<div class="card-body">
-								<div class="row">
-									<div class="col-md">
-										<div class="container">
-											<div class="row">
-												<div class="col-md title">
-													<p>
-														<strong>' . $title. '</strong>
-													</p>
+	if(count($data) == 0){
+		echo "Geen relevante bronnen gevonden. Probeer andere zoekwoorden.";
+	} else {
+		foreach($data as $source){
+			$title = str_replace('"', "'", $source->title);
+			$outlet = $source->outlet;
+			$publish_date = $source->publish_date;
+
+			// Dutch date format
+			$date_letter_dutch = date('d-m-Y', strtotime($publish_date));
+			$date_q = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
+
+			$snippet = preg_replace("/\r|\n/", " ", $source->snippet);
+			$snippet = str_replace('"', "'", $snippet);
+			$url = $source->url;
+			$type = $source->type;
+			$html .= '<div class="row justify-content-md-center source-card">
+						<div class="col-sm-12 col-md-11">
+							<div class="card mb-3">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md">
+											<div class="container">
+												<div class="row">
+													<div class="col-md title">
+														<p>
+															<strong>' . $title. '</strong>
+														</p>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="container">
-											<div class="row">
-												<div class="col-md-3 info">
-													Bron: <a href="'.$url.'" target="_blank"><strong><u>' . $outlet. '</u></strong></a>
+											<div class="container">
+												<div class="row">
+													<div class="col-md-3 info">
+														Bron: <a href="'.$url.'" target="_blank"><strong><u>' . $outlet. '</u></strong></a>
+														<br>
+														Datum: <strong>' . $date_q . '</strong>
+													</div>
+													<div class="col-md content">' . $snippet . '<br>
 													<br>
-													Datum: <strong>' . $publish_date . '</strong>
-												</div>
-												<div class="col-md content">' . $snippet . '<br>
-												<br>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div class="col-sm-12 mt-2 mt-md-0 col-md-3 options justify-content-center d-flex  align-items-center">
-										<div class="jq-addsource">
-											<button onclick="store_source(this, &quot;' . $url . '&quot;, &quot;' . $publish_date . '&quot;, &quot;' . $title . '&quot;, &quot;' . $snippet . '&quot;, &quot;' . $type . '&quot;, &quot;' . $outlet . '&quot;)" class="btn btn-secondary btn-block jq-addtokb">
-												Toevoegen aan kennisbank
-										    </button>
-									    </div>
+										<div class="col-sm-12 mt-2 mt-md-0 col-md-3 options justify-content-center d-flex  align-items-center">
+											<div class="jq-addsource">
+												<button onclick="store_source(this, &quot;' . $url . '&quot;, &quot;' . $publish_date . '&quot;, &quot;' . $title . '&quot;, &quot;' . $snippet . '&quot;, &quot;' . $type . '&quot;, &quot;' . $outlet . '&quot;)" class="btn btn-secondary btn-block jq-addtokb">
+													Toevoegen aan kennisbank
+												</button>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>';
-	}
-	echo $html;
+					</div>';
+		}//for each
+		echo $html;
+	} //else
 }

@@ -43,7 +43,20 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
 				$(this).toggleClass('nonactive-keyword');
 			});
             $(".do_search").click(function () {
-                    $("#sourcecontainer").html("Searching for relevant sources...");
+                    $("#sourcecontainer").html("<div class=\"row justify-content-md-center source-card\">\n" +
+                        "\t<div class=\"col-sm-12 col-md-11\">\n" +
+                        "\t\t<div class=\"card mb-3\">\n" +
+                        "\t\t\t<div class=\"card-body\">\n" +
+                        "\t\t\t\t<div class=\"row justify-content-center\">\n" +
+                        "\t\t\t\t\t\t<img src=\"assets/img/load-gif.gif\" height=\"60\" width=\"60\">\n" +
+                        "</div>\n" +
+                        "<div class=\"row justify-content-center\">\n" +
+                        "\t\t    <p>Zoeken...</p>\n" +
+                        "\t\t\t\t</div>\n" +
+                        "\t\t\t</div>\n" +
+                        "\t\t</div>\n" +
+                        "\t</div>\n" +
+                        "</div>");
                     var use_news_articles = $('#gridCheck1:checked').val();
                     if (use_news_articles == undefined){
                         use_news_articles = 'off';
@@ -68,23 +81,37 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                         autokeywords.push($(this).text());
                     });
                     keywords = userkeywords.concat(autokeywords);
-                    console.log(keywords);
-                    console.log($("#datefrom").val());
-                    var form = new FormData();
-                    form.append('question_id','1');
-                    form.append('keywords',JSON.stringify(keywords));
-                    form.append('fromdate',fromdate);
-                    form.append('todate',todate);
-                    form.append('search_news',use_news_articles);
-                    form.append('search_prev_answers',use_old_answers);
-                    fetch('process_search.php', {
-                            method: 'POST',
-                            body: form
-                        }).then(response => {
-                            response.text().then(function (text) {
-                                $("#sourcecontainer").html(text);
-                            });
-                        });
+					if((keywords.length < 3 && userkeywords == "") || keywords.length < 2){
+						$("#sourcecontainer").html("<div class=\"row justify-content-md-center source-card\">\n" +
+                            "\t<div class=\"col-sm-12 col-md-11\">\n" +
+                            "\t\t<div class=\"card mb-3\">\n" +
+                            "\t\t\t<div class=\"card-body\">\n" +
+                            "\t\t\t\t<div class=\"row justify-content-center\">\n" +
+                            "\t\t\t\t\t<p>Te weinig keywords. Gebruik minimaal twee keywords voor een zoekopdracht.</p>\n" +
+                            "\t\t\t\t</div>\n" +
+                            "\t\t\t</div>\n" +
+                            "\t\t</div>\n" +
+                            "\t</div>\n" +
+                            "</div>");
+					} else {
+						console.log(keywords);
+						console.log($("#datefrom").val());
+						var form = new FormData();
+						form.append('question_id','1');
+						form.append('keywords',JSON.stringify(keywords));
+						form.append('fromdate',fromdate);
+						form.append('todate',todate);
+						form.append('search_news',use_news_articles);
+						form.append('search_prev_answers',use_old_answers);
+						fetch('process_search.php', {
+								method: 'POST',
+								body: form
+							}).then(response => {
+								response.text().then(function (text) {
+									$("#sourcecontainer").html(text);
+								});
+							});
+					}
 
             });
 
@@ -115,7 +142,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
         $(document).ready(function () {
             
             $("#help").on("click", function(){
-                alert("De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden");
+                alert("De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden. U kunt keywords uitschakelen door deze aan te klikken.");
             }); 
         });
         
@@ -158,13 +185,13 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                                                 <div class="form-group mb-0">
                                                     <label>
                                                         <strong>Keywords </strong>
-                                                        <i class="fa fa-question-circle cursor-pointer" id="help" title="De keywords worden gebruikt door de zoekmachine om relevante informatie te vinden"></i>
+                                                        <i class="fa fa-question-circle cursor-pointer" id="help" title="Klik op een keyword om deze uit te sluiten in de zoekresultaten"></i>
                                                     </label>
                                                 </div>
                                                 <div class="keywordtags"><?php
 								                //#列出该project的所有keyword
 								                foreach($keywords as $v){
-                                                    echo '<span class="badge badge-pill badge-secondary active-keyword">'.$v['keyword_name'].'</span>';
+                                                    echo '<span class="badge badge-pill badge-secondary active-keyword cursor-pointer">'.$v['keyword_name'].'</span>';
 								                }
 								                	?>
                                                 </div>
@@ -217,7 +244,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                                                 <div class="form-check">
                                                     <input class="form-check-input"
                                                            type="checkbox"
-                                                           id="gridCheck1">
+                                                           id="gridCheck1" checked>
                                                     <label class="form-check-label"
                                                            for="gridCheck1">
                                                         Media bronnen van afgelopen maand
@@ -226,7 +253,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                                                 <div class="form-check">
                                                     <input class="form-check-input"
                                                            type="checkbox"
-                                                           id="gridCheck2">
+                                                           id="gridCheck2" checked>
                                                     <label class="form-check-label"
                                                            for="gridCheck2">
                                                         Oude kamervragen
@@ -250,26 +277,6 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
                     <hr class="col-md-9">
 					<div class="sourcecontainer" id="sourcecontainer">
                     </div>
-            <nav aria-label="Page navigation example ">
-                                    <ul class="pagination justify-content-center">
-                                        <li class="page-item"><a class="page-link"
-                                               href="#">Previous</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                               href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                               href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                               href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                               href="#">4</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                               href="#">5</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                               href="#">6</a></li>
-                                        <li class="page-item"><a class="page-link"
-                                               href="#">Next</a></li>
-                                    </ul>
-                                </nav>
                 </div>
             </div>
         </div>

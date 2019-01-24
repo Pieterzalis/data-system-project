@@ -183,7 +183,12 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                                     <div class="col-md-auto info">
                                         Bron: <a href="<?= $source['source_url'] ?>" target="_blank"><u><?= $source['source_outlet'] ?></u></a>
                                         <br>
-                                        Datum: <?= $source['source_date_published'] ?>
+                                        Datum: <?php
+                                                // Dutch date format
+                                                $date_letter_dutch = date('d-m-Y', strtotime($source['source_date_published']));
+                                                $date_q = date('d-m-Y', strtotime($date_letter_dutch . "+3 week"));
+                                                echo $date_q;
+                                        ?>
                                     </div>
                                     <div class="col-md content"><?= $source['source_snippet']  ?></div>
                                 </div>
@@ -191,33 +196,6 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                         </div>
                         <?php } ?>
                 <?php } ?>
-<!--                <div class="card mb-3 text-left">-->
-<!--                    <div class="card-body">-->
-<!--                        <div class="d-flex">-->
-<!--                            <div class="flex-1 title">-->
-<!--                                <p>-->
-<!--                                    <strong>Title xxxx xxxx xxxxxxx</strong>-->
-<!--                                </p>-->
-<!--                            </div>-->
-<!--                            <div class="flex-none">-->
-<!--                                <a href=""-->
-<!--                                   class="card-close-btn text-secondary">-->
-<!--                                    <!-- close -->
-<!--                                    <i class="fa fa-close"-->
-<!--                                       aria-hidden="true"></i>-->
-<!--                                </a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="row">-->
-<!--                            <div class="col-md-auto info">-->
-<!--                                Bron: <strong><u>xxxxx</u></strong>-->
-<!--                                <br>-->
-<!--                                Datum: <strong>xxxxxx</strong>-->
-<!--                            </div>-->
-<!--                            <div class="col-md content">content content content content content content content content content content </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
 
             </div>
         </div>
