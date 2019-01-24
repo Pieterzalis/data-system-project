@@ -173,7 +173,7 @@ function getDistributionProjectCardsHtml() {
                                     <span>Deadline: <strong>".$date_deadline."</strong></span>
                                     <p>Indiener: <strong>" . $row['indiener_fullname'] . " - " . $row['party_name'] . "</strong></p>
                                     <h5>Toegewezen vragen: ".$amount_assigned['assigned']."/".$amount_assigned['total']."</h5>
-                                    <div class=\"toewijzenbutton\"><button type=\"button\" class=\"btn btn-primary shadow bluebutton toewijzenbutton\" onclick=\"location.href = 'distribution-detail?id=".$projectID."'\">Toewijzen</button></div>
+                                    <div class=\"toewijzenbutton\"><button type=\"button\" class=\"btn btn-primary shadow bluebutton toewijzenbutton\" onclick=\"changePage(this, {pageId:".$projectID."})\">Toewijzen</button></div>
                                 </div>
                             </div>
                         </div>";
