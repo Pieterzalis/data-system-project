@@ -197,7 +197,7 @@ $sources = DB::query("SELECT * FROM `source` WHERE source_question_id = ".$id." 
                         <?php } ?>
                 <?php } ?>
 
-            </div>
+                </div>
         </div>
 
 </body>
