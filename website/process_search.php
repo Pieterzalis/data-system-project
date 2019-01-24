@@ -71,7 +71,7 @@ function saveSources($data, $question_id){
 function returnHTMLResponse($data){
 	$html = "";
 	foreach($data as $source){
-		$title = $source->title;
+		$title = preg_replace("'", "\'", $source->title);
 		$outlet = $source->outlet;
 		$publish_date = $source->publish_date;
 		$snippet = preg_replace("/\r|\n/", " ", $source->snippet);
@@ -95,7 +95,7 @@ function returnHTMLResponse($data){
 										<div class="container">
 											<div class="row">
 												<div class="col-md-3 info">
-													Bron: <strong><u>' . $outlet. '</u></strong>
+													Bron: <a href="'.$url.'" target="_blank"><strong><u>' . $outlet. '</u></strong></a>
 													<br>
 													Datum: <strong>' . $publish_date . '</strong>
 												</div>
