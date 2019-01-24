@@ -47,6 +47,7 @@ function getExpertsByQuestion($question_id) {
                                   u1.user_username,
                                   u1.user_firstname,
                                   u1.user_lastname_prefix,
+								   u1.user_id,
                                   u1.user_lastname 
                           from question_has_experts qhe 
                           INNER JOIN question q ON q.question_id = qhe.question_id 
