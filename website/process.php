@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         for ($i = 0; $i < $all_files; $i++) {  
             #$file_name = $_FILES['files']['name'][$i];
-            $file_name = 'tmp.pdf';
             $file_tmp = $_FILES['files']['tmp_name'][$i];
             $file_type = $_FILES['files']['type'][$i];
             $file_size = $_FILES['files']['size'][$i];
             $exploded = explode('.', $_FILES['files']['name'][$i]);
             $file_ext = strtolower(end($exploded));
-
+            $file_name = 'tmp.' . $file_ext;
+			
             $file = $path . $file_name;
 
             if (!in_array($file_ext, $extensions)) {
@@ -38,7 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!$move_file){
                 	// Moving file went wrong
 	                echo 'Error uploading, moving file';
-                }
+                } else {
+					parseLetter($file_ext);
+				}
 
             }
         }
@@ -47,20 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-parseLetter();
-
-function parseLetter()
+function parseLetter($file_ext)
 {
     // TODO make this dynamic with the upload script!
-    $file_path = htmlentities('uploads/tmp.pdf');
+    $file_path = htmlentities('uploads/tmp.' . $file_ext);
     $python_path = htmlentities('read_qf.py');
     $file_name = basename($file_path);
 
     // Execute python script for parsing the letter
     exec("python " . $python_path . " " . $file_path . "", $output, $ret_code);
-
     $output_data = end($output);
-
     if ($output_data === false) {
         $output_data = null;
         echo 'Error: Python returned no output';
