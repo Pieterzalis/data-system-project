@@ -171,7 +171,7 @@ if(isset($_GET['uid'])&& isset($_GET['qid'])){
                                 <img src="assets/img/logo.png"></div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Jouw Kamervragen</h3>
+                            <h3 class="page-title">Kamervragen Toewijzen</h3>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
                             <div class="options">
