@@ -263,7 +263,7 @@ if(isset($_GET['uid'])&& isset($_GET['qid'])){
                                                     class="btn btn-primary shadow bluebutton"
                                                     onclick="location='distribution-main.php'">
                                                 <i class="fa fa-home"
-                                                   aria-hidden="true"></i>Jouw Kamervragen
+                                                   aria-hidden="true"></i>Overzicht
                                             </button>
                                             
                                         </div>
@@ -333,7 +333,7 @@ if(isset($_GET['uid'])&& isset($_GET['qid'])){
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>Terug naar overzicht</button>
             </div>
             <h4><Strong><?=$question_list[0]['project_title']?></Strong></h4>
-            <h6 class="text-secondary">Keyword</h6>
+            <h6 class="text-secondary">Keywords</h6>
             <div><?php $ak = DB::query('select keyword_name from keyword where keyword_project_id='.$project_id);
                 foreach($ak as $v){
 				echo '<span class="badge badge-pill badge-secondary">'.$v['keyword_name'].'</span>';

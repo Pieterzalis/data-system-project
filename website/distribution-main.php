@@ -107,7 +107,7 @@
                                 <img src="assets/img/logo.png"></div>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-center">
-                            <h3 class="page-title">Jouw Kamervragen</h3>
+                            <h3 class="page-title">Alle Kamervragen</h3>
                         </div>
                         <div class="col-sm-4 d-flex align-items-center justify-content-end">
                             <div class="options">
@@ -199,7 +199,7 @@
                                                     class="btn btn-primary shadow bluebutton"
                                                     onclick="window.location.reload()">
                                                 <i class="fa fa-home"
-                                                   aria-hidden="true"></i>Jouw Kamervragen
+                                                   aria-hidden="true"></i>Overzicht
                                             </button>
                                             
                                         </div>
