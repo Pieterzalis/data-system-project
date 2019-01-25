@@ -197,7 +197,7 @@
                                         <div class="text-center py-3 px-2">
                                             <button type="button"
                                                     class="btn btn-primary shadow bluebutton"
-                                                    onclick="search()">
+                                                    onclick="window.location.reload()">
                                                 <i class="fa fa-home"
                                                    aria-hidden="true"></i>Jouw Kamervragen
                                             </button>

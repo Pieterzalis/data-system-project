@@ -261,7 +261,7 @@ if(isset($_GET['uid'])&& isset($_GET['qid'])){
                                         <div class="text-center py-3 px-2">
                                             <button type="button"
                                                     class="btn btn-primary shadow bluebutton"
-                                                    onclick="search()">
+                                                    onclick="location='distribution-main.php'">
                                                 <i class="fa fa-home"
                                                    aria-hidden="true"></i>Jouw Kamervragen
                                             </button>

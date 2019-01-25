@@ -499,7 +499,7 @@
                                         </div>
                                     </div>
 
-                                    <button onclick="window.location='distribution.php'" class="btn btn-danger">ANNULEER</button>
+                                    <button onclick="window.location='distribution-main.php'" class="btn btn-danger">ANNULEER</button>
                                 </div>
 
 
