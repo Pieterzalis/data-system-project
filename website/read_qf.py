@@ -29,7 +29,7 @@ def read_file(target):
 		text = docx2txt.process(target)
 	else:
 		text = ''
-	text = text.replace('\u2122','\u2019')#remove single quote to TM bug
+	text = text.replace('\u2122','\u2019')#to make sure single quote does not become TM symbol
 	return text
 
 
@@ -99,7 +99,7 @@ def doc_to_questions(text):
 		questions = questions[1:] #remove section before first occurrence of Vraag, as that is not a question
 	else: #for doc files
 		paragraphs = text.split('  ')
-		questions = [paragraph for paragraph in paragraphs if '?' in paragraph]
+		questions = [paragraphs[i] for i in range(len(paragraphs)) if '?' in paragraphs[i] and paragraphs[i-1].strip().isdigit()]
 	for i in range(len(questions)):
 		question = questions[i]
 		question = question[:question.rfind('?')]
