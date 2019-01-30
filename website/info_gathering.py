@@ -2,10 +2,15 @@
 import sys
 import re
 import time
-from newsapi.newsapi_client import NewsApiClient #use pip install newsapi-python
+from operator import itemgetter
 import requests
 from bs4 import BeautifulSoup
 import json
+from newsapi.newsapi_client import NewsApiClient #use pip install newsapi-python
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import gensim
+from gensim.corpora.dictionary import Dictionary
 
 #Create queries based on the keywords, in order of potential usefulness
 #First use all keywords, then repeatedly drop the last one untill only the first two remain
@@ -148,12 +153,34 @@ def get_previous_answers(queries, fromdate, todate):
 	answers = clean_answers(answers)
 	return answers #if all queries together do not return 5 different previous answers, return what is found
 
+def ranking_queries(data, question):
+	question = [re.sub(r'[^\w\s]','',w.lower()) for w in word_tokenize(question)  if w not in stopwords.words('dutch')]
+	with open('corpus.json') as bowfile:
+		corpus = json.load(bowfile)
+		dictionary = Dictionary.load('dictionary.dict')
+		tf_idf = gensim.models.TfidfModel(corpus)
+		question_bow = [dictionary.doc2bow(question)]
+		print(tf_idf[question_bow])
+		sims = gensim.similarities.Similarity('banana',tf_idf[question_bow], #function for similarity
+										  num_features=len(dictionary))
+			
+		for i in range(len(data)):
+			source = data[i]['snippet']
+			source_doc = [re.sub(r'[^\w\s]','', w.lower()) for w in word_tokenize(source)]
+			source_doc_bow = dictionary.doc2bow(source_doc)
+			source_doc_tf_idf = tf_idf[source_doc_bow]
+			data[i]['similarity score'] = sims[source_doc_tf_idf].sum() #for each	
+		data = sorted(data, key=itemgetter('similarity score'), reverse=True)
+		return data
+	return data
+
 def main(argv):
 	keywords = list(filter(None,argv[1][:-1].split(","))) #[:-1] is to remove last comma
 	fromdate = argv[2]
 	todate = argv[3]
 	search_news = argv[4]
 	search_prev_answers = argv[5]
+	question = argv[6]
 	queries = create_queries(keywords)
 	data = {}
 	news_articles = []
@@ -163,6 +190,9 @@ def main(argv):
 	if(search_prev_answers == 'on'):
 		prev_answers = get_previous_answers(queries, fromdate, todate)
 	data = news_articles + prev_answers
+	data = ranking_queries(data, question)
+	for i in range(len(data)):
+		data[i]['similarity score'] = str(data[i]['similarity score']) #required for json dump
 	json_data = json.dumps(data)
 	print(json_data)
 	return

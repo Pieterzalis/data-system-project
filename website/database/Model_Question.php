@@ -101,8 +101,16 @@ function getAssignedQuestions($user_id){
 	}
 
 	return $results;
+}
 
+function getQuestionById($question_id){
+	$result = DB::query("SELECT question_title FROM question WHERE question_id = " . $question_id . " ")[0]['question_title'];
+	#$result = $result[0];
+	if (DB::count() === 0){
+		echo 'Query returned no results';
+	}
 
+	return $result;
 }
 
 function getUnansweredQuestionList() {

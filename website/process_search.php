@@ -2,6 +2,7 @@
 
 require_once 'database/Model_Core.php';
 require_once 'database/Model_Source.php';
+require_once 'database/Model_Question.php';
 
 #example data from front-end:
 #$question_id = "23";
@@ -46,7 +47,8 @@ function gatherInfo($question_id, $keywords, $fromdate, $todate, $search_news, $
 	foreach ($keywords as $keyword){
 		$keywordstring = $keywordstring . $keyword . ",";
 	}
-    $data = $keywordstring . " " . $fromdate . " " . $todate . " " . $search_news . " " . $search_prev_answers;
+	$question = getQuestionById($question_id);
+	$data = $keywordstring . " " . $fromdate . " " . $todate . " " . $search_news . " " . $search_prev_answers . " \"" . $question. "\"";
     $python_path = htmlentities('info_gathering.py');
 
     // Execute python script for retrieving relevant information
@@ -61,7 +63,7 @@ function gatherInfo($question_id, $keywords, $fromdate, $todate, $search_news, $
 		$data = json_decode($output_data);
         //saveSources($data, $question_id);
 		returnHTMLResponse($data);
-    } 
+    }
 }
 
 function saveSources($data, $question_id){

@@ -1,6 +1,7 @@
 <?php
 require_once 'database/Model_Project.php';
 $question_id = intval($_GET['qid']);
+$question = DB::query("SELECT question_title FROM question WHERE question_id = " . $question_id . " ")[0]['question_title'];
 $project_id = DB::queryFirstRow("SELECT question_project_id FROM question WHERE question_id = '$question_id'");
 $project_id = $project_id['question_project_id'];
 $keywords = DB::query("select keyword_name from keyword where keyword_project_id= '$project_id' ");
@@ -97,7 +98,7 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
 						console.log(keywords);
 						console.log($("#datefrom").val());
 						var form = new FormData();
-						form.append('question_id','1');
+						form.append('question_id', <?php echo($question_id); ?>);
 						form.append('keywords',JSON.stringify(keywords));
 						form.append('fromdate',fromdate);
 						form.append('todate',todate);
@@ -159,6 +160,9 @@ $keywords = DB::query("select keyword_name from keyword where keyword_project_id
         <div class="row justify-content-md-left removeleftmargin">
                 <button type="button" class="btn btn-primary shadow bluebutton" onclick="window.location='overzicht-detail.php?id=<?= $question_id ?>'">
                     <i class="fa fa-arrow-left" aria-hidden="true"></i>Terug naar vraag</button>
+            </div>
+            <div class="question-div  text-center">
+                <h5><Strong><?=$question; ?></Strong></h5>
             </div>
         <div class="row flex-1">
             <!-- layout_content -->
